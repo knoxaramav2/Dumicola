@@ -130,6 +130,19 @@ DUMICOMMON/fast:
 .PHONY : DUMICOMMON/fast
 
 #=============================================================================
+# Target rules for targets named DUMICORE
+
+# Build rule for target.
+DUMICORE: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 DUMICORE
+.PHONY : DUMICORE
+
+# fast build rule for target.
+DUMICORE/fast:
+	$(MAKE) $(MAKESILENT) -f dumicore/CMakeFiles/DUMICORE.dir/build.make dumicore/CMakeFiles/DUMICORE.dir/build
+.PHONY : DUMICORE/fast
+
+#=============================================================================
 # Target rules for targets named DUMIDESK
 
 # Build rule for target.
@@ -151,6 +164,7 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... DUMICOMMON"
+	@echo "... DUMICORE"
 	@echo "... DUMIDESK"
 .PHONY : help
 

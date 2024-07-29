@@ -3,9 +3,7 @@
 
 int main(){
 
-    int r = DUMICOMMON::TestFnc();
-
-    printf(":: %d\n", r);
+    
 
     return 0;
 }

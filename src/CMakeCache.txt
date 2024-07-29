@@ -152,7 +152,7 @@ CMAKE_PROJECT_DESCRIPTION:STATIC=
 CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=Dumicola
+CMAKE_PROJECT_NAME:STATIC=DUMICOLA
 
 //Path to a program.
 CMAKE_RANLIB:FILEPATH=/usr/bin/ranlib
@@ -218,6 +218,15 @@ CMAKE_TAPI:FILEPATH=CMAKE_TAPI-NOTFOUND
 // during the make.  This is useful for debugging only. With Visual
 // Studio IDE projects all commands are done without /nologo.
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
+
+//Value Computed by CMake
+DUMICOLA_BINARY_DIR:STATIC=/media/knox/ExtDrive/Dev/Dumicola/src
+
+//Value Computed by CMake
+DUMICOLA_IS_TOP_LEVEL:STATIC=ON
+
+//Value Computed by CMake
+DUMICOLA_SOURCE_DIR:STATIC=/media/knox/ExtDrive/Dev/Dumicola/src
 
 //Value Computed by CMake
 Dumicola_BINARY_DIR:STATIC=/media/knox/ExtDrive/Dev/Dumicola/src
@@ -339,7 +348,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=3
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=4
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP

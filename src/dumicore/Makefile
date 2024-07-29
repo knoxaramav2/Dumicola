@@ -87,14 +87,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /media/knox/ExtDrive/Dev/Dumicola/src && $(CMAKE_COMMAND) -E cmake_progress_start /media/knox/ExtDrive/Dev/Dumicola/src/CMakeFiles /media/knox/ExtDrive/Dev/Dumicola/src/dumicommon//CMakeFiles/progress.marks
-	cd /media/knox/ExtDrive/Dev/Dumicola/src && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 dumicommon/all
+	cd /media/knox/ExtDrive/Dev/Dumicola/src && $(CMAKE_COMMAND) -E cmake_progress_start /media/knox/ExtDrive/Dev/Dumicola/src/CMakeFiles /media/knox/ExtDrive/Dev/Dumicola/src/dumicore//CMakeFiles/progress.marks
+	cd /media/knox/ExtDrive/Dev/Dumicola/src && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 dumicore/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /media/knox/ExtDrive/Dev/Dumicola/src/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /media/knox/ExtDrive/Dev/Dumicola/src && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 dumicommon/clean
+	cd /media/knox/ExtDrive/Dev/Dumicola/src && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 dumicore/clean
 .PHONY : clean
 
 # The main clean target
@@ -103,12 +103,12 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /media/knox/ExtDrive/Dev/Dumicola/src && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 dumicommon/preinstall
+	cd /media/knox/ExtDrive/Dev/Dumicola/src && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 dumicore/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /media/knox/ExtDrive/Dev/Dumicola/src && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 dumicommon/preinstall
+	cd /media/knox/ExtDrive/Dev/Dumicola/src && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 dumicore/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
@@ -117,42 +117,42 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-dumicommon/CMakeFiles/DUMICOMMON.dir/rule:
-	cd /media/knox/ExtDrive/Dev/Dumicola/src && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 dumicommon/CMakeFiles/DUMICOMMON.dir/rule
-.PHONY : dumicommon/CMakeFiles/DUMICOMMON.dir/rule
+dumicore/CMakeFiles/DUMICORE.dir/rule:
+	cd /media/knox/ExtDrive/Dev/Dumicola/src && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 dumicore/CMakeFiles/DUMICORE.dir/rule
+.PHONY : dumicore/CMakeFiles/DUMICORE.dir/rule
 
 # Convenience name for target.
-DUMICOMMON: dumicommon/CMakeFiles/DUMICOMMON.dir/rule
-.PHONY : DUMICOMMON
+DUMICORE: dumicore/CMakeFiles/DUMICORE.dir/rule
+.PHONY : DUMICORE
 
 # fast build rule for target.
-DUMICOMMON/fast:
-	cd /media/knox/ExtDrive/Dev/Dumicola/src && $(MAKE) $(MAKESILENT) -f dumicommon/CMakeFiles/DUMICOMMON.dir/build.make dumicommon/CMakeFiles/DUMICOMMON.dir/build
-.PHONY : DUMICOMMON/fast
+DUMICORE/fast:
+	cd /media/knox/ExtDrive/Dev/Dumicola/src && $(MAKE) $(MAKESILENT) -f dumicore/CMakeFiles/DUMICORE.dir/build.make dumicore/CMakeFiles/DUMICORE.dir/build
+.PHONY : DUMICORE/fast
 
-dumicommon.o: dumicommon.cpp.o
-.PHONY : dumicommon.o
+__/dumicommon/dumicommon.o: __/dumicommon/dumicommon.cpp.o
+.PHONY : __/dumicommon/dumicommon.o
 
 # target to build an object file
-dumicommon.cpp.o:
-	cd /media/knox/ExtDrive/Dev/Dumicola/src && $(MAKE) $(MAKESILENT) -f dumicommon/CMakeFiles/DUMICOMMON.dir/build.make dumicommon/CMakeFiles/DUMICOMMON.dir/dumicommon.cpp.o
-.PHONY : dumicommon.cpp.o
+__/dumicommon/dumicommon.cpp.o:
+	cd /media/knox/ExtDrive/Dev/Dumicola/src && $(MAKE) $(MAKESILENT) -f dumicore/CMakeFiles/DUMICORE.dir/build.make dumicore/CMakeFiles/DUMICORE.dir/__/dumicommon/dumicommon.cpp.o
+.PHONY : __/dumicommon/dumicommon.cpp.o
 
-dumicommon.i: dumicommon.cpp.i
-.PHONY : dumicommon.i
+__/dumicommon/dumicommon.i: __/dumicommon/dumicommon.cpp.i
+.PHONY : __/dumicommon/dumicommon.i
 
 # target to preprocess a source file
-dumicommon.cpp.i:
-	cd /media/knox/ExtDrive/Dev/Dumicola/src && $(MAKE) $(MAKESILENT) -f dumicommon/CMakeFiles/DUMICOMMON.dir/build.make dumicommon/CMakeFiles/DUMICOMMON.dir/dumicommon.cpp.i
-.PHONY : dumicommon.cpp.i
+__/dumicommon/dumicommon.cpp.i:
+	cd /media/knox/ExtDrive/Dev/Dumicola/src && $(MAKE) $(MAKESILENT) -f dumicore/CMakeFiles/DUMICORE.dir/build.make dumicore/CMakeFiles/DUMICORE.dir/__/dumicommon/dumicommon.cpp.i
+.PHONY : __/dumicommon/dumicommon.cpp.i
 
-dumicommon.s: dumicommon.cpp.s
-.PHONY : dumicommon.s
+__/dumicommon/dumicommon.s: __/dumicommon/dumicommon.cpp.s
+.PHONY : __/dumicommon/dumicommon.s
 
 # target to generate assembly for a file
-dumicommon.cpp.s:
-	cd /media/knox/ExtDrive/Dev/Dumicola/src && $(MAKE) $(MAKESILENT) -f dumicommon/CMakeFiles/DUMICOMMON.dir/build.make dumicommon/CMakeFiles/DUMICOMMON.dir/dumicommon.cpp.s
-.PHONY : dumicommon.cpp.s
+__/dumicommon/dumicommon.cpp.s:
+	cd /media/knox/ExtDrive/Dev/Dumicola/src && $(MAKE) $(MAKESILENT) -f dumicore/CMakeFiles/DUMICORE.dir/build.make dumicore/CMakeFiles/DUMICORE.dir/__/dumicommon/dumicommon.cpp.s
+.PHONY : __/dumicommon/dumicommon.cpp.s
 
 # Help Target
 help:
@@ -162,10 +162,10 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... DUMICOMMON"
-	@echo "... dumicommon.o"
-	@echo "... dumicommon.i"
-	@echo "... dumicommon.s"
+	@echo "... DUMICORE"
+	@echo "... __/dumicommon/dumicommon.o"
+	@echo "... __/dumicommon/dumicommon.i"
+	@echo "... __/dumicommon/dumicommon.s"
 .PHONY : help
 
 

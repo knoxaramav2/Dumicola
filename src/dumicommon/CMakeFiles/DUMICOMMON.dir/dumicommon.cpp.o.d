@@ -2,6 +2,7 @@ dumicommon/CMakeFiles/DUMICOMMON.dir/dumicommon.cpp.o: \
  /media/knox/ExtDrive/Dev/Dumicola/src/dumicommon/dumicommon.cpp \
  /usr/include/stdc-predef.h \
  /media/knox/ExtDrive/Dev/Dumicola/src/dumicommon/dumicommon.hpp \
+ /media/knox/ExtDrive/Dev/Dumicola/src/dumicommon/dumicommon_version.h \
  /usr/include/stdio.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
  /usr/include/features.h /usr/include/features-time64.h \

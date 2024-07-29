@@ -1,0 +1,2 @@
+/usr/bin/ar qc /media/knox/ExtDrive/Dev/Dumicola/src../build/libDUMICORE.a CMakeFiles/DUMICORE.dir/__/dumicommon/dumicommon.cpp.o
+/usr/bin/ranlib /media/knox/ExtDrive/Dev/Dumicola/src../build/libDUMICORE.a

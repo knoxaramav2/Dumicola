@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/media/knox/ExtDrive/Dev/Dumicola/src/DUMICOMMON -I/media/knox/ExtDrive/Dev/Dumicola/src/DUMICORE
+CXX_INCLUDES = -I/media/knox/ExtDrive/Dev/Dumicola/src/DUMICOMMON
 
 CXX_FLAGS = -std=gnu++23
 

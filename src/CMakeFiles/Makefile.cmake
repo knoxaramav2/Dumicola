@@ -13,6 +13,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "CMakeLists.txt"
   "dumicommon/CMakeLists.txt"
   "dumicommon/dumicommon_version.h.in"
+  "dumicore/CMakeLists.txt"
   "dumidesk/CMakeLists.txt"
   "/usr/share/cmake-3.28/Modules/CMakeCInformation.cmake"
   "/usr/share/cmake-3.28/Modules/CMakeCXXInformation.cmake"
@@ -45,11 +46,13 @@ set(CMAKE_MAKEFILE_PRODUCTS
   "CMakeFiles/CMakeDirectoryInformation.cmake"
   "dumicommon/dumicommon_version.h"
   "dumicommon/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "dumicore/CMakeFiles/CMakeDirectoryInformation.cmake"
   "dumidesk/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
   "dumicommon/CMakeFiles/DUMICOMMON.dir/DependInfo.cmake"
+  "dumicore/CMakeFiles/DUMICORE.dir/DependInfo.cmake"
   "dumidesk/CMakeFiles/DUMIDESK.dir/DependInfo.cmake"
   )
