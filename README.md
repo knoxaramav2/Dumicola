@@ -1,6 +1,8 @@
 # Dumicola
 A networked device control hub for tinkerers. Dumicola provides a managed way to connect devices, provide utilites to create custom programs to automate signaling between devices on your Dumicola network, and create your own libraries and plugins to fully customize your network.
 
+![](./plogo1.png)
+
 ### Use Cases
 ###### Robotics / Embedded Systems
 * Run Microcola on embedded systems to enable interoperability to mobile and desktop environments
