@@ -1,0 +1,1 @@
+/usr/bin/c++ -fPIC -shared -Wl,-soname,libDUMICOMMON.so -o /media/knox/ExtDrive/Dev/Dumicola/src../build/libDUMICOMMON.so CMakeFiles/DUMICOMMON.dir/dumicommon.cpp.o CMakeFiles/DUMICOMMON.dir/test.cpp.o 
