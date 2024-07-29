@@ -8,7 +8,7 @@ A networked device control hub for tinkerers. Dumicola provides a managed way to
 * Run Microcola on embedded systems to enable interoperability to mobile and desktop environments
 * Standardize comunication between robots and other embedded solutions 
 ###### Home Security
-* Steam camera feeds across devices
+* Stream camera feeds across devices
 * Create networked motion sensors
 * Broadcast alarms to mobile devices
 ###### Hobby Projects
@@ -49,7 +49,7 @@ The embedded version of the dumicola runtime. This can be extended for customize
 
 Project | Status | Progress | Active
 --------|--------|----------|-------
-| DumiCommon | Not Started | ![](https://progress-bar.dev/0/) | No |
+| DumiCommon | Started | ![](https://progress-bar.dev/0/) | Yes |
 | DumiSDK | Not Started | ![](https://progress-bar.dev/0/) | No |
 | ColaCore | Not Started | ![](https://progress-bar.dev/0/) | No |
 | Megacola | Not Started | ![](https://progress-bar.dev/0/) | No |
