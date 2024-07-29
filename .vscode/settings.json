@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "*.in": "c"
+    },
+    "makefile.makefilePath": "./src/cpp",
+    "makefile.buildLog": "."
+}
