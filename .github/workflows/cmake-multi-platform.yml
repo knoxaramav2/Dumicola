@@ -65,7 +65,8 @@ jobs:
       #  -S ${{ github.workspace }}/src
 
       run: >
-        cmake -S ${{ github.workspace }}/src
+        cmake -B ${{ github.workspace }}/build
+        -S ${{ github.workspace }}/src
         -DCMAKE_CXX_COMPILER=${{ matrix.cpp_compiler }}
         -DCMAKE_C_COMPILER=${{ matrix.c_compiler }}
         -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
@@ -73,7 +74,7 @@ jobs:
     - name: Build
       # Build your program with the given configuration. Note that --config is needed because the default Windows generator is a multi-config generator (Visual Studio generator).
       #run: cmake --build ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }}
-      run: cmake --build ${{ github.workspace }}/src --config ${{ matrix.build_type }}
+      run: cmake --build ${{ github.workspace }}/build --config ${{ matrix.build_type }}
 
 #    - name: Test
 #      working-directory: ${{ steps.strings.outputs.build-output-dir }}
