@@ -168,6 +168,7 @@ build/
 
 #C/C++
 *.o
+*.o.d
 *.a
 *.so
 *.lib
