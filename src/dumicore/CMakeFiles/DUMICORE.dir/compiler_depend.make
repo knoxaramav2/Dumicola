@@ -205,8 +205,8 @@ dumicore/CMakeFiles/DUMICORE.dir/__/dumicommon/dumicommon.cpp.o: dumicommon/dumi
   /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h
 
 dumicore/CMakeFiles/DUMICORE.dir/appman.cpp.o: dumicore/appman.cpp \
-  DUMICOMMON/defs.hpp \
-  DUMICOMMON/dtypes.hpp \
+  dumicommon/defs.hpp \
+  dumicommon/dtypes.hpp \
   dumicore/appman.hpp \
   /usr/include/alloca.h \
   /usr/include/asm-generic/errno-base.h \
@@ -611,8 +611,6 @@ dumicommon/dumicommon.hpp:
 
 /usr/include/c++/13/cstdio:
 
-DUMICOMMON/dtypes.hpp:
-
 /usr/include/c++/13/cstdint:
 
 /usr/include/c++/13/cstdlib:
@@ -704,8 +702,6 @@ dumicore/appman.cpp:
 /usr/include/x86_64-linux-gnu/bits/locale.h:
 
 /usr/include/x86_64-linux-gnu/bits/select.h:
-
-DUMICOMMON/defs.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h:
 

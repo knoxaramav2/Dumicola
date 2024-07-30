@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/media/knox/ExtDrive/Dev/Dumicola/src../build/libDUMICOMMON.pdb"
-  "/media/knox/ExtDrive/Dev/Dumicola/src../build/libDUMICOMMON.so"
+  "/media/knox/ExtDrive/Dev/Dumicola/build/libDUMICOMMON.pdb"
+  "/media/knox/ExtDrive/Dev/Dumicola/build/libDUMICOMMON.so"
   "CMakeFiles/DUMICOMMON.dir/dtypes.cpp.o"
   "CMakeFiles/DUMICOMMON.dir/dtypes.cpp.o.d"
   "CMakeFiles/DUMICOMMON.dir/dumicommon.cpp.o"

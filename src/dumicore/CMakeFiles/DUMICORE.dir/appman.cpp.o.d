@@ -2,8 +2,8 @@ dumicore/CMakeFiles/DUMICORE.dir/appman.cpp.o: \
  /media/knox/ExtDrive/Dev/Dumicola/src/dumicore/appman.cpp \
  /usr/include/stdc-predef.h \
  /media/knox/ExtDrive/Dev/Dumicola/src/dumicore/appman.hpp \
- /media/knox/ExtDrive/Dev/Dumicola/src/DUMICOMMON/dtypes.hpp \
- /media/knox/ExtDrive/Dev/Dumicola/src/DUMICOMMON/defs.hpp \
+ /media/knox/ExtDrive/Dev/Dumicola/src/dumicommon/dtypes.hpp \
+ /media/knox/ExtDrive/Dev/Dumicola/src/dumicommon/defs.hpp \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h \
  /usr/include/c++/13/string /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \

@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/media/knox/ExtDrive/Dev/Dumicola/src../build/DUMIDESK"
-  "/media/knox/ExtDrive/Dev/Dumicola/src../build/DUMIDESK.pdb"
+  "/media/knox/ExtDrive/Dev/Dumicola/build/DUMIDESK"
+  "/media/knox/ExtDrive/Dev/Dumicola/build/DUMIDESK.pdb"
   "CMakeFiles/DUMIDESK.dir/__/dumicommon/dtypes.cpp.o"
   "CMakeFiles/DUMIDESK.dir/__/dumicommon/dtypes.cpp.o.d"
   "CMakeFiles/DUMIDESK.dir/__/dumicommon/dumicommon.cpp.o"

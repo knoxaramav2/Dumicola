@@ -208,8 +208,8 @@ dumicore/CMakeFiles/DUMICORE.dir/__/dumicommon/dumicommon.cpp.o
 
 dumicore/CMakeFiles/DUMICORE.dir/appman.cpp.o
  /media/knox/ExtDrive/Dev/Dumicola/src/dumicore/appman.cpp
- /media/knox/ExtDrive/Dev/Dumicola/src/DUMICOMMON/defs.hpp
- /media/knox/ExtDrive/Dev/Dumicola/src/DUMICOMMON/dtypes.hpp
+ /media/knox/ExtDrive/Dev/Dumicola/src/dumicommon/defs.hpp
+ /media/knox/ExtDrive/Dev/Dumicola/src/dumicommon/dtypes.hpp
  /media/knox/ExtDrive/Dev/Dumicola/src/dumicore/appman.hpp
  /usr/include/alloca.h
  /usr/include/asm-generic/errno-base.h

@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/media/knox/ExtDrive/Dev/Dumicola/src../build/libDUMICORE.a"
-  "/media/knox/ExtDrive/Dev/Dumicola/src../build/libDUMICORE.pdb"
+  "/media/knox/ExtDrive/Dev/Dumicola/build/libDUMICORE.a"
+  "/media/knox/ExtDrive/Dev/Dumicola/build/libDUMICORE.pdb"
   "CMakeFiles/DUMICORE.dir/__/dumicommon/dtypes.cpp.o"
   "CMakeFiles/DUMICORE.dir/__/dumicommon/dtypes.cpp.o.d"
   "CMakeFiles/DUMICORE.dir/__/dumicommon/dumicommon.cpp.o"
