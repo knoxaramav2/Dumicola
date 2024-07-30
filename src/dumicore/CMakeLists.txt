@@ -13,10 +13,3 @@ PRIVATE
     appman.cpp
 INTERFACE
 )
-
-message("Includes...")
-get_property(dirs DIRECTORY ${DUMICORE_DIR} PROPERTY INCLUDE_DIRECTORIES)
-foreach(dir ${dirs})
-  message(STATUS "dir='${dir}'")
-endforeach()
-message("Includes Done")
