@@ -69,10 +69,24 @@ include dumicore/CMakeFiles/DUMICORE.dir/progress.make
 # Include the compile flags for this target's objects.
 include dumicore/CMakeFiles/DUMICORE.dir/flags.make
 
+dumicore/CMakeFiles/DUMICORE.dir/appman.cpp.o: dumicore/CMakeFiles/DUMICORE.dir/flags.make
+dumicore/CMakeFiles/DUMICORE.dir/appman.cpp.o: dumicore/appman.cpp
+dumicore/CMakeFiles/DUMICORE.dir/appman.cpp.o: dumicore/CMakeFiles/DUMICORE.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/media/knox/ExtDrive/Dev/Dumicola/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object dumicore/CMakeFiles/DUMICORE.dir/appman.cpp.o"
+	cd /media/knox/ExtDrive/Dev/Dumicola/src/dumicore && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT dumicore/CMakeFiles/DUMICORE.dir/appman.cpp.o -MF CMakeFiles/DUMICORE.dir/appman.cpp.o.d -o CMakeFiles/DUMICORE.dir/appman.cpp.o -c /media/knox/ExtDrive/Dev/Dumicola/src/dumicore/appman.cpp
+
+dumicore/CMakeFiles/DUMICORE.dir/appman.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/DUMICORE.dir/appman.cpp.i"
+	cd /media/knox/ExtDrive/Dev/Dumicola/src/dumicore && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/knox/ExtDrive/Dev/Dumicola/src/dumicore/appman.cpp > CMakeFiles/DUMICORE.dir/appman.cpp.i
+
+dumicore/CMakeFiles/DUMICORE.dir/appman.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/DUMICORE.dir/appman.cpp.s"
+	cd /media/knox/ExtDrive/Dev/Dumicola/src/dumicore && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/knox/ExtDrive/Dev/Dumicola/src/dumicore/appman.cpp -o CMakeFiles/DUMICORE.dir/appman.cpp.s
+
 dumicore/CMakeFiles/DUMICORE.dir/__/dumicommon/dumicommon.cpp.o: dumicore/CMakeFiles/DUMICORE.dir/flags.make
 dumicore/CMakeFiles/DUMICORE.dir/__/dumicommon/dumicommon.cpp.o: dumicommon/dumicommon.cpp
 dumicore/CMakeFiles/DUMICORE.dir/__/dumicommon/dumicommon.cpp.o: dumicore/CMakeFiles/DUMICORE.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/media/knox/ExtDrive/Dev/Dumicola/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object dumicore/CMakeFiles/DUMICORE.dir/__/dumicommon/dumicommon.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/media/knox/ExtDrive/Dev/Dumicola/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object dumicore/CMakeFiles/DUMICORE.dir/__/dumicommon/dumicommon.cpp.o"
 	cd /media/knox/ExtDrive/Dev/Dumicola/src/dumicore && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT dumicore/CMakeFiles/DUMICORE.dir/__/dumicommon/dumicommon.cpp.o -MF CMakeFiles/DUMICORE.dir/__/dumicommon/dumicommon.cpp.o.d -o CMakeFiles/DUMICORE.dir/__/dumicommon/dumicommon.cpp.o -c /media/knox/ExtDrive/Dev/Dumicola/src/dumicommon/dumicommon.cpp
 
 dumicore/CMakeFiles/DUMICORE.dir/__/dumicommon/dumicommon.cpp.i: cmake_force
@@ -83,17 +97,35 @@ dumicore/CMakeFiles/DUMICORE.dir/__/dumicommon/dumicommon.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/DUMICORE.dir/__/dumicommon/dumicommon.cpp.s"
 	cd /media/knox/ExtDrive/Dev/Dumicola/src/dumicore && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/knox/ExtDrive/Dev/Dumicola/src/dumicommon/dumicommon.cpp -o CMakeFiles/DUMICORE.dir/__/dumicommon/dumicommon.cpp.s
 
+dumicore/CMakeFiles/DUMICORE.dir/__/dumicommon/dtypes.cpp.o: dumicore/CMakeFiles/DUMICORE.dir/flags.make
+dumicore/CMakeFiles/DUMICORE.dir/__/dumicommon/dtypes.cpp.o: dumicommon/dtypes.cpp
+dumicore/CMakeFiles/DUMICORE.dir/__/dumicommon/dtypes.cpp.o: dumicore/CMakeFiles/DUMICORE.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/media/knox/ExtDrive/Dev/Dumicola/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object dumicore/CMakeFiles/DUMICORE.dir/__/dumicommon/dtypes.cpp.o"
+	cd /media/knox/ExtDrive/Dev/Dumicola/src/dumicore && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT dumicore/CMakeFiles/DUMICORE.dir/__/dumicommon/dtypes.cpp.o -MF CMakeFiles/DUMICORE.dir/__/dumicommon/dtypes.cpp.o.d -o CMakeFiles/DUMICORE.dir/__/dumicommon/dtypes.cpp.o -c /media/knox/ExtDrive/Dev/Dumicola/src/dumicommon/dtypes.cpp
+
+dumicore/CMakeFiles/DUMICORE.dir/__/dumicommon/dtypes.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/DUMICORE.dir/__/dumicommon/dtypes.cpp.i"
+	cd /media/knox/ExtDrive/Dev/Dumicola/src/dumicore && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/knox/ExtDrive/Dev/Dumicola/src/dumicommon/dtypes.cpp > CMakeFiles/DUMICORE.dir/__/dumicommon/dtypes.cpp.i
+
+dumicore/CMakeFiles/DUMICORE.dir/__/dumicommon/dtypes.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/DUMICORE.dir/__/dumicommon/dtypes.cpp.s"
+	cd /media/knox/ExtDrive/Dev/Dumicola/src/dumicore && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/knox/ExtDrive/Dev/Dumicola/src/dumicommon/dtypes.cpp -o CMakeFiles/DUMICORE.dir/__/dumicommon/dtypes.cpp.s
+
 # Object files for target DUMICORE
 DUMICORE_OBJECTS = \
-"CMakeFiles/DUMICORE.dir/__/dumicommon/dumicommon.cpp.o"
+"CMakeFiles/DUMICORE.dir/appman.cpp.o" \
+"CMakeFiles/DUMICORE.dir/__/dumicommon/dumicommon.cpp.o" \
+"CMakeFiles/DUMICORE.dir/__/dumicommon/dtypes.cpp.o"
 
 # External object files for target DUMICORE
 DUMICORE_EXTERNAL_OBJECTS =
 
+/media/knox/ExtDrive/Dev/Dumicola/src../build/libDUMICORE.a: dumicore/CMakeFiles/DUMICORE.dir/appman.cpp.o
 /media/knox/ExtDrive/Dev/Dumicola/src../build/libDUMICORE.a: dumicore/CMakeFiles/DUMICORE.dir/__/dumicommon/dumicommon.cpp.o
+/media/knox/ExtDrive/Dev/Dumicola/src../build/libDUMICORE.a: dumicore/CMakeFiles/DUMICORE.dir/__/dumicommon/dtypes.cpp.o
 /media/knox/ExtDrive/Dev/Dumicola/src../build/libDUMICORE.a: dumicore/CMakeFiles/DUMICORE.dir/build.make
 /media/knox/ExtDrive/Dev/Dumicola/src../build/libDUMICORE.a: dumicore/CMakeFiles/DUMICORE.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/media/knox/ExtDrive/Dev/Dumicola/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX static library /media/knox/ExtDrive/Dev/Dumicola/src../build/libDUMICORE.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/media/knox/ExtDrive/Dev/Dumicola/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX static library /media/knox/ExtDrive/Dev/Dumicola/src../build/libDUMICORE.a"
 	cd /media/knox/ExtDrive/Dev/Dumicola/src/dumicore && $(CMAKE_COMMAND) -P CMakeFiles/DUMICORE.dir/cmake_clean_target.cmake
 	cd /media/knox/ExtDrive/Dev/Dumicola/src/dumicore && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/DUMICORE.dir/link.txt --verbose=$(VERBOSE)
 

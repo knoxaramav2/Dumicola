@@ -8,6 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/media/knox/ExtDrive/Dev/Dumicola/src/dumicommon/dtypes.cpp" "dumidesk/CMakeFiles/DUMIDESK.dir/__/dumicommon/dtypes.cpp.o" "gcc" "dumidesk/CMakeFiles/DUMIDESK.dir/__/dumicommon/dtypes.cpp.o.d"
   "/media/knox/ExtDrive/Dev/Dumicola/src/dumicommon/dumicommon.cpp" "dumidesk/CMakeFiles/DUMIDESK.dir/__/dumicommon/dumicommon.cpp.o" "gcc" "dumidesk/CMakeFiles/DUMIDESK.dir/__/dumicommon/dumicommon.cpp.o.d"
   "/media/knox/ExtDrive/Dev/Dumicola/src/dumidesk/dumidesk.cpp" "dumidesk/CMakeFiles/DUMIDESK.dir/dumidesk.cpp.o" "gcc" "dumidesk/CMakeFiles/DUMIDESK.dir/dumidesk.cpp.o.d"
   )

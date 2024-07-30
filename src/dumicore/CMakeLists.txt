@@ -7,7 +7,7 @@ target_sources(
 PUBLIC
 
 PRIVATE
-
+    appman.cpp
 INTERFACE
 )
 

@@ -130,6 +130,30 @@ DUMICORE/fast:
 	cd /media/knox/ExtDrive/Dev/Dumicola/src && $(MAKE) $(MAKESILENT) -f dumicore/CMakeFiles/DUMICORE.dir/build.make dumicore/CMakeFiles/DUMICORE.dir/build
 .PHONY : DUMICORE/fast
 
+__/dumicommon/dtypes.o: __/dumicommon/dtypes.cpp.o
+.PHONY : __/dumicommon/dtypes.o
+
+# target to build an object file
+__/dumicommon/dtypes.cpp.o:
+	cd /media/knox/ExtDrive/Dev/Dumicola/src && $(MAKE) $(MAKESILENT) -f dumicore/CMakeFiles/DUMICORE.dir/build.make dumicore/CMakeFiles/DUMICORE.dir/__/dumicommon/dtypes.cpp.o
+.PHONY : __/dumicommon/dtypes.cpp.o
+
+__/dumicommon/dtypes.i: __/dumicommon/dtypes.cpp.i
+.PHONY : __/dumicommon/dtypes.i
+
+# target to preprocess a source file
+__/dumicommon/dtypes.cpp.i:
+	cd /media/knox/ExtDrive/Dev/Dumicola/src && $(MAKE) $(MAKESILENT) -f dumicore/CMakeFiles/DUMICORE.dir/build.make dumicore/CMakeFiles/DUMICORE.dir/__/dumicommon/dtypes.cpp.i
+.PHONY : __/dumicommon/dtypes.cpp.i
+
+__/dumicommon/dtypes.s: __/dumicommon/dtypes.cpp.s
+.PHONY : __/dumicommon/dtypes.s
+
+# target to generate assembly for a file
+__/dumicommon/dtypes.cpp.s:
+	cd /media/knox/ExtDrive/Dev/Dumicola/src && $(MAKE) $(MAKESILENT) -f dumicore/CMakeFiles/DUMICORE.dir/build.make dumicore/CMakeFiles/DUMICORE.dir/__/dumicommon/dtypes.cpp.s
+.PHONY : __/dumicommon/dtypes.cpp.s
+
 __/dumicommon/dumicommon.o: __/dumicommon/dumicommon.cpp.o
 .PHONY : __/dumicommon/dumicommon.o
 
@@ -154,6 +178,30 @@ __/dumicommon/dumicommon.cpp.s:
 	cd /media/knox/ExtDrive/Dev/Dumicola/src && $(MAKE) $(MAKESILENT) -f dumicore/CMakeFiles/DUMICORE.dir/build.make dumicore/CMakeFiles/DUMICORE.dir/__/dumicommon/dumicommon.cpp.s
 .PHONY : __/dumicommon/dumicommon.cpp.s
 
+appman.o: appman.cpp.o
+.PHONY : appman.o
+
+# target to build an object file
+appman.cpp.o:
+	cd /media/knox/ExtDrive/Dev/Dumicola/src && $(MAKE) $(MAKESILENT) -f dumicore/CMakeFiles/DUMICORE.dir/build.make dumicore/CMakeFiles/DUMICORE.dir/appman.cpp.o
+.PHONY : appman.cpp.o
+
+appman.i: appman.cpp.i
+.PHONY : appman.i
+
+# target to preprocess a source file
+appman.cpp.i:
+	cd /media/knox/ExtDrive/Dev/Dumicola/src && $(MAKE) $(MAKESILENT) -f dumicore/CMakeFiles/DUMICORE.dir/build.make dumicore/CMakeFiles/DUMICORE.dir/appman.cpp.i
+.PHONY : appman.cpp.i
+
+appman.s: appman.cpp.s
+.PHONY : appman.s
+
+# target to generate assembly for a file
+appman.cpp.s:
+	cd /media/knox/ExtDrive/Dev/Dumicola/src && $(MAKE) $(MAKESILENT) -f dumicore/CMakeFiles/DUMICORE.dir/build.make dumicore/CMakeFiles/DUMICORE.dir/appman.cpp.s
+.PHONY : appman.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -163,9 +211,15 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... DUMICORE"
+	@echo "... __/dumicommon/dtypes.o"
+	@echo "... __/dumicommon/dtypes.i"
+	@echo "... __/dumicommon/dtypes.s"
 	@echo "... __/dumicommon/dumicommon.o"
 	@echo "... __/dumicommon/dumicommon.i"
 	@echo "... __/dumicommon/dumicommon.s"
+	@echo "... appman.o"
+	@echo "... appman.i"
+	@echo "... appman.s"
 .PHONY : help
 
 

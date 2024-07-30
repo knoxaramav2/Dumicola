@@ -130,6 +130,30 @@ DUMIDESK/fast:
 	cd /media/knox/ExtDrive/Dev/Dumicola/src && $(MAKE) $(MAKESILENT) -f dumidesk/CMakeFiles/DUMIDESK.dir/build.make dumidesk/CMakeFiles/DUMIDESK.dir/build
 .PHONY : DUMIDESK/fast
 
+__/dumicommon/dtypes.o: __/dumicommon/dtypes.cpp.o
+.PHONY : __/dumicommon/dtypes.o
+
+# target to build an object file
+__/dumicommon/dtypes.cpp.o:
+	cd /media/knox/ExtDrive/Dev/Dumicola/src && $(MAKE) $(MAKESILENT) -f dumidesk/CMakeFiles/DUMIDESK.dir/build.make dumidesk/CMakeFiles/DUMIDESK.dir/__/dumicommon/dtypes.cpp.o
+.PHONY : __/dumicommon/dtypes.cpp.o
+
+__/dumicommon/dtypes.i: __/dumicommon/dtypes.cpp.i
+.PHONY : __/dumicommon/dtypes.i
+
+# target to preprocess a source file
+__/dumicommon/dtypes.cpp.i:
+	cd /media/knox/ExtDrive/Dev/Dumicola/src && $(MAKE) $(MAKESILENT) -f dumidesk/CMakeFiles/DUMIDESK.dir/build.make dumidesk/CMakeFiles/DUMIDESK.dir/__/dumicommon/dtypes.cpp.i
+.PHONY : __/dumicommon/dtypes.cpp.i
+
+__/dumicommon/dtypes.s: __/dumicommon/dtypes.cpp.s
+.PHONY : __/dumicommon/dtypes.s
+
+# target to generate assembly for a file
+__/dumicommon/dtypes.cpp.s:
+	cd /media/knox/ExtDrive/Dev/Dumicola/src && $(MAKE) $(MAKESILENT) -f dumidesk/CMakeFiles/DUMIDESK.dir/build.make dumidesk/CMakeFiles/DUMIDESK.dir/__/dumicommon/dtypes.cpp.s
+.PHONY : __/dumicommon/dtypes.cpp.s
+
 __/dumicommon/dumicommon.o: __/dumicommon/dumicommon.cpp.o
 .PHONY : __/dumicommon/dumicommon.o
 
@@ -187,6 +211,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... DUMIDESK"
+	@echo "... __/dumicommon/dtypes.o"
+	@echo "... __/dumicommon/dtypes.i"
+	@echo "... __/dumicommon/dtypes.s"
 	@echo "... __/dumicommon/dumicommon.o"
 	@echo "... __/dumicommon/dumicommon.i"
 	@echo "... __/dumicommon/dumicommon.s"

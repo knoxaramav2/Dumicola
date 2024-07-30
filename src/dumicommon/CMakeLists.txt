@@ -11,6 +11,7 @@ target_sources(
     DUMICOMMON
 PUBLIC 
     dumicommon.cpp
+    dtypes.cpp
 PRIVATE
 
 )

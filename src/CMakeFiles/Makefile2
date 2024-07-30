@@ -132,12 +132,12 @@ dumidesk/clean: dumidesk/CMakeFiles/DUMIDESK.dir/clean
 dumicommon/CMakeFiles/DUMICOMMON.dir/all:
 	$(MAKE) $(MAKESILENT) -f dumicommon/CMakeFiles/DUMICOMMON.dir/build.make dumicommon/CMakeFiles/DUMICOMMON.dir/depend
 	$(MAKE) $(MAKESILENT) -f dumicommon/CMakeFiles/DUMICOMMON.dir/build.make dumicommon/CMakeFiles/DUMICOMMON.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/media/knox/ExtDrive/Dev/Dumicola/src/CMakeFiles --progress-num=1,2 "Built target DUMICOMMON"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/media/knox/ExtDrive/Dev/Dumicola/src/CMakeFiles --progress-num=1,2,3 "Built target DUMICOMMON"
 .PHONY : dumicommon/CMakeFiles/DUMICOMMON.dir/all
 
 # Build rule for subdir invocation for target.
 dumicommon/CMakeFiles/DUMICOMMON.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /media/knox/ExtDrive/Dev/Dumicola/src/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /media/knox/ExtDrive/Dev/Dumicola/src/CMakeFiles 3
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 dumicommon/CMakeFiles/DUMICOMMON.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /media/knox/ExtDrive/Dev/Dumicola/src/CMakeFiles 0
 .PHONY : dumicommon/CMakeFiles/DUMICOMMON.dir/rule
@@ -158,12 +158,12 @@ dumicommon/CMakeFiles/DUMICOMMON.dir/clean:
 dumicore/CMakeFiles/DUMICORE.dir/all: dumicommon/CMakeFiles/DUMICOMMON.dir/all
 	$(MAKE) $(MAKESILENT) -f dumicore/CMakeFiles/DUMICORE.dir/build.make dumicore/CMakeFiles/DUMICORE.dir/depend
 	$(MAKE) $(MAKESILENT) -f dumicore/CMakeFiles/DUMICORE.dir/build.make dumicore/CMakeFiles/DUMICORE.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/media/knox/ExtDrive/Dev/Dumicola/src/CMakeFiles --progress-num=3,4 "Built target DUMICORE"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/media/knox/ExtDrive/Dev/Dumicola/src/CMakeFiles --progress-num=4,5,6,7 "Built target DUMICORE"
 .PHONY : dumicore/CMakeFiles/DUMICORE.dir/all
 
 # Build rule for subdir invocation for target.
 dumicore/CMakeFiles/DUMICORE.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /media/knox/ExtDrive/Dev/Dumicola/src/CMakeFiles 4
+	$(CMAKE_COMMAND) -E cmake_progress_start /media/knox/ExtDrive/Dev/Dumicola/src/CMakeFiles 7
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 dumicore/CMakeFiles/DUMICORE.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /media/knox/ExtDrive/Dev/Dumicola/src/CMakeFiles 0
 .PHONY : dumicore/CMakeFiles/DUMICORE.dir/rule
@@ -184,12 +184,12 @@ dumicore/CMakeFiles/DUMICORE.dir/clean:
 dumidesk/CMakeFiles/DUMIDESK.dir/all: dumicommon/CMakeFiles/DUMICOMMON.dir/all
 	$(MAKE) $(MAKESILENT) -f dumidesk/CMakeFiles/DUMIDESK.dir/build.make dumidesk/CMakeFiles/DUMIDESK.dir/depend
 	$(MAKE) $(MAKESILENT) -f dumidesk/CMakeFiles/DUMIDESK.dir/build.make dumidesk/CMakeFiles/DUMIDESK.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/media/knox/ExtDrive/Dev/Dumicola/src/CMakeFiles --progress-num=5,6,7 "Built target DUMIDESK"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/media/knox/ExtDrive/Dev/Dumicola/src/CMakeFiles --progress-num=8,9,10,11 "Built target DUMIDESK"
 .PHONY : dumidesk/CMakeFiles/DUMIDESK.dir/all
 
 # Build rule for subdir invocation for target.
 dumidesk/CMakeFiles/DUMIDESK.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /media/knox/ExtDrive/Dev/Dumicola/src/CMakeFiles 5
+	$(CMAKE_COMMAND) -E cmake_progress_start /media/knox/ExtDrive/Dev/Dumicola/src/CMakeFiles 7
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 dumidesk/CMakeFiles/DUMIDESK.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /media/knox/ExtDrive/Dev/Dumicola/src/CMakeFiles 0
 .PHONY : dumidesk/CMakeFiles/DUMIDESK.dir/rule
