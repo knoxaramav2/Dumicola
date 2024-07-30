@@ -1,9 +1,9 @@
 dumidesk/CMakeFiles/DUMIDESK.dir/dumidesk.cpp.o: \
  /media/knox/ExtDrive/Dev/Dumicola/src/dumidesk/dumidesk.cpp \
  /usr/include/stdc-predef.h \
- /media/knox/ExtDrive/Dev/Dumicola/src/DUMICOMMON/dumicommon.hpp \
- /media/knox/ExtDrive/Dev/Dumicola/src/DUMICOMMON/dumicommon_version.h \
- /media/knox/ExtDrive/Dev/Dumicola/src/DUMICOMMON/dbcontext.hpp \
+ /media/knox/ExtDrive/Dev/Dumicola/src/dumicommon/dumicommon.hpp \
+ /media/knox/ExtDrive/Dev/Dumicola/src/dumicommon/dumicommon_version.h \
+ /media/knox/ExtDrive/Dev/Dumicola/src/dumicommon/dbcontext.hpp \
  /usr/include/stdio.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
  /usr/include/features.h /usr/include/features-time64.h \

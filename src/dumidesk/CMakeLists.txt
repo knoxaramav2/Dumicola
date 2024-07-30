@@ -11,7 +11,7 @@ PRIVATE
 
 target_include_directories(DUMIDESK 
 PRIVATE 
-    "${CMAKE_BINARY_DIR}/DUMICOMMON"
-    "${CMAKE_BINARY_DIR}/DUMICORE"
+    ${DUMICOMMON_DIR}
+    ${DUMICORE_DIR}
     )
 target_link_libraries(DUMIDESK PRIVATE DUMICOMMON)
