@@ -1,1 +1,0 @@
-/usr/bin/g++ CMakeFiles/DUMIDESK.dir/dumidesk.cpp.o CMakeFiles/DUMIDESK.dir/__/dumicommon/dumicommon.cpp.o CMakeFiles/DUMIDESK.dir/__/dumicommon/dtypes.cpp.o -o /media/knox/ExtDrive/Dev/Dumicola/build/DUMIDESK  -Wl,-rpath,/media/knox/ExtDrive/Dev/Dumicola/build /media/knox/ExtDrive/Dev/Dumicola/build/libDUMICOMMON.so 
