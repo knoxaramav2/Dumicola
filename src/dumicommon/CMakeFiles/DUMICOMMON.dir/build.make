@@ -73,29 +73,29 @@ dumicommon/CMakeFiles/DUMICOMMON.dir/dumicommon.cpp.o: dumicommon/CMakeFiles/DUM
 dumicommon/CMakeFiles/DUMICOMMON.dir/dumicommon.cpp.o: dumicommon/dumicommon.cpp
 dumicommon/CMakeFiles/DUMICOMMON.dir/dumicommon.cpp.o: dumicommon/CMakeFiles/DUMICOMMON.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/media/knox/ExtDrive/Dev/Dumicola/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object dumicommon/CMakeFiles/DUMICOMMON.dir/dumicommon.cpp.o"
-	cd /media/knox/ExtDrive/Dev/Dumicola/src/dumicommon && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT dumicommon/CMakeFiles/DUMICOMMON.dir/dumicommon.cpp.o -MF CMakeFiles/DUMICOMMON.dir/dumicommon.cpp.o.d -o CMakeFiles/DUMICOMMON.dir/dumicommon.cpp.o -c /media/knox/ExtDrive/Dev/Dumicola/src/dumicommon/dumicommon.cpp
+	cd /media/knox/ExtDrive/Dev/Dumicola/src/dumicommon && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT dumicommon/CMakeFiles/DUMICOMMON.dir/dumicommon.cpp.o -MF CMakeFiles/DUMICOMMON.dir/dumicommon.cpp.o.d -o CMakeFiles/DUMICOMMON.dir/dumicommon.cpp.o -c /media/knox/ExtDrive/Dev/Dumicola/src/dumicommon/dumicommon.cpp
 
 dumicommon/CMakeFiles/DUMICOMMON.dir/dumicommon.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/DUMICOMMON.dir/dumicommon.cpp.i"
-	cd /media/knox/ExtDrive/Dev/Dumicola/src/dumicommon && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/knox/ExtDrive/Dev/Dumicola/src/dumicommon/dumicommon.cpp > CMakeFiles/DUMICOMMON.dir/dumicommon.cpp.i
+	cd /media/knox/ExtDrive/Dev/Dumicola/src/dumicommon && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/knox/ExtDrive/Dev/Dumicola/src/dumicommon/dumicommon.cpp > CMakeFiles/DUMICOMMON.dir/dumicommon.cpp.i
 
 dumicommon/CMakeFiles/DUMICOMMON.dir/dumicommon.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/DUMICOMMON.dir/dumicommon.cpp.s"
-	cd /media/knox/ExtDrive/Dev/Dumicola/src/dumicommon && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/knox/ExtDrive/Dev/Dumicola/src/dumicommon/dumicommon.cpp -o CMakeFiles/DUMICOMMON.dir/dumicommon.cpp.s
+	cd /media/knox/ExtDrive/Dev/Dumicola/src/dumicommon && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/knox/ExtDrive/Dev/Dumicola/src/dumicommon/dumicommon.cpp -o CMakeFiles/DUMICOMMON.dir/dumicommon.cpp.s
 
 dumicommon/CMakeFiles/DUMICOMMON.dir/dtypes.cpp.o: dumicommon/CMakeFiles/DUMICOMMON.dir/flags.make
 dumicommon/CMakeFiles/DUMICOMMON.dir/dtypes.cpp.o: dumicommon/dtypes.cpp
 dumicommon/CMakeFiles/DUMICOMMON.dir/dtypes.cpp.o: dumicommon/CMakeFiles/DUMICOMMON.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/media/knox/ExtDrive/Dev/Dumicola/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object dumicommon/CMakeFiles/DUMICOMMON.dir/dtypes.cpp.o"
-	cd /media/knox/ExtDrive/Dev/Dumicola/src/dumicommon && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT dumicommon/CMakeFiles/DUMICOMMON.dir/dtypes.cpp.o -MF CMakeFiles/DUMICOMMON.dir/dtypes.cpp.o.d -o CMakeFiles/DUMICOMMON.dir/dtypes.cpp.o -c /media/knox/ExtDrive/Dev/Dumicola/src/dumicommon/dtypes.cpp
+	cd /media/knox/ExtDrive/Dev/Dumicola/src/dumicommon && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT dumicommon/CMakeFiles/DUMICOMMON.dir/dtypes.cpp.o -MF CMakeFiles/DUMICOMMON.dir/dtypes.cpp.o.d -o CMakeFiles/DUMICOMMON.dir/dtypes.cpp.o -c /media/knox/ExtDrive/Dev/Dumicola/src/dumicommon/dtypes.cpp
 
 dumicommon/CMakeFiles/DUMICOMMON.dir/dtypes.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/DUMICOMMON.dir/dtypes.cpp.i"
-	cd /media/knox/ExtDrive/Dev/Dumicola/src/dumicommon && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/knox/ExtDrive/Dev/Dumicola/src/dumicommon/dtypes.cpp > CMakeFiles/DUMICOMMON.dir/dtypes.cpp.i
+	cd /media/knox/ExtDrive/Dev/Dumicola/src/dumicommon && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/knox/ExtDrive/Dev/Dumicola/src/dumicommon/dtypes.cpp > CMakeFiles/DUMICOMMON.dir/dtypes.cpp.i
 
 dumicommon/CMakeFiles/DUMICOMMON.dir/dtypes.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/DUMICOMMON.dir/dtypes.cpp.s"
-	cd /media/knox/ExtDrive/Dev/Dumicola/src/dumicommon && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/knox/ExtDrive/Dev/Dumicola/src/dumicommon/dtypes.cpp -o CMakeFiles/DUMICOMMON.dir/dtypes.cpp.s
+	cd /media/knox/ExtDrive/Dev/Dumicola/src/dumicommon && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/knox/ExtDrive/Dev/Dumicola/src/dumicommon/dtypes.cpp -o CMakeFiles/DUMICOMMON.dir/dtypes.cpp.s
 
 # Object files for target DUMICOMMON
 DUMICOMMON_OBJECTS = \

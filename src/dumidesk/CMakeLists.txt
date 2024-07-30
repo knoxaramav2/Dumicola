@@ -1,4 +1,4 @@
-
+message(">> DUMIDESK @ ${CMAKE_CURRENT_SOURCE_DIR}")
 
 add_executable(DUMIDESK)
 #link_libraries(DUMIDESK PRIVATE DUMICOMMON)

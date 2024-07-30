@@ -73,43 +73,43 @@ dumidesk/CMakeFiles/DUMIDESK.dir/dumidesk.cpp.o: dumidesk/CMakeFiles/DUMIDESK.di
 dumidesk/CMakeFiles/DUMIDESK.dir/dumidesk.cpp.o: dumidesk/dumidesk.cpp
 dumidesk/CMakeFiles/DUMIDESK.dir/dumidesk.cpp.o: dumidesk/CMakeFiles/DUMIDESK.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/media/knox/ExtDrive/Dev/Dumicola/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object dumidesk/CMakeFiles/DUMIDESK.dir/dumidesk.cpp.o"
-	cd /media/knox/ExtDrive/Dev/Dumicola/src/dumidesk && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT dumidesk/CMakeFiles/DUMIDESK.dir/dumidesk.cpp.o -MF CMakeFiles/DUMIDESK.dir/dumidesk.cpp.o.d -o CMakeFiles/DUMIDESK.dir/dumidesk.cpp.o -c /media/knox/ExtDrive/Dev/Dumicola/src/dumidesk/dumidesk.cpp
+	cd /media/knox/ExtDrive/Dev/Dumicola/src/dumidesk && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT dumidesk/CMakeFiles/DUMIDESK.dir/dumidesk.cpp.o -MF CMakeFiles/DUMIDESK.dir/dumidesk.cpp.o.d -o CMakeFiles/DUMIDESK.dir/dumidesk.cpp.o -c /media/knox/ExtDrive/Dev/Dumicola/src/dumidesk/dumidesk.cpp
 
 dumidesk/CMakeFiles/DUMIDESK.dir/dumidesk.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/DUMIDESK.dir/dumidesk.cpp.i"
-	cd /media/knox/ExtDrive/Dev/Dumicola/src/dumidesk && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/knox/ExtDrive/Dev/Dumicola/src/dumidesk/dumidesk.cpp > CMakeFiles/DUMIDESK.dir/dumidesk.cpp.i
+	cd /media/knox/ExtDrive/Dev/Dumicola/src/dumidesk && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/knox/ExtDrive/Dev/Dumicola/src/dumidesk/dumidesk.cpp > CMakeFiles/DUMIDESK.dir/dumidesk.cpp.i
 
 dumidesk/CMakeFiles/DUMIDESK.dir/dumidesk.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/DUMIDESK.dir/dumidesk.cpp.s"
-	cd /media/knox/ExtDrive/Dev/Dumicola/src/dumidesk && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/knox/ExtDrive/Dev/Dumicola/src/dumidesk/dumidesk.cpp -o CMakeFiles/DUMIDESK.dir/dumidesk.cpp.s
+	cd /media/knox/ExtDrive/Dev/Dumicola/src/dumidesk && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/knox/ExtDrive/Dev/Dumicola/src/dumidesk/dumidesk.cpp -o CMakeFiles/DUMIDESK.dir/dumidesk.cpp.s
 
 dumidesk/CMakeFiles/DUMIDESK.dir/__/dumicommon/dumicommon.cpp.o: dumidesk/CMakeFiles/DUMIDESK.dir/flags.make
 dumidesk/CMakeFiles/DUMIDESK.dir/__/dumicommon/dumicommon.cpp.o: dumicommon/dumicommon.cpp
 dumidesk/CMakeFiles/DUMIDESK.dir/__/dumicommon/dumicommon.cpp.o: dumidesk/CMakeFiles/DUMIDESK.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/media/knox/ExtDrive/Dev/Dumicola/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object dumidesk/CMakeFiles/DUMIDESK.dir/__/dumicommon/dumicommon.cpp.o"
-	cd /media/knox/ExtDrive/Dev/Dumicola/src/dumidesk && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT dumidesk/CMakeFiles/DUMIDESK.dir/__/dumicommon/dumicommon.cpp.o -MF CMakeFiles/DUMIDESK.dir/__/dumicommon/dumicommon.cpp.o.d -o CMakeFiles/DUMIDESK.dir/__/dumicommon/dumicommon.cpp.o -c /media/knox/ExtDrive/Dev/Dumicola/src/dumicommon/dumicommon.cpp
+	cd /media/knox/ExtDrive/Dev/Dumicola/src/dumidesk && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT dumidesk/CMakeFiles/DUMIDESK.dir/__/dumicommon/dumicommon.cpp.o -MF CMakeFiles/DUMIDESK.dir/__/dumicommon/dumicommon.cpp.o.d -o CMakeFiles/DUMIDESK.dir/__/dumicommon/dumicommon.cpp.o -c /media/knox/ExtDrive/Dev/Dumicola/src/dumicommon/dumicommon.cpp
 
 dumidesk/CMakeFiles/DUMIDESK.dir/__/dumicommon/dumicommon.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/DUMIDESK.dir/__/dumicommon/dumicommon.cpp.i"
-	cd /media/knox/ExtDrive/Dev/Dumicola/src/dumidesk && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/knox/ExtDrive/Dev/Dumicola/src/dumicommon/dumicommon.cpp > CMakeFiles/DUMIDESK.dir/__/dumicommon/dumicommon.cpp.i
+	cd /media/knox/ExtDrive/Dev/Dumicola/src/dumidesk && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/knox/ExtDrive/Dev/Dumicola/src/dumicommon/dumicommon.cpp > CMakeFiles/DUMIDESK.dir/__/dumicommon/dumicommon.cpp.i
 
 dumidesk/CMakeFiles/DUMIDESK.dir/__/dumicommon/dumicommon.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/DUMIDESK.dir/__/dumicommon/dumicommon.cpp.s"
-	cd /media/knox/ExtDrive/Dev/Dumicola/src/dumidesk && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/knox/ExtDrive/Dev/Dumicola/src/dumicommon/dumicommon.cpp -o CMakeFiles/DUMIDESK.dir/__/dumicommon/dumicommon.cpp.s
+	cd /media/knox/ExtDrive/Dev/Dumicola/src/dumidesk && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/knox/ExtDrive/Dev/Dumicola/src/dumicommon/dumicommon.cpp -o CMakeFiles/DUMIDESK.dir/__/dumicommon/dumicommon.cpp.s
 
 dumidesk/CMakeFiles/DUMIDESK.dir/__/dumicommon/dtypes.cpp.o: dumidesk/CMakeFiles/DUMIDESK.dir/flags.make
 dumidesk/CMakeFiles/DUMIDESK.dir/__/dumicommon/dtypes.cpp.o: dumicommon/dtypes.cpp
 dumidesk/CMakeFiles/DUMIDESK.dir/__/dumicommon/dtypes.cpp.o: dumidesk/CMakeFiles/DUMIDESK.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/media/knox/ExtDrive/Dev/Dumicola/src/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object dumidesk/CMakeFiles/DUMIDESK.dir/__/dumicommon/dtypes.cpp.o"
-	cd /media/knox/ExtDrive/Dev/Dumicola/src/dumidesk && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT dumidesk/CMakeFiles/DUMIDESK.dir/__/dumicommon/dtypes.cpp.o -MF CMakeFiles/DUMIDESK.dir/__/dumicommon/dtypes.cpp.o.d -o CMakeFiles/DUMIDESK.dir/__/dumicommon/dtypes.cpp.o -c /media/knox/ExtDrive/Dev/Dumicola/src/dumicommon/dtypes.cpp
+	cd /media/knox/ExtDrive/Dev/Dumicola/src/dumidesk && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT dumidesk/CMakeFiles/DUMIDESK.dir/__/dumicommon/dtypes.cpp.o -MF CMakeFiles/DUMIDESK.dir/__/dumicommon/dtypes.cpp.o.d -o CMakeFiles/DUMIDESK.dir/__/dumicommon/dtypes.cpp.o -c /media/knox/ExtDrive/Dev/Dumicola/src/dumicommon/dtypes.cpp
 
 dumidesk/CMakeFiles/DUMIDESK.dir/__/dumicommon/dtypes.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/DUMIDESK.dir/__/dumicommon/dtypes.cpp.i"
-	cd /media/knox/ExtDrive/Dev/Dumicola/src/dumidesk && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/knox/ExtDrive/Dev/Dumicola/src/dumicommon/dtypes.cpp > CMakeFiles/DUMIDESK.dir/__/dumicommon/dtypes.cpp.i
+	cd /media/knox/ExtDrive/Dev/Dumicola/src/dumidesk && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/knox/ExtDrive/Dev/Dumicola/src/dumicommon/dtypes.cpp > CMakeFiles/DUMIDESK.dir/__/dumicommon/dtypes.cpp.i
 
 dumidesk/CMakeFiles/DUMIDESK.dir/__/dumicommon/dtypes.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/DUMIDESK.dir/__/dumicommon/dtypes.cpp.s"
-	cd /media/knox/ExtDrive/Dev/Dumicola/src/dumidesk && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/knox/ExtDrive/Dev/Dumicola/src/dumicommon/dtypes.cpp -o CMakeFiles/DUMIDESK.dir/__/dumicommon/dtypes.cpp.s
+	cd /media/knox/ExtDrive/Dev/Dumicola/src/dumidesk && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/knox/ExtDrive/Dev/Dumicola/src/dumicommon/dtypes.cpp -o CMakeFiles/DUMIDESK.dir/__/dumicommon/dtypes.cpp.s
 
 # Object files for target DUMIDESK
 DUMIDESK_OBJECTS = \

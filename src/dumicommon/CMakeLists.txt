@@ -1,3 +1,4 @@
+message(">> DUMICOMMON @ ${CMAKE_CURRENT_SOURCE_DIR}")
 
 #Version config
 set(DUMICOMM_MAJOR 0)
