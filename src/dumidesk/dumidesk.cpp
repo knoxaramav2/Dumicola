@@ -1,4 +1,4 @@
-#include "dumicommon.hpp"
+#include "dumisdk.hpp"
 #include <stdio.h>
 
 int main(){

@@ -27,73 +27,45 @@ A networked device control hub for tinkerers. Dumicola provides a managed way to
 * Hypatia (Math)
 * Porus (Data Provider)
 
-## DumiSDK
-Dumicore is the scaffold for creating custom plugins. This provides everything necessary to create custom component libraries to be used to create extended Dumicola programs.
+# Components
+### DumiSDK
+Provides common definitions used across Dumicola components. This includes system type definitions and handling, as well as the base definitions required to create plugin libraries, as well as services used by the Service Manager.
 
-## DumiCommon
-Provides the common libraries required for a dumicola runtime.
+### Service Manager
+The service manager provides a configurable system for injecting services and making them available across the Dumicola system. Examples of services include database providers, network communication, and file access.
 
-## DumiManager
-The desktop network manager and program designer. This communicates with Megacola to modify control behavior and start and stop programs. DumiManager also providers a visual environment for viewing device program behavior through customizeable dashboards.
+### DumiCore
+This is the base runtime library used for creating a Dumicola executable. This provides a base implementation of all universally required systems, which can be extended for a final target, such as for a desktop or embedded implementation. As such, this is lightweight and does not directly provide platform specific configuration.
 
-## ColaCore
-The base runtime library for Dumicola. Provides minimal required functionality for a Dumicola runtime executable. Service implementations are not provided; these must be registered by the implementing runtime application.
+### DumiMobile
+The mobile (Android) implementation of DumiCore. This provides the basic runtime environment behind the Android application UI. This version adds Bluetooth and Wifi communication, as well as basic file access.
 
-## Megacola
-The desktop version of the dumicola runtime. This is the full featured version application for managing network devices and running applications. 
+### DumiMicro
+The embedded implementation of DumiCore. Being the most lightweight of the deployable systems, this implementation does not provide much configuration out of the box, as resources are expected to be scarce, and available peripherals are unknown. These will need to be added by the developer.
 
-## Microcola
-The embedded version of the dumicola runtime. This can be extended for customized use. cased.
+### DumiDesktop
+Dumidesktop is the fully configured environment for running Dumicola on PC. This includes full network configuration, a graphical interface, broader file access, and more. It is recommended to have at least one DumiDesktop instance available to lighten the network load on less powerful devices, although this is not required.
 
 # Roadmap
 
 Project | Status | Progress | Active
 --------|--------|----------|-------
-| DumiCommon | Started | ![](https://progress-bar.dev/0/) | Yes |
-| DumiSDK | Not Started | ![](https://progress-bar.dev/0/) | No |
-| ColaCore | Not Started | ![](https://progress-bar.dev/0/) | No |
-| Megacola | Not Started | ![](https://progress-bar.dev/0/) | No |
-| DumiManager | Not Started | ![](https://progress-bar.dev/0/) | No |
-| Microcola | Not Started | ![](https://progress-bar.dev/0/) | No |
+| DumiSdk | Started | ![](https://progress-bar.dev/0/) | Yes |
+| Service Manager | Not Started | ![](https://progress-bar.dev/0/) | No |
+| DumiCore | Not Started | ![](https://progress-bar.dev/0/) | No |
+| DumiMobile | Not Started | ![](https://progress-bar.dev/0/) | No |
+| DumiMicro | Not Started | ![](https://progress-bar.dev/0/) | No |
+| DumiDesktop | Not Started | ![](https://progress-bar.dev/0/) | No |
+
+# Standard Libraries
+Plugin | Status | Progress | Active
+------ | ------ | -------- | ------
 | Vulkan (STL) | Not Started | ![](https://progress-bar.dev/0/) | No |
 | Hypatia (STL) | Not Started | ![](https://progress-bar.dev/0/) | No |
 | Porus (STL) | Not Started | ![](https://progress-bar.dev/0/) | No |
 
-
-###### DumiCommon Progress
-- [ ] Database Context
-- [ ] DAO
-- [ ] Database Models
-- [ ] Migrations Manager
-- [ ] Security Manager
-- [ ] CommonConfig
-
-###### DumiSDK
- - [ ] CommonUtil
- - [ ] NodeBaseImpl
- - [ ] Types
- - [ ] ITypes
- - [ ] Exception
-
- ###### ColaCore
- - [ ] Process Manager
- - [ ] Resource Manager
- - [ ] Interop Service
- - [ ] Data Service
- - [ ] Network Service
- - [ ] Bytecode Executor
-
- ###### MegaCola (ColaCore)
-
-
- ###### DumiManager
- - [ ] Plugin Manager
- - [ ] App Designer
- - [ ] Network Viewer
- - [ ] Account Administration
- - [ ] Interop Manager
-
- ###### MicroCola (ColaCore)
-
-
- ###### 
+# User Interfaces
+GUI | Platform | Status | Progress | Active
+--- | -------- | ------ | -------- | ------
+| WinUI | Windows | Not Started | ![](https://progress-bar.dev/0/) | No
+| GNUI | Linux | Not Started | ![](https://progress-bar.dev/0/) | No

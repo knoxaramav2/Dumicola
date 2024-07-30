@@ -2,11 +2,11 @@ message(">> DUMICORE @ ${CMAKE_CURRENT_SOURCE_DIR}")
 
 add_library(DUMICORE STATIC)
 
-target_include_directories(DUMICORE PRIVATE ${DUMICOMMON_DIR})
-target_link_libraries(DUMICORE PRIVATE DUMICOMMON)
+target_include_directories(DUMICORE PRIVATE ${dumisdk_DIR})
+target_link_libraries(DUMICORE PRIVATE dumisdk)
 
 
-message("LINK TO ${DUMICOMMON_DIR}")
+message("LINK TO ${dumisdk_DIR}")
 
 target_sources(
     DUMICORE

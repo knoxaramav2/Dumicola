@@ -7,7 +7,7 @@
 #include <map>
 
 template <typename T>
-DUMICOMMON::DType<T>::DType(DumiType type)
+dumisdk::DType<T>::DType(DumiType type)
 {
     this->type = type;
 
@@ -25,7 +25,7 @@ DUMICOMMON::DType<T>::DType(DumiType type)
 }
 
 template <typename T>
-DUMICOMMON::DType<T>::~DType()
+dumisdk::DType<T>::~DType()
 {
     if(this->value != nullptr){ delete this->value; }
 }

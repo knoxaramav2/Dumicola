@@ -1,7 +1,7 @@
 message(">> DUMIDESK @ ${CMAKE_CURRENT_SOURCE_DIR}")
 
 add_executable(DUMIDESK)
-#link_libraries(DUMIDESK PRIVATE DUMICOMMON)
+#link_libraries(DUMIDESK PRIVATE dumisdk)
 
 target_sources(
     DUMIDESK
@@ -11,7 +11,7 @@ PRIVATE
 
 target_include_directories(DUMIDESK 
 PRIVATE 
-    ${DUMICOMMON_DIR}
+    ${dumisdk_DIR}
     ${DUMICORE_DIR}
     )
-target_link_libraries(DUMIDESK PRIVATE DUMICOMMON)
+target_link_libraries(DUMIDESK PRIVATE dumisdk)

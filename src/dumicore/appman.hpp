@@ -1,7 +1,7 @@
 #pragma once
 #include "dtypes.hpp"
 
-namespace DUMICOMMON{
+namespace dumisdk{
    
     
     class AppManager{
