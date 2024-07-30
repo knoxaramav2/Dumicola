@@ -163,3 +163,14 @@ cython_debug/
 
 # Additional ignores
 *.blend
+*.blend1
+build/
+
+#C/C++
+*.o
+*.a
+*.so
+*.lib
+*.exe
+*.dll
+**/CMakeFiles/**
