@@ -58,16 +58,16 @@ Every program cycle, each node is **Updated**, or allowed to execute a method. T
 
 Nodes are separated into different categories depending on their characteristics as outlined in the table below.
 
-:white_check_mark: - Expected :o: - Optional :x: - Not Allowed
+:white_check_mark: - Expected :large_orange_diamond: - Optional :x: - Not Allowed
 
 ###### Node Types
 | Type | Inputs | Outputs | Views
 | ---- | ------ | ------- | -----
 | Provider | :x: | :white_check_mark: | :x:
-| Actuator | :white_check_mark: | :white_check_mark: | :o: 
-| Monitor | :white_check_mark: | :x: | :o: 
+| Actuator | :white_check_mark: | :white_check_mark: | :large_orange_diamond: 
+| Monitor | :white_check_mark: | :x: | :large_orange_diamond: 
 | Single | :x: | :x: | :x: 
-| Nomad | :x: | :white_check_mark: | :o: 
+| Nomad | :x: | :white_check_mark: | :large_orange_diamond: 
 
 **Inputs** are divided into two base types: **DCInput** and **DCView**.
 
@@ -81,14 +81,14 @@ In either case, the purpose of DCInput and DCView is to allow DCType propgation 
 ###### DCInput API
 | Method | Type | Arguments | Public
 | ------ | ---- | --------- | ------
-| Set | void | DCType*value |  - [ ]
-| Get | void | DCType*value | - [ x ]
+| Set | void | DCType*value | :x:
+| Get | void | DCType*value | :white_check_mark:
 
 ###### DCView API
 | Method | Type | Arguments | Public
 | ------ | ---- | --------- | ------
-| Set | void | DCType*value |  - [ ]
-| Get | void | DCType*value| - [ x ]
+| Set | void | DCType*value | :x:
+| Get | void | DCType*value| :white_check_mark:
 
 ##### Outputs
 
@@ -97,8 +97,8 @@ Outputs are fixed, named outlets from a node. Outputs are responsible for provid
 ###### DCOutput API
 | Method | Type | Arguments | Public
 | ------ | ---- | --------- | ------
-| Set | void | DCType*value |  - [ x ]
-| Get  | DCType*value | | - [ ]
+| Set | void | DCType*value | :white_check_mark:
+| Get  | DCType*value | | :x:
 
 **Fields**
 
@@ -109,8 +109,8 @@ Note that not all states in a node are Fields; only those that can be configured
 ###### Field API
 | Method | Type | Arguments | Public
 | ------ | ---- | --------- | ------
-| Set | void | DCType*value |  - [ ]
-| Get | DCType* |  | - [ x ]
+| Set | void | DCType*value | :white_check_mark:
+| Get | DCType* |  | :x:
 
 
 #### DCApp
