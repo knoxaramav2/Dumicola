@@ -23,6 +23,7 @@ done
 if [ "$clean" = true ] ; then
     echo "Cleaning..."
     cmake --build ${local_path}/src --target clean
+    rm -r ${local_path}/build
 fi
 
 if [ "$build" = true ] ; then
@@ -43,7 +44,7 @@ if [ "$test" != "DC_NO_TEST_CONTEXT" ] ; then
         echo "Run all tests"
 
         cmake --build ./build/test
-        ctest --test-dir "${local_path}/build"
+        ctest --test-dir "${local_path}/build" --output-on-failure --verbose
     else
         echo "Run test: ${test}"
         ctest "${local_path}/build"

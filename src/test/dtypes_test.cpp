@@ -1,9 +1,9 @@
-#include "dumisdk.hpp"
+#include "dtypes_test.hpp"
 #include <cassert>
+#include "stdio.h"
 
-int main(){
-    assert(true);
-
-    
+int DTYPE_TEST::typetest()
+{
+    printf("FROM TYPEDEST (DTYPE)\n");
     return 0;
 }
