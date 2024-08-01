@@ -1,32 +1,75 @@
 #include "dtypes.hpp"
+#include "utils.hpp"
 
 #include <type_traits>
-#include <exception>
+#include <stdexcept>
 #include <concepts>
 #include <vector>
 #include <map>
+#include <format>
 
-template <typename T>
-dumisdk::DType<T>::DType(DumiType type)
+dumisdk::DCMemObj::DCMemObj(DumiBaseType t_base, DumiExtType t_ext)
 {
-    this->type = type;
-
-    switch(type){
-        case DumiType::NONE: this->value = nullptr; break;
-        case DumiType::BOOL: this->value = new bool; break;
-        case DumiType::INTEGER: this->value = new long; break;
-        case DumiType::DECIMAL: this->value = new double; break;
-        case DumiType::STRING: this->value = new std::string; break;
-        case DumiType::LOOKUP: this->value = new std::map<APPSID, TypeRef>; break;
-        case DumiType::LIST: this->value = new std::vector<T>; break;
-        case DumiType::MMDT: this->value = new MediaData(); break;
-    }
-
-    this->id = appId(this->value);
+    this->id = addrId(*this);
+    this->type = SET_DTYPE_EXT(t_base, t_ext);
 }
 
 template <typename T>
-dumisdk::DType<T>::~DType()
+inline dumisdk::DCType<T>::DCType(DumiBaseType t_base, DumiExtType t_ext, T initialValue)
+    :DCMemObj(t_base, t_ext)
 {
-    if(this->value != nullptr){ delete this->value; }
+    this->__value = new T(initialValue);
 }
+
+template <typename T>
+dumisdk::DCType<T>::~DCType()
+{
+    delete __value;
+}
+
+template<typename T>
+T dumisdk::DCType<T>::get()
+{
+    return *__value;
+}
+
+template<typename T>
+int dumisdk::DCType<T>::set(T value)
+{
+    *__value = value;
+    return 0;
+}
+
+/** 
+ * Type definitions 
+ **/
+dumisdk::DCBoolean::DCBoolean()
+    :DCType<bool>(DumiBaseType::BOOL, DumiExtType::BASIC_DTYPE, false)
+    {}
+
+dumisdk::DCInteger::DCInteger()
+    :DCType<int32_t>(DumiBaseType::INTEGER, DumiExtType::BASIC_DTYPE, 0)
+    {}
+
+dumisdk::DCDecimal::DCDecimal()
+    :DCType<double>(DumiBaseType::DECIMAL, DumiExtType::BASIC_DTYPE, 0.0f)
+    {}
+
+dumisdk::DCString::DCString()
+    :DCType<std::string>(DumiBaseType::STRING, DumiExtType::BASIC_DTYPE, "")
+    {}
+
+dumisdk::DCMap::DCMap()
+    :DCType<std::map<APPSID, dumisdk::DCMemObj*>>(DumiBaseType::MAP, DumiExtType::BASIC_DTYPE, {})
+    {}
+
+dumisdk::DCMemObj *dumisdk::DCMap::operator[](APPSID id)
+{
+    return nullptr;
+}
+
+dumisdk::DCList::DCList()
+    :DCType<std::vector<dumisdk::DCMemObj*>>(DumiBaseType::LIST, DumiExtType::BASIC_DTYPE, {})
+    {}
+
+

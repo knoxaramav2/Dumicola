@@ -17,6 +17,7 @@ target_sources(
     DUMISDK
 PUBLIC 
     dumisdk.cpp
+    utils.cpp
     dtypes.cpp
 PRIVATE
 
