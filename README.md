@@ -50,19 +50,19 @@ Dumidesktop is the fully configured environment for running Dumicola on PC. This
 
 Project | Status | Progress | Active
 --------|--------|----------|-------
-| DumiSdk | Started | ![](https://progress-bar.dev/0/) | Yes |
-| Service Manager | Not Started | ![](https://progress-bar.dev/0/) | No |
-| DumiCore | Not Started | ![](https://progress-bar.dev/0/) | No |
-| DumiMobile | Not Started | ![](https://progress-bar.dev/0/) | No |
-| DumiMicro | Not Started | ![](https://progress-bar.dev/0/) | No |
-| DumiDesktop | Not Started | ![](https://progress-bar.dev/0/) | No |
+| DumiSdk | Started | ![](https://progress-bar.dev/0/) | Yes 
+| Service Manager | Not Started | ![](https://progress-bar.dev/0/) | No 
+| DumiCore | Not Started | ![](https://progress-bar.dev/0/) | No 
+| DumiMobile | Not Started | ![](https://progress-bar.dev/0/) | No 
+| DumiMicro | Not Started | ![](https://progress-bar.dev/0/) | No 
+| DumiDesktop | Not Started | ![](https://progress-bar.dev/0/) | No 
 
 # Standard Libraries
 Plugin | Status | Progress | Active
 ------ | ------ | -------- | ------
-| Vulkan (STL) | Not Started | ![](https://progress-bar.dev/0/) | No |
-| Hypatia (STL) | Not Started | ![](https://progress-bar.dev/0/) | No |
-| Porus (STL) | Not Started | ![](https://progress-bar.dev/0/) | No |
+| Vulkan (STL) | Not Started | ![](https://progress-bar.dev/0/) | No 
+| Hypatia (STL) | Not Started | ![](https://progress-bar.dev/0/) | No 
+| Porus (STL) | Not Started | ![](https://progress-bar.dev/0/) | No 
 
 # User Interfaces
 GUI | Platform | Status | Progress | Active

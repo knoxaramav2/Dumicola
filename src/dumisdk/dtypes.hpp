@@ -12,7 +12,7 @@ namespace dumisdk
         INTEGER, DECIMAL,
         STRING,
         LOOKUP, LIST,
-        BLOB
+        MMDT
     };
 
     template<typename T>
@@ -30,5 +30,9 @@ namespace dumisdk
         DType<void>* typeData;
 
         TypeRef(DType<void> typeData);
+    };
+
+    class MediaData{
+        public:
     };
 }

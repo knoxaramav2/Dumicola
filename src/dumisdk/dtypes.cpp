@@ -19,6 +19,7 @@ dumisdk::DType<T>::DType(DumiType type)
         case DumiType::STRING: this->value = new std::string; break;
         case DumiType::LOOKUP: this->value = new std::map<APPSID, TypeRef>; break;
         case DumiType::LIST: this->value = new std::vector<T>; break;
+        case DumiType::MMDT: this->value = new MediaData(); break;
     }
 
     this->id = appId(this->value);
