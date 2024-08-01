@@ -3,40 +3,32 @@ build=false
 run=""
 test="DC_NO_TEST_CONTEXT"
 local_path="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+clean=false
 
-# while getopts "brX" o
-# do
-#     eval nextopt=\${$OPTIND}
-#     case "${o}" in
-#         X) echo "noval";;
-#         b) echo "_Build";;
-#         r) 
-#             if [[ -n "$nextopt && $nextopt != -*" ]]; then
-#                 OPTIND=$((OPTIND + 1))
-#                 run=$nextopt
-#             fi
-#             echo "_Run $run"
-#     esac
-# done
-
-while getopts br:Tt: flag
+while getopts br:Tt:C flag
 do 
     case "${flag}" in
         b) build=true;;
         r) run=${OPTARG};;
         t) test=${OPTARG};;
-        T) test=""
+        T) test="";;
+        C) clean=true;;
     esac
 done
 
-echo "Build? " $build
-echo "Run? " $run
-echo "Test? " $test
+#echo "Build? " $build
+#echo "Run? " $run
+#echo "Test? " $test
+
+if [ "$clean" = true ] ; then
+    echo "Cleaning..."
+    cmake --build ${local_path}/src --target clean
+fi
 
 if [ "$build" = true ] ; then
     echo "BUILD START"
     cmake -B "${local_path}/build" -S ${local_path}/src -DCMAKE_CXX_COMPILER=g++ -DCMAKE_C_COMPILER=gcc -DCMAKE_BUILD_TYPE=Release
-    cmake --build "${local_path}/build" --config Release
+    cmake --build ${local_path}/build --config Release
     echo "DONE."
 fi
 

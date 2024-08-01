@@ -76,5 +76,9 @@ jobs:
 
     - name: Test
       working-directory: ${{ steps.strings.outputs.build-output-dir }}
-      run: echo "TEST @ ${{ steps.strings.outputs.build-output-dir }}" && \
-        ctest --build-config ${{ matrix.build_type }} --test-dir "${{ steps.strings.outputs.build-output-dir }}/test"
+      run: >
+        cmake --build ${{ github.workspace }}/build/test &&
+        ctest --test-dir ${{ github.workspace }}/build
+
+      #run: echo "TEST @ ${{ steps.strings.outputs.build-output-dir }}" && \
+      #  ctest --build-config ${{ matrix.build_type }} --test-dir "${{ steps.strings.outputs.build-output-dir }}/test"
