@@ -5,6 +5,25 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'
+        required: true
+        default: 'warning'
+        type: choice
+        options:
+          - info
+          - warning
+          - debug
+      tags:
+        description: 'Dumicola manual test'
+        required: false
+        type: boolean
+      environment:
+        description: 'Test environment'
+        type: environment
+        required: true
 
 jobs:
   build:
