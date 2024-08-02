@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <functional>
 
 namespace dumisdk
 {
@@ -39,27 +40,72 @@ namespace dumisdk
 
     template<typename T>
     struct DCType : DCMemObj{
-        virtual T get();
-        virtual int set(T);
-
         protected:
         DCType(DumiBaseType t_base, DumiExtType t_ext, T initialValue);
         ~DCType();
         T* __value;
-
     };
 
-    struct DCBoolean: DCType<bool>{ DCBoolean(); };
-    struct DCInteger: DCType<int32_t>{ DCInteger(); };
-    struct DCDecimal: DCType<double>{ DCDecimal(); };
-    struct DCString: DCType<std::string>{ DCString(); };
-    struct DCMap: DCType<std::map<APPSID, DCMemObj*>>{ 
+    template<typename T>
+    struct DCLiteral: DCType<T>{
+        DCLiteral(DumiBaseType t_base, DumiExtType t_ext, T initialValue);
+        virtual T get();
+        virtual void set(T value);
+    };
+
+    template<typename T, typename I>
+    struct DCCollection: DCType<T>{
+        DCCollection(DumiBaseType t_base, DumiExtType t_ext, T initialValue);
+        virtual DCMemObj* operator[](I id);
+        virtual bool remove(I id);
+        virtual bool remove(DCMemObj* item);
+    };
+
+    struct DCBoolean: DCLiteral<bool>{ DCBoolean(); };
+    struct DCInteger: DCLiteral<int32_t>{ DCInteger(); };
+    struct DCDecimal: DCLiteral<double>{ DCDecimal(); };
+    struct DCString: DCLiteral<std::string>{ DCString(); };
+
+    struct DCMap: DCCollection<std::map<APPSID, DCMemObj*>, APPSID>{ 
         DCMap();
         DCMemObj* operator[](APPSID id);
-        //bool remove(APPSID id);
-        //bool remove(DCMemObj* item);
+        bool remove(APPSID id);
+        bool remove(DCMemObj* item);
     };
-    struct DCList: DCType<std::vector<DCMemObj*>>{ DCList(); };
+    struct DCList: DCCollection<std::vector<DCMemObj*>, size_t>{ 
+        DCList(); 
+        DCMemObj* operator[](size_t index);
+        void push_back(DCMemObj* item);
+        bool remove(size_t index);
+        bool remove(DCMemObj* item);
+    };
+
+    typedef DCMemObj* (__type_builder)(
+        DumiBaseType base,
+        DumiExtType ext
+    );
+
+    struct TypeTemplate:DCMemObj{
+        TypeTemplate(std::string name, __type_builder builder,
+        DumiBaseType base, DumiExtType ext);
+        std::string name;
+        DCMemObj* build();
+        private:
+        __type_builder* __builder;
+    };
+
+    class TypeTemplateFactory{
+        static std::vector<TypeTemplate> __templates;
+        TypeTemplateFactory();
+        ~TypeTemplateFactory();
+
+        public:
+
+        TypeTemplateFactory* getInstance();
+
+        bool registerTemplate();
+        DCMemObj* createFrom();
+    };
 
     class DCDataManager{
         std::map<APPSID, DCMemObj*> __dTypeStorage;

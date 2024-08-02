@@ -1,5 +1,6 @@
 #include "dtypes.hpp"
 #include "utils.hpp"
+#include "dumiexcept.hpp"
 
 #include <type_traits>
 #include <stdexcept>
@@ -27,49 +28,189 @@ dumisdk::DCType<T>::~DCType()
     delete __value;
 }
 
-template<typename T>
-T dumisdk::DCType<T>::get()
+/**
+ * DC Literal
+ */
+
+template <typename T>
+dumisdk::DCLiteral<T>::DCLiteral(DumiBaseType t_base, DumiExtType t_ext, T initialValue)
+    :DCType<T>(t_base, t_ext, initialValue) {}
+
+template <typename T>
+inline T dumisdk::DCLiteral<T>::get()
 {
-    return *__value;
+    return *this->__value;
 }
 
-template<typename T>
-int dumisdk::DCType<T>::set(T value)
+template <typename T>
+void dumisdk::DCLiteral<T>::set(T value)
 {
-    *__value = value;
-    return 0;
+    *this->__value = value;
 }
+
+/**
+ * DC Collection
+ */
+template <typename T, typename I>
+inline dumisdk::DCCollection<T, I>::DCCollection(DumiBaseType t_base, DumiExtType t_ext, T initialValue)
+    :DCType<T>(t_base, t_ext, initialValue) {}
 
 /** 
  * Type definitions 
  **/
 dumisdk::DCBoolean::DCBoolean()
-    :DCType<bool>(DumiBaseType::BOOL, DumiExtType::BASIC_DTYPE, false)
+    :DCLiteral<bool>(DumiBaseType::BOOL, DumiExtType::BASIC_DTYPE, false)
     {}
 
 dumisdk::DCInteger::DCInteger()
-    :DCType<int32_t>(DumiBaseType::INTEGER, DumiExtType::BASIC_DTYPE, 0)
+    :DCLiteral<int32_t>(DumiBaseType::INTEGER, DumiExtType::BASIC_DTYPE, 0)
     {}
 
 dumisdk::DCDecimal::DCDecimal()
-    :DCType<double>(DumiBaseType::DECIMAL, DumiExtType::BASIC_DTYPE, 0.0f)
+    :DCLiteral<double>(DumiBaseType::DECIMAL, DumiExtType::BASIC_DTYPE, 0.0f)
     {}
 
 dumisdk::DCString::DCString()
-    :DCType<std::string>(DumiBaseType::STRING, DumiExtType::BASIC_DTYPE, "")
+    :DCLiteral<std::string>(DumiBaseType::STRING, DumiExtType::BASIC_DTYPE, "")
     {}
 
+
+/* DC Map */
 dumisdk::DCMap::DCMap()
-    :DCType<std::map<APPSID, dumisdk::DCMemObj*>>(DumiBaseType::MAP, DumiExtType::BASIC_DTYPE, {})
+    :DCCollection<std::map<APPSID, dumisdk::DCMemObj*>, APPSID>
+    (DumiBaseType::MAP, DumiExtType::BASIC_DTYPE, {})
     {}
 
 dumisdk::DCMemObj *dumisdk::DCMap::operator[](APPSID id)
 {
+    for(auto i = __value->begin(); i != __value->end(); ++i){
+        if(i->second->id == id){
+            return i->second;
+        }
+    }
+
     return nullptr;
 }
 
-dumisdk::DCList::DCList()
-    :DCType<std::vector<dumisdk::DCMemObj*>>(DumiBaseType::LIST, DumiExtType::BASIC_DTYPE, {})
-    {}
+bool dumisdk::DCMap::remove(APPSID id)
+{
+    return __value->erase(id) > 0;
+}
 
+bool dumisdk::DCMap::remove(DCMemObj *item)
+{
+    size_t idx = -1;
+    for(auto i = __value->begin(); i != __value->end(); ++i){
+        if(i->second == item){
+            __value->erase(i);
+            return true;
+        }
+    }
+
+    return false;
+}
+
+
+/* DC List */
+dumisdk::DCList::DCList()
+    :DCCollection<std::vector<DCMemObj*>, size_t>
+    (DumiBaseType::LIST, DumiExtType::BASIC_DTYPE, {}){}
+
+dumisdk::DCMemObj *dumisdk::DCList::operator[](size_t index)
+{
+    if(index < 0 || index >= __value->size()) { return nullptr; }
+    return (*__value)[index];
+}
+
+void dumisdk::DCList::push_back(DCMemObj *item)
+{
+    __value->push_back(item);
+}
+
+bool dumisdk::DCList::remove(size_t index)
+{
+    if(index < 0 || index >= __value->size()){ return false; }
+    __value->erase(__value->begin()+index);
+    return true;
+}
+
+bool dumisdk::DCList::remove(DCMemObj *item)
+{
+    for(auto i = __value->begin(); i != __value->end(); ++i){
+        if(*i == item){
+            __value->erase(i);
+            return true;
+        }
+    }
+    return false;
+}
+
+
+/* Type Management */
+dumisdk::TypeTemplate::TypeTemplate(std::string name, __type_builder builder,
+DumiBaseType base, DumiExtType ext)
+    :dumisdk::DCMemObj(base, ext)
+{
+    this->name = name;
+    this->__builder = builder;
+}
+
+static dumisdk::TypeTemplateFactory* __ttf_inst = nullptr;
+
+dumisdk::TypeTemplateFactory::TypeTemplateFactory(){
+    if(__ttf_inst != nullptr){
+        throw dumiexception(std::format("Duplicate instantiation of {}", NAMEOF(TypeTemplateFactory)).c_str());
+    }
+
+    __ttf_inst = this;
+}
+
+dumisdk::TypeTemplateFactory::~TypeTemplateFactory(){
+    if(__ttf_inst != nullptr){
+        __ttf_inst = nullptr;
+    } else {
+
+    }
+}
+
+dumisdk::TypeTemplateFactory* dumisdk::TypeTemplateFactory::getInstance(){
+    if(__ttf_inst == nullptr){
+        __ttf_inst = new TypeTemplateFactory();
+    }
+    return __ttf_inst;
+}
+
+bool dumisdk::TypeTemplateFactory::registerTemplate(){
+    return false;
+}
+
+
+/* DC Data Manager */
+dumisdk::DCDataManager::DCDataManager(){
+
+}
+
+dumisdk::DCDataManager::~DCDataManager(){
+
+}
+
+dumisdk::DCMemObj *dumisdk::DCDataManager::createVar(DumiBaseType type, DumiExtType ext)
+{
+    return nullptr;
+}
+
+dumisdk::DCMemObj *dumisdk::DCDataManager::requestVar(APPSID id)
+{
+    return __dTypeStorage.contains(id) ? 
+        __dTypeStorage[id] : nullptr;
+}
+
+bool dumisdk::DCDataManager::deleteVar(APPSID id)
+{
+    if(__dTypeStorage.contains(id)){
+        __dTypeStorage.erase(id);
+        return true;
+    }
+    return false;
+}
 

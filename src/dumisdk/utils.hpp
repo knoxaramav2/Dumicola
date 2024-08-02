@@ -10,3 +10,5 @@ namespace dumisdk{
     #define addrId(obj) reinterpret_cast<APPSID>(&obj);
 }
 
+#define NAMEOF(x) #x
+

@@ -19,6 +19,8 @@ PUBLIC
     dumisdk.cpp
     utils.cpp
     dtypes.cpp
+    logger.cpp
+    utils.cpp
 PRIVATE
 
 )

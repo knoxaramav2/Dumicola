@@ -49,7 +49,8 @@
         "ctime": "cpp",
         "span": "cpp",
         "variant": "cpp",
-        "format": "cpp"
+        "format": "cpp",
+        "cstring": "cpp"
     },
     "makefile.makefilePath": "./src/cpp",
     "makefile.buildLog": "."
