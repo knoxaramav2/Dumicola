@@ -1,6 +1,7 @@
 #include "dtypes.hpp"
 #include "utils.hpp"
 #include "dumiexcept.hpp"
+#include "logger.hpp"
 
 #include <type_traits>
 #include <stdexcept>
@@ -9,15 +10,15 @@
 #include <map>
 #include <format>
 
-dumisdk::DCMemObj::DCMemObj(DumiBaseType t_base, DumiExtType t_ext)
+dumisdk::DCMemObj::DCMemObj(std::string name)
 {
     this->id = addrId(*this);
-    this->type = SET_DTYPE_EXT(t_base, t_ext);
+    this->hashId = FNV1A(name);
 }
 
 template <typename T>
-inline dumisdk::DCType<T>::DCType(DumiBaseType t_base, DumiExtType t_ext, T initialValue)
-    :DCMemObj(t_base, t_ext)
+inline dumisdk::DCType<T>::DCType(std::string name, T initialValue)
+    :DCMemObj(name)
 {
     this->__value = new T(initialValue);
 }
@@ -33,8 +34,8 @@ dumisdk::DCType<T>::~DCType()
  */
 
 template <typename T>
-dumisdk::DCLiteral<T>::DCLiteral(DumiBaseType t_base, DumiExtType t_ext, T initialValue)
-    :DCType<T>(t_base, t_ext, initialValue) {}
+dumisdk::DCLiteral<T>::DCLiteral(std::string name, T initialValue)
+    :DCType<T>(name, initialValue) {}
 
 template <typename T>
 inline T dumisdk::DCLiteral<T>::get()
@@ -52,34 +53,32 @@ void dumisdk::DCLiteral<T>::set(T value)
  * DC Collection
  */
 template <typename T, typename I>
-inline dumisdk::DCCollection<T, I>::DCCollection(DumiBaseType t_base, DumiExtType t_ext, T initialValue)
-    :DCType<T>(t_base, t_ext, initialValue) {}
+inline dumisdk::DCCollection<T, I>::DCCollection(std::string name, T initialValue)
+    :DCType<T>(name, initialValue) {}
 
 /** 
  * Type definitions 
  **/
 dumisdk::DCBoolean::DCBoolean()
-    :DCLiteral<bool>(DumiBaseType::BOOL, DumiExtType::BASIC_DTYPE, false)
+    :DCLiteral<bool>(DC_BOOL, false)
     {}
 
 dumisdk::DCInteger::DCInteger()
-    :DCLiteral<int32_t>(DumiBaseType::INTEGER, DumiExtType::BASIC_DTYPE, 0)
+    :DCLiteral<int32_t>(DC_INTEGER, 0)
     {}
 
 dumisdk::DCDecimal::DCDecimal()
-    :DCLiteral<double>(DumiBaseType::DECIMAL, DumiExtType::BASIC_DTYPE, 0.0f)
+    :DCLiteral<double>(DC_DECIMAL, 0.0f)
     {}
 
 dumisdk::DCString::DCString()
-    :DCLiteral<std::string>(DumiBaseType::STRING, DumiExtType::BASIC_DTYPE, "")
+    :DCLiteral<std::string>(DC_STIRNG, "")
     {}
 
 
 /* DC Map */
 dumisdk::DCMap::DCMap()
-    :DCCollection<std::map<APPSID, dumisdk::DCMemObj*>, APPSID>
-    (DumiBaseType::MAP, DumiExtType::BASIC_DTYPE, {})
-    {}
+   : DCCollection<std::map<APPSID, DCMemObj*>, APPSID>(DC_MAP, {}) {}
 
 dumisdk::DCMemObj *dumisdk::DCMap::operator[](APPSID id)
 {
@@ -97,7 +96,7 @@ bool dumisdk::DCMap::remove(APPSID id)
     return __value->erase(id) > 0;
 }
 
-bool dumisdk::DCMap::remove(DCMemObj *item)
+bool dumisdk::DCMap::remove(dumisdk::DCMemObj *item)
 {
     size_t idx = -1;
     for(auto i = __value->begin(); i != __value->end(); ++i){
@@ -113,8 +112,7 @@ bool dumisdk::DCMap::remove(DCMemObj *item)
 
 /* DC List */
 dumisdk::DCList::DCList()
-    :DCCollection<std::vector<DCMemObj*>, size_t>
-    (DumiBaseType::LIST, DumiExtType::BASIC_DTYPE, {}){}
+    : DCCollection<std::vector<DCMemObj*>, size_t>(DC_LIST, {}) {}
 
 dumisdk::DCMemObj *dumisdk::DCList::operator[](size_t index)
 {
@@ -147,12 +145,16 @@ bool dumisdk::DCList::remove(DCMemObj *item)
 
 
 /* Type Management */
-dumisdk::TypeTemplate::TypeTemplate(std::string name, __type_builder builder,
-DumiBaseType base, DumiExtType ext)
-    :dumisdk::DCMemObj(base, ext)
+dumisdk::TypeTemplate::TypeTemplate(std::string name, __type_builder builder)
+    :dumisdk::DCMemObj(name)
 {
     this->name = name;
     this->__builder = builder;
+}
+
+dumisdk::DCMemObj *dumisdk::TypeTemplate::build()
+{
+    return nullptr;
 }
 
 static dumisdk::TypeTemplateFactory* __ttf_inst = nullptr;
@@ -167,9 +169,14 @@ dumisdk::TypeTemplateFactory::TypeTemplateFactory(){
 
 dumisdk::TypeTemplateFactory::~TypeTemplateFactory(){
     if(__ttf_inst != nullptr){
+
+        for(auto i: __ttf_inst->__templates){
+            delete  i.second;
+        }
+
         __ttf_inst = nullptr;
     } else {
-
+        logerr_a(std::format("{} deconstructed with invalid static instance", NAMEOF(TypeTemplateFactory)), LoggerAction::LG_PRINTWRITE);
     }
 }
 
@@ -180,22 +187,51 @@ dumisdk::TypeTemplateFactory* dumisdk::TypeTemplateFactory::getInstance(){
     return __ttf_inst;
 }
 
-bool dumisdk::TypeTemplateFactory::registerTemplate(){
-    return false;
+bool dumisdk::TypeTemplateFactory::registerTemplate(std::string name, __type_builder builder){
+
+    HASHID hash = FNV1A(name);
+
+    for(auto i:__ttf_inst->__templates){
+        if(i.first==hash){ 
+            logerr_a(std::format("Duplicate type name: {}", name), LoggerAction::LG_PRINTWRITE);
+            return false; 
+        }
+    }
+
+    TypeTemplate* newTmpl = new TypeTemplate(name, builder);
+    __templates[appId(newTmpl)] = newTmpl;
+
+    return true;
 }
 
+// dumisdk::DCMemObj *dumisdk::TypeTemplateFactory::instanceOf(std::string name)
+// {
+//     return instanceOf(FNV1A(name));
+// }
+
+// dumisdk::DCMemObj *dumisdk::TypeTemplateFactory::instanceOf(HASHID id)
+// {
+//     if(__templates.contains(id)){
+//         return __templates[id]->build();
+//     }
+//     return nullptr;
+// }
 
 /* DC Data Manager */
 dumisdk::DCDataManager::DCDataManager(){
-
+    __factory = TypeTemplateFactory::getInstance();
 }
 
 dumisdk::DCDataManager::~DCDataManager(){
 
 }
 
-dumisdk::DCMemObj *dumisdk::DCDataManager::createVar(DumiBaseType type, DumiExtType ext)
+dumisdk::DCMemObj *dumisdk::DCDataManager::createVar(std::string name)
 {
+    HASHID hash = FNV1A(name);
+    if(__dTypeStorage.contains(hash)){
+        //return __factory->instanceOf(hash);
+    }
     return nullptr;
 }
 

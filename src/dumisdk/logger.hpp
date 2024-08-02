@@ -15,16 +15,16 @@ namespace dumisdk
     };
 
     class Logger{
-        static void initLogger(unsigned bufferSize, bool color);
-        static void log(std::string msg, LogLevel level, LoggerAction action);
-        static void flush();
-        private:
         static inline void __ensureLogger();
         Logger(unsigned _bfSize=10, bool _color=false);
         static std::vector<std::string> __logBuff;
         static unsigned __bufferSize;
         static bool __color;
         static Logger* __inst;
+        public:
+        static void initLogger(unsigned bufferSize, bool color);
+        static void log(std::string msg, LogLevel level, LoggerAction action);
+        static void flush();        
     };
 
     #define logmsg(msg) Logger::log(std::format("{}", msg), LG_INFO, LG_PRINT)

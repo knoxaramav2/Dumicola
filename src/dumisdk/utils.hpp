@@ -5,7 +5,7 @@
 
 namespace dumisdk{
     uint32_t nextId();
-    //std::string uuid();
+    uint32_t FNV1A(std::string);
     
     #define addrId(obj) reinterpret_cast<APPSID>(&obj);
 }

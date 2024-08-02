@@ -9,56 +9,33 @@
 
 namespace dumisdk
 {
-    #define BYTE2 0x0000FFFF
-    #define BYTE4 0xFFFF0000
-
-    enum DumiBaseType: uint16_t{
-        //Basic types
-        NONE = 0,
-        BOOL,
-        INTEGER, DECIMAL,
-        STRING,
-        MAP, LIST,
-        MMDT,
-    };
-
-    enum DumiExtType: uint16_t{
-        BASIC_DTYPE=0,
-    };
-
-    #define DumiType uint32_t
-
-    #define SET_DTYPE_EXT(base, ext) (DumiType)(base | (ext<<16))
-    #define DTYPE_BASE(e_val) (DumiBaseType)(e_val&BYTE2)
-    #define DTYPE_EXT(e_val) (DumiExtType)(e_val>>16)
-
     struct DCMemObj{
         APPSID id;
-        DumiType type;
-        DCMemObj(DumiBaseType t_base, DumiExtType t_ext);
+        HASHID hashId;
+        DCMemObj(std::string name);
     };
 
     template<typename T>
     struct DCType : DCMemObj{
         protected:
-        DCType(DumiBaseType t_base, DumiExtType t_ext, T initialValue);
+        DCType(std::string name, T initialValue);
         ~DCType();
         T* __value;
     };
 
     template<typename T>
     struct DCLiteral: DCType<T>{
-        DCLiteral(DumiBaseType t_base, DumiExtType t_ext, T initialValue);
+        DCLiteral(std::string name, T initialValue);
         virtual T get();
         virtual void set(T value);
     };
 
-    template<typename T, typename I>
+    template<typename T, class I>
     struct DCCollection: DCType<T>{
-        DCCollection(DumiBaseType t_base, DumiExtType t_ext, T initialValue);
-        virtual DCMemObj* operator[](I id);
-        virtual bool remove(I id);
-        virtual bool remove(DCMemObj* item);
+        DCCollection(std::string name, T initialValue);
+        virtual DCMemObj* operator[](I id) = 0;
+        virtual bool remove(I id) = 0;
+        virtual bool remove(DCMemObj* item) = 0;
     };
 
     struct DCBoolean: DCLiteral<bool>{ DCBoolean(); };
@@ -72,6 +49,7 @@ namespace dumisdk
         bool remove(APPSID id);
         bool remove(DCMemObj* item);
     };
+
     struct DCList: DCCollection<std::vector<DCMemObj*>, size_t>{ 
         DCList(); 
         DCMemObj* operator[](size_t index);
@@ -80,14 +58,10 @@ namespace dumisdk
         bool remove(DCMemObj* item);
     };
 
-    typedef DCMemObj* (__type_builder)(
-        DumiBaseType base,
-        DumiExtType ext
-    );
+    typedef DCMemObj* (__type_builder)(std::string name);
 
     struct TypeTemplate:DCMemObj{
-        TypeTemplate(std::string name, __type_builder builder,
-        DumiBaseType base, DumiExtType ext);
+        TypeTemplate(std::string name, __type_builder builder);
         std::string name;
         DCMemObj* build();
         private:
@@ -95,25 +69,27 @@ namespace dumisdk
     };
 
     class TypeTemplateFactory{
-        static std::vector<TypeTemplate> __templates;
+        std::map<HASHID, TypeTemplate*> __templates;
         TypeTemplateFactory();
         ~TypeTemplateFactory();
 
         public:
 
-        TypeTemplateFactory* getInstance();
+        static TypeTemplateFactory* getInstance();
 
-        bool registerTemplate();
-        DCMemObj* createFrom();
+        bool registerTemplate(std::string name, __type_builder builder);
+        //DCMemObj* instanceOf(std::string name);
+        //DCMemObj* instanceOf(HASHID id);
     };
 
     class DCDataManager{
-        std::map<APPSID, DCMemObj*> __dTypeStorage;
+        TypeTemplateFactory* __factory;
+        std::map<HASHID, DCMemObj*> __dTypeStorage;
     public:
         DCDataManager();
         ~DCDataManager();
 
-        DCMemObj* createVar(DumiBaseType type, DumiExtType ext);
+        DCMemObj* createVar(std::string name);
         DCMemObj* requestVar(APPSID id);
         bool deleteVar(APPSID id);
     };

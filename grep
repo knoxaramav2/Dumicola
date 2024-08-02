@@ -1,0 +1,8 @@
+BUILD START
+-- Configuring done (0.0s)
+-- Generating done (0.0s)
+-- Build files have been written to: /media/knox/ExtDrive/Dev/Dumicola/build
+[ 20%] Built target DUMISDK
+[ 43%] Built target DUMICORE
+[ 46%] Linking CXX executable DUMIDESK
+DONE.

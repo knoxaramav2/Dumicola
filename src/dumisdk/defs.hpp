@@ -5,6 +5,7 @@
 
 typedef std::uintptr_t APPSID;
 typedef size_t RSCID;
+typedef uint32_t HASHID;
 
 template<typename T> inline APPSID appId(T* ptr) { return reinterpret_cast<std::uintptr_t>(ptr); }
 template<typename T> inline APPSID appId(T ptr) { return reinterpret_cast<std::uintptr_t>(&ptr); }
@@ -38,3 +39,13 @@ template<typename T> inline APPSID appId(T ptr) { return reinterpret_cast<std::u
 #else
 #define BITMODE 32
 #endif
+
+#define DC_BOOL "__DC_IT_BOOL"
+#define DC_INTEGER "__DC_IT_INTEGER"
+#define DC_DECIMAL "__DC_IT_DECIMAL"
+#define DC_STIRNG "__DC_IT_STRING"
+#define DC_MAP "__DC_IT_MAP"
+#define DC_LIST "__DC_IT_LIST"
+
+
+

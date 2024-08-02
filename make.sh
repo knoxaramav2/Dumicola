@@ -4,8 +4,10 @@ run=""
 test="DC_NO_TEST_CONTEXT"
 local_path="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 clean=false
+dumpProj=""
+dumpFile=""
 
-while getopts br:Tt:C flag
+while getopts br:Tt:CD:d: flag
 do 
     case "${flag}" in
         b) build=true;;
@@ -13,6 +15,8 @@ do
         t) test=${OPTARG};;
         T) test="";;
         C) clean=true;;
+        D) dumpProj=${OPTARG};;
+        d) dumpFile=${OPTARG};;
     esac
 done
 
@@ -31,6 +35,25 @@ if [ "$build" = true ] ; then
     cmake -B "${local_path}/build" -S ${local_path}/src -DCMAKE_CXX_COMPILER=g++ -DCMAKE_C_COMPILER=gcc -DCMAKE_BUILD_TYPE=Release
     cmake --build ${local_path}/build --config Release
     echo "DONE."
+fi
+
+if [ "$dumpProj" != "" ] ; then
+    dumpDir="${local_path}/build/${dumpProj}/CMakeFiles/${dumpProj}.dir"
+    files=""
+    if [ "$dumpFile" = "" ] ; then
+        files=$(find "$dumpDir" -type f -name "*.cpp.o")
+    else
+        files="${dumpDir}/${dumpFile}"
+    fi
+
+    for file in $files;
+    do 
+        echo "DUMP FILE: ${file}"
+        if [ file = "" ]; then continue; fi
+        set -x
+        #"-t ./build/${dumpProj}/CMakeFiles/${dumpProj}.dir/{$file}"
+        $(objdump -t "${file}")
+    done
 fi
 
 if [ "$run" != "" ] ; then
