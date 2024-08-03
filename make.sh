@@ -6,8 +6,9 @@ local_path="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 clean=false
 dumpProj=""
 dumpFile=""
+releaseType="Debug"
 
-while getopts br:Tt:CD:d: flag
+while getopts br:Tt:CD:d:R flag
 do 
     case "${flag}" in
         b) build=true;;
@@ -17,6 +18,7 @@ do
         C) clean=true;;
         D) dumpProj=${OPTARG};;
         d) dumpFile=${OPTARG};;
+        R) releaseType="Release"
     esac
 done
 
@@ -32,8 +34,8 @@ fi
 
 if [ "$build" = true ] ; then
     echo "BUILD START"
-    cmake -B "${local_path}/build" -S ${local_path}/src -DCMAKE_CXX_COMPILER=g++ -DCMAKE_C_COMPILER=gcc -DCMAKE_BUILD_TYPE=Release
-    cmake --build ${local_path}/build --config Release
+    cmake -B "${local_path}/build" -S ${local_path}/src -DCMAKE_CXX_COMPILER=g++ -DCMAKE_C_COMPILER=gcc -DCMAKE_BUILD_TYPE="${releaseType}"
+    cmake --build ${local_path}/build --config "${releaseType}"
     echo "DONE."
 fi
 
@@ -51,7 +53,6 @@ if [ "$dumpProj" != "" ] ; then
         echo "DUMP FILE: ${file}"
         if [ file = "" ]; then continue; fi
         set -x
-        #"-t ./build/${dumpProj}/CMakeFiles/${dumpProj}.dir/{$file}"
         $(objdump -t "${file}")
     done
 fi
@@ -60,7 +61,6 @@ if [ "$run" != "" ] ; then
     exec_dir="${local_path}/build/${run}/${run}"
     ${exec_dir}
 fi
-
 
 if [ "$test" != "DC_NO_TEST_CONTEXT" ] ; then
     if [ "$test" = "" ] ; then

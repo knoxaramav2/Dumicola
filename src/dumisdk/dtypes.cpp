@@ -72,9 +72,8 @@ dumisdk::DCDecimal::DCDecimal()
     {}
 
 dumisdk::DCString::DCString()
-    :DCLiteral<std::string>(DC_STIRNG, "")
+    :DCLiteral<std::string>(DC_STRING, "")
     {}
-
 
 /* DC Map */
 dumisdk::DCMap::DCMap()
@@ -145,21 +144,21 @@ bool dumisdk::DCList::remove(DCMemObj *item)
 
 
 /* Type Management */
-dumisdk::TypeTemplate::TypeTemplate(std::string name, __type_builder builder)
+dumisdk::__internal::TypeTemplate::TypeTemplate(std::string name, __type_builder builder)
     :dumisdk::DCMemObj(name)
 {
     this->name = name;
     this->__builder = builder;
 }
 
-dumisdk::DCMemObj *dumisdk::TypeTemplate::build()
+dumisdk::DCMemObj *dumisdk::__internal::TypeTemplate::build()
 {
-    return nullptr;
+    return __builder();
 }
 
-static dumisdk::TypeTemplateFactory* __ttf_inst = nullptr;
+static dumisdk::__internal::TypeTemplateFactory* __ttf_inst = nullptr;
 
-dumisdk::TypeTemplateFactory::TypeTemplateFactory(){
+dumisdk::__internal::TypeTemplateFactory::TypeTemplateFactory(){
     if(__ttf_inst != nullptr){
         throw dumiexception(std::format("Duplicate instantiation of {}", NAMEOF(TypeTemplateFactory)).c_str());
     }
@@ -167,7 +166,7 @@ dumisdk::TypeTemplateFactory::TypeTemplateFactory(){
     __ttf_inst = this;
 }
 
-dumisdk::TypeTemplateFactory::~TypeTemplateFactory(){
+dumisdk::__internal::TypeTemplateFactory::~TypeTemplateFactory(){
     if(__ttf_inst != nullptr){
 
         for(auto i: __ttf_inst->__templates){
@@ -180,14 +179,14 @@ dumisdk::TypeTemplateFactory::~TypeTemplateFactory(){
     }
 }
 
-dumisdk::TypeTemplateFactory* dumisdk::TypeTemplateFactory::getInstance(){
+dumisdk::__internal::TypeTemplateFactory* dumisdk::__internal::TypeTemplateFactory::getInstance(){
     if(__ttf_inst == nullptr){
         __ttf_inst = new TypeTemplateFactory();
     }
     return __ttf_inst;
 }
 
-bool dumisdk::TypeTemplateFactory::registerTemplate(std::string name, __type_builder builder){
+bool dumisdk::__internal::TypeTemplateFactory::registerTemplate(std::string name, __type_builder builder){
 
     HASHID hash = FNV1A(name);
 
@@ -199,49 +198,78 @@ bool dumisdk::TypeTemplateFactory::registerTemplate(std::string name, __type_bui
     }
 
     TypeTemplate* newTmpl = new TypeTemplate(name, builder);
-    __templates[appId(newTmpl)] = newTmpl;
+    __templates[hash] = newTmpl;
 
     return true;
 }
 
-// dumisdk::DCMemObj *dumisdk::TypeTemplateFactory::instanceOf(std::string name)
-// {
-//     return instanceOf(FNV1A(name));
-// }
-
-// dumisdk::DCMemObj *dumisdk::TypeTemplateFactory::instanceOf(HASHID id)
-// {
-//     if(__templates.contains(id)){
-//         return __templates[id]->build();
-//     }
-//     return nullptr;
-// }
-
-/* DC Data Manager */
-dumisdk::DCDataManager::DCDataManager(){
-    __factory = TypeTemplateFactory::getInstance();
-}
-
-dumisdk::DCDataManager::~DCDataManager(){
-
-}
-
-dumisdk::DCMemObj *dumisdk::DCDataManager::createVar(std::string name)
+dumisdk::DCMemObj *dumisdk::__internal::TypeTemplateFactory::instanceOf(std::string name)
 {
-    HASHID hash = FNV1A(name);
-    if(__dTypeStorage.contains(hash)){
-        //return __factory->instanceOf(hash);
+    return instanceOf(FNV1A(name));
+}
+
+dumisdk::DCMemObj *dumisdk::__internal::TypeTemplateFactory::instanceOf(HASHID id)
+{
+    if(__templates.contains(id)){
+        auto inst = __templates[id]->build();
+        return inst;
     }
     return nullptr;
 }
 
-dumisdk::DCMemObj *dumisdk::DCDataManager::requestVar(APPSID id)
+bool dumisdk::__internal::TypeTemplateFactory::hasType(std::string name)
 {
+    return hasType(hashId(name));
+}
+
+bool dumisdk::__internal::TypeTemplateFactory::hasType(HASHID id)
+{
+    return __templates.contains(id);
+}
+
+/* DC Data Manager */
+dumisdk::__internal::DCDataManager::DCDataManager(bool loadDefaults){
+    __factory = TypeTemplateFactory::getInstance();
+    if(loadDefaults){ loadDefaultTypes(); }
+}
+
+dumisdk::__internal::DCDataManager::~DCDataManager(){
+
+}
+
+APPSID dumisdk::__internal::DCDataManager::createVar(std::string typeName)
+{
+    return createVar(hashId(typeName));
+}
+
+APPSID dumisdk::__internal::DCDataManager::createVar(HASHID typeId)
+{
+    bool hasType = __factory->hasType(typeId);
+    static uintptr_t utest = 0;
+
+    if(__factory->hasType(typeId)){
+        auto typeInst = __factory->instanceOf(typeId);
+        auto instId = appId(typeInst);
+        utest = instId;
+        __dTypeStorage[instId] = typeInst;
+        return instId;
+    }
+    return 0;
+}
+
+dumisdk::DCMemObj *dumisdk::__internal::DCDataManager::requestVar(APPSID id)
+{
+    if(__dTypeStorage.contains(id)){
+        return __dTypeStorage[id];
+    } else {
+        return nullptr;
+    }
+
     return __dTypeStorage.contains(id) ? 
         __dTypeStorage[id] : nullptr;
 }
 
-bool dumisdk::DCDataManager::deleteVar(APPSID id)
+bool dumisdk::__internal::DCDataManager::deleteVar(APPSID id)
 {
     if(__dTypeStorage.contains(id)){
         __dTypeStorage.erase(id);
@@ -250,3 +278,18 @@ bool dumisdk::DCDataManager::deleteVar(APPSID id)
     return false;
 }
 
+void dumisdk::__internal::DCDataManager::loadDefaultTypes(){
+    auto mk_bool = [](){return (DCMemObj*)(new DCBoolean());};
+    auto mk_integer = [](){return (DCMemObj*)(new DCInteger());};
+    auto mk_decimal = [](){return (DCMemObj*)(new DCDecimal());};
+    auto mk_string = [](){return (DCMemObj*)(new DCString());};
+    auto mk_list = [](){return (DCMemObj*)(new DCList());};
+    auto mk_map = [](){return (DCMemObj*)(new DCMap());};
+
+    __factory->registerTemplate(DC_BOOL, mk_bool);
+    __factory->registerTemplate(DC_INTEGER, mk_integer);
+    __factory->registerTemplate(DC_DECIMAL, mk_decimal);
+    __factory->registerTemplate(DC_STRING, mk_string);
+    __factory->registerTemplate(DC_LIST, mk_list);
+    __factory->registerTemplate(DC_MAP, mk_map);
+}

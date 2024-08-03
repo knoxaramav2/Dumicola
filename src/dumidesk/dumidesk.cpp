@@ -1,12 +1,11 @@
-//#include "dumisdk.hpp"
-//#include "__dumisdk_init.hpp"
+#include "dumisdk.hpp"
 #include <stdio.h>
 
 int main(){
 
     printf("Start DumiDesk...\n");
 
-    //dumisdk::__internal::initDumicolaCommon();
+    //dumisdk::Logger::initLogger(10, true);
 
     printf("Close.\n");
     

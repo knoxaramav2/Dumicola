@@ -1,6 +1,5 @@
 cmake_minimum_required(VERSION 3.28)
 project(DUMICOLA)
-enable_testing()
 
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
@@ -18,5 +17,6 @@ add_subdirectory(dumicore)
 add_subdirectory(dumidesk)
 
 #Testing
+enable_testing()
 set(DUMITEST_DIR ${CMAKE_CURRENT_SOURCE_DIR}/dumitest)
 add_subdirectory(test)

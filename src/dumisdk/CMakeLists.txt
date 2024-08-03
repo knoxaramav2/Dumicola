@@ -20,7 +20,6 @@ PUBLIC
     utils.cpp
     dtypes.cpp
     logger.cpp
-    __dumisdk_init.cpp
 PRIVATE
 
 )
