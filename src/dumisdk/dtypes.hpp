@@ -109,3 +109,6 @@ namespace dumisdk
         };
     }
 };
+
+#define __InitDumiData__ auto DataManager = new dumisdk::__internal::DCDataManager(true);
+
