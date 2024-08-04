@@ -44,11 +44,11 @@ jobs:
           #  c_compiler: cl
           #  cpp_compiler: cl
           - os: ubuntu-latest
-            c_compiler: /usr/bin/gcc-13
-            cpp_compiler: /usr/bin/g++-13
+            c_compiler: gcc
+            cpp_compiler: g++
           - os: ubuntu-latest
-            c_compiler: /usr/bin/clang-18
-            cpp_compiler: /usr/bin/clang++-18
+            c_compiler: clang
+            cpp_compiler: clang++
         exclude:
           #- os: windows-latest
           #  c_compiler: gcc
@@ -92,8 +92,8 @@ jobs:
         -DCMAKE_CXX_STANDARD=23
         -DCMAKE_C_STANDARD=17
       env:
-        CC: gcc-13
-        CXX: g++-13
+        CC: ${{ (matrix.c_compiler == 'gcc') && 'gcc-13' || 'clang-18' }}
+        CXX: ${{ (matrix.c_compiler == 'g++') && 'g++-13' || 'clang++-18' }}
 
     - name: Build
       run: cmake --build ${{ github.workspace }}/build --config ${{ matrix.build_type }}
