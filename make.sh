@@ -7,8 +7,10 @@ clean=false
 dumpProj=""
 dumpFile=""
 releaseType="Debug"
+c_compiler="gcc"
+cpp_compiler="g++"
 
-while getopts br:Tt:CD:d:R flag
+while getopts br:Tt:CD:d:Rx: flag
 do 
     case "${flag}" in
         b) build=true;;
@@ -18,7 +20,21 @@ do
         C) clean=true;;
         D) dumpProj=${OPTARG};;
         d) dumpFile=${OPTARG};;
-        R) releaseType="Release"
+        R) releaseType="Release";;
+        x) 
+            if [ ${OPTARG} = "gcc" ]; then 
+                echo ">> GCC | ${OPTARG}"
+                c_compiler="gcc"
+                cpp_compiler="g++"
+            elif [ ${OPTARG} = "clang" ]; then
+                echo ">> CLANG"
+                c_compiler="clang"
+                cpp_compiler="clang++"
+            else
+                c_compiler="gcc"
+                cpp_compiler="g++"
+                echo "Unrecognized compiler family '$OPTARG'. Defaulting to gcc/g++."
+            fi
     esac
 done
 
@@ -34,7 +50,8 @@ fi
 
 if [ "$build" = true ] ; then
     echo "BUILD START"
-    cmake -B "${local_path}/build" -S ${local_path}/src -DCMAKE_CXX_COMPILER=g++ -DCMAKE_C_COMPILER=gcc -DCMAKE_BUILD_TYPE="${releaseType}"
+    set -x
+    cmake -B "${local_path}/build" -S ${local_path}/src -DCMAKE_CXX_COMPILER="$cpp_compiler" -DCMAKE_C_COMPILER="$c_compiler" -DCMAKE_BUILD_TYPE="${releaseType}"
     cmake --build ${local_path}/build --config "${releaseType}"
     echo "DONE."
 fi
