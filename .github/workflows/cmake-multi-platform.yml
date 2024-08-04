@@ -23,7 +23,10 @@ on:
       environment:
         description: 'Test environment'
         type: environment
-        required: true
+        required: false
+
+env:
+  ENVIRONMENT: ${{ github.event.inputs.environment }}
 
 jobs:
   build:
