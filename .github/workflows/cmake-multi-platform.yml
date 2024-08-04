@@ -69,13 +69,16 @@ jobs:
     - name: Set up compilers
       run: |
         sudo apt-get update
-        sudo apt-get upgrade
         if [ "${{ matrix.c_compiler }}" == "gcc" ]; then
           sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
           sudo apt-get install -y gcc-13 g++-13
           sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-13 60
           sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-13 60
         elif [ "${{ matrix.c_compiler }}" == "clang" ]; then
+          sudo apt-get install -y wget gnupg
+          wget https://apt.llvm.org/llvm.sh
+          chmod +x llvm.sh
+          sudo ./llvm.sh 18
           sudo apt-get install -y clang-18
         fi
 
