@@ -32,6 +32,11 @@ jobs:
   build:
     runs-on: ${{ matrix.os }}
 
+    env:
+      CC: ${{ (matrix.c_compiler == 'gcc') && 'gcc-13' || 'clang-18' }}
+      CXX: ${{ (matrix.c_compiler == 'g++') && 'g++-13' || 'clang++-18' }}
+      BUILD_OFFSET: ${{secrets.BUILD_OFFSET || 0}}
+
     strategy:
       fail-fast: false
 
@@ -63,6 +68,7 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: Set reusable strings
+      
       id: strings
       shell: bash
       run: |
@@ -85,7 +91,10 @@ jobs:
         fi
     - name: Set build version
       run: >
-        echo ::set-env name=CT_BUILD_NO::$(($RUN_NO-$BUILD_OFFSET))
+          echo "CT_BUILD_NO=$(( ${{ github.run_number }} - ${{ env.BUILD_OFFSET }} ))" >> $GITHUB_ENV &&
+          echo "CT_MAJOR_NO=$(( ${{ secrets.BUILD_MAJOR }}" )) >> GITHUB_ENV &&
+          echo "CT_MINOR_NO=$(( ${{ secrets.BUILD_MINOR }}" )) >> GITHUB_ENV &&
+          echo "Build:: $CT_MAJOR_NO:$CT_MINOR_NO:CT_BUILD_NO"
 
     - name: Configure CMake
       run: >
@@ -93,20 +102,12 @@ jobs:
         -S ${{ github.workspace }}/src
         -DCMAKE_CXX_COMPILER=${{ matrix.cpp_compiler }}-${{matrix.cmp_version}}
         -DCMAKE_C_COMPILER=${{ matrix.c_compiler }}-${{matrix.cmp_version}}
-        -DCMAKE_BUILD_TYPE=${{ env.CT_BUILD_NO}}
+        -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
         -DCMAKE_CXX_STANDARD=23
         -DCMAKE_C_STANDARD=17
         -DMAJOR_VRS=${{env.CT_MAJOR_NO}}
         -DMINOR_VRS=${{env.CT_MINOR_NO}}
         -DMINOR_VRS=${{env.CT_BUILD_NO}}
-      env:
-        CC: ${{ (matrix.c_compiler == 'gcc') && 'gcc-13' || 'clang-18' }}
-        CXX: ${{ (matrix.c_compiler == 'g++') && 'g++-13' || 'clang++-18' }}
-        BUILD_OFFSET: ${{env.BUILD_OFFSET}}
-        RUN_NO: ${{github.run_number}}
-        CT_MAJOR_NO: ${{env.BUILD_MAJOR || '0'}}
-        CT_MINOR_NO: ${{env.BUILD_MINOR || '0'}}
-        CT_BUILD_NO: ${{env.BUILD_NO || '0'}}
         
     - name: Build
       run: cmake --build ${{ github.workspace }}/build --config ${{ matrix.build_type }}
