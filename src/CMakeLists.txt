@@ -12,6 +12,8 @@ if(NOT DEFINED BUILD_VRS)
     set(BUILD_VRS 0) 
 endif()
 
+message("Build Version: ${MAJOR_VRS}.${MINOR_VRS}.${BUILD_VRS}")
+
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(CMAKE_C_STANDARD 17)
