@@ -1,7 +1,7 @@
 message(">> dumisdk @ ${CMAKE_CURRENT_SOURCE_DIR}")
 
 #Setup library
-add_library(DUMISDK SHARED)
+add_library(dumisdk SHARED)
 
 #Version config
 set(DUMICOMM_MAJOR 0)
@@ -11,15 +11,14 @@ message("CONFIG VERSION.h.in")
 configure_file(dumisdk_version.hpp.in ${CMAKE_CURRENT_SOURCE_DIR}/dumisdk_version.hpp)
 
 message("INCLUDE ${CMAKE_BINARY_DIR}/dumisdk")
-target_include_directories(DUMISDK PRIVATE "${CMAKE_BINARY_DIR}/dumisdk")
+target_include_directories(dumisdk PRIVATE "${CMAKE_BINARY_DIR}/dumisdk")
 
 target_sources(
-    DUMISDK
+    dumisdk
 PUBLIC 
     dumisdk.cpp
     utils.cpp
     dtypes.cpp
-    logger.cpp
 PRIVATE
 
 )

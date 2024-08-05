@@ -1,4 +1,6 @@
 #include "utils.hpp"
+#include<memory>
+#include <string>
 
 static uint32_t __id_cntr = 1;
 
@@ -15,3 +17,4 @@ uint32_t dumisdk::FNV1A(std::string raw){
 
     return hash;
 }
+

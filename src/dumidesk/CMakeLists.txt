@@ -1,16 +1,17 @@
 message(">> DUMIDESK @ ${DUMIDESK_DIR}")
 
-add_executable(DUMIDESK)
+add_executable(dumidesk)
 
 target_sources(
-    DUMIDESK
+    dumidesk
 PRIVATE
     dumidesk.cpp
 )
 
-target_include_directories(DUMIDESK 
+target_include_directories(dumidesk 
 PRIVATE 
+    ${DUMILOGGER_DIR}
     ${DUMISDK_DIR}
     ${DUMICORE_DIR}
     )
-target_link_libraries(DUMIDESK PRIVATE DUMISDK)
+target_link_libraries(dumidesk PRIVATE dumilogger dumicore dumisdk)

@@ -1,12 +1,12 @@
-#include "logger.hpp"
 #include<stdio.h>
+#include "dumiLogger.hpp"
 
-dumisdk::Logger* dumisdk::Logger::__inst = nullptr;
-bool dumisdk::Logger::__color = false;
-unsigned dumisdk::Logger::__bufferSize = 10;
-std::vector<std::string> dumisdk::Logger::__logBuff;
+dumiLogger::Logger* dumiLogger::Logger::__inst = nullptr;
+bool dumiLogger::Logger::__color = false;
+unsigned dumiLogger::Logger::__bufferSize = 10;
+std::vector<std::string> dumiLogger::Logger::__logBuff;
 
-inline void dumisdk::Logger::__ensureLogger()
+inline void dumiLogger::Logger::__ensureLogger()
 {
     if(__inst == nullptr){
         __inst = new Logger();
@@ -14,12 +14,12 @@ inline void dumisdk::Logger::__ensureLogger()
     }
 }
 
-dumisdk::Logger::Logger(unsigned _bfSize, bool _color){
+dumiLogger::Logger::Logger(unsigned _bfSize, bool _color){
     __bufferSize = _bfSize;
     __color = _color;
 }
 
-void dumisdk::Logger::initLogger(unsigned bufferSize=10, bool color=false)
+void dumiLogger::Logger::initLogger(unsigned bufferSize=10, bool color=false)
 {
     if(__inst != nullptr){
         logwrn_a("Ignoring duplication logger instantiation", LG_PRINT);
@@ -33,7 +33,7 @@ void dumisdk::Logger::initLogger(unsigned bufferSize=10, bool color=false)
 #define __LG_CLR_WRN        "\x1b[33m"
 #define __LG_CLR_RESET      "\x1b[0m"
 
-void dumisdk::Logger::log(std::string msg, LogLevel level, LoggerAction action)
+void dumiLogger::Logger::log(std::string msg, LogLevel level, LoggerAction action)
 {
     __ensureLogger();
     auto e_msg = level == LG_ERR ? "ERR: " : level == LG_WARN ? "WRN: " : "";
@@ -62,10 +62,16 @@ void dumisdk::Logger::log(std::string msg, LogLevel level, LoggerAction action)
     }
 }
 
-void dumisdk::Logger::flush()
+void dumiLogger::Logger::flush()
 {
     __ensureLogger();
     //TODO
 
     __logBuff.clear();
+}
+
+template <typename... Args>
+inline std::string dumiLogger::Logger::formatstr(const char *f_str, Args... args)
+{
+    return std::string();
 }

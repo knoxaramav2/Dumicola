@@ -5,7 +5,7 @@ add_library(kassert kassert.cpp)
 
 add_executable(test_sdk_types dtypes_test.cpp)
 target_include_directories(test_sdk_types PRIVATE ${DUMISDK_DIR})
-target_link_libraries(test_sdk_types PRIVATE DUMISDK kassert)
+target_link_libraries(test_sdk_types PRIVATE dumisdk kassert)
 
 add_test(NAME TestSdk COMMAND test_sdk_types)
 

@@ -50,7 +50,6 @@ fi
 
 if [ "$build" = true ] ; then
     echo "BUILD START"
-    set -x
     cmake -B "${local_path}/build" -S ${local_path}/src -DCMAKE_CXX_COMPILER="$cpp_compiler" -DCMAKE_C_COMPILER="$c_compiler" -DCMAKE_BUILD_TYPE="${releaseType}"
     cmake --build ${local_path}/build --config "${releaseType}"
     echo "DONE."

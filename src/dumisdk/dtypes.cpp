@@ -1,14 +1,12 @@
 #include "dtypes.hpp"
 #include "utils.hpp"
 #include "dumiexcept.hpp"
-#include "logger.hpp"
 
 #include <type_traits>
 #include <stdexcept>
 #include <concepts>
 #include <vector>
 #include <map>
-#include <format>
 
 dumisdk::DCMemObj::DCMemObj(std::string name)
 {
@@ -160,7 +158,7 @@ static dumisdk::__internal::TypeTemplateFactory* __ttf_inst = nullptr;
 
 dumisdk::__internal::TypeTemplateFactory::TypeTemplateFactory(){
     if(__ttf_inst != nullptr){
-        throw dumiexception(std::format("Duplicate instantiation of {}", NAMEOF(TypeTemplateFactory)).c_str());
+        throw dumiexception("Duplicate template factory");
     }
 
     __ttf_inst = this;
@@ -175,7 +173,8 @@ dumisdk::__internal::TypeTemplateFactory::~TypeTemplateFactory(){
 
         __ttf_inst = nullptr;
     } else {
-        logerr_a(std::format("{} deconstructed with invalid static instance", NAMEOF(TypeTemplateFactory)), LoggerAction::LG_PRINTWRITE);
+        //TODO
+        //logerr_a(dumisdk::formatstr("%s deconstructed with invalid static instance", NAMEOF(TypeTemplateFactory)), LoggerAction::LG_PRINTWRITE);
     }
 }
 
@@ -192,7 +191,8 @@ bool dumisdk::__internal::TypeTemplateFactory::registerTemplate(std::string name
 
     for(auto i:__ttf_inst->__templates){
         if(i.first==hash){ 
-            logerr_a(std::format("Duplicate type name: {}", name), LoggerAction::LG_PRINTWRITE);
+            //TODO
+            //logerr_a(dumisdk::formatstr("Duplicate type name: {}", name), LoggerAction::LG_PRINTWRITE);
             return false; 
         }
     }
