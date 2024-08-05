@@ -10,6 +10,8 @@ releaseType="Debug"
 c_compiler="gcc"
 cpp_compiler="g++"
 
+version_opts='-DDUMICOMM_MINOR=0 -DDUMICOMM_MAJOR=0 -DDUMICOMM_BUILD=0'
+
 while getopts br:Tt:CD:d:Rx: flag
 do 
     case "${flag}" in
@@ -50,7 +52,8 @@ fi
 
 if [ "$build" = true ] ; then
     echo "BUILD START"
-    cmake -B "${local_path}/build" -S ${local_path}/src -DCMAKE_CXX_COMPILER="$cpp_compiler" -DCMAKE_C_COMPILER="$c_compiler" -DCMAKE_BUILD_TYPE="${releaseType}"
+    cmake -B "${local_path}/build" -S ${local_path}/src "${version_opts}" -DCMAKE_CXX_COMPILER="$cpp_compiler" -DCMAKE_C_COMPILER="$c_compiler" -DCMAKE_BUILD_TYPE="${releaseType}" \
+        -DMAJOR_VRS=10 -DMINOR_VRS=5 -DBUILD_VRS=88
     cmake --build ${local_path}/build --config "${releaseType}"
     echo "DONE."
 fi

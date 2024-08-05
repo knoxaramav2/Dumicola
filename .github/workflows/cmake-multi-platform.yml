@@ -23,7 +23,7 @@ on:
       environment:
         description: 'Test environment'
         type: environment
-        required: false
+        required: true
 
 env:
   ENVIRONMENT: ${{ github.event.inputs.environment }}
@@ -83,6 +83,9 @@ jobs:
           sudo ./llvm.sh 18
           sudo apt-get install -y clang-18
         fi
+    - name: Set build version
+      run: >
+        echo ::set-env name=CT_BUILD_NO::$(($RUN_NO-$BUILD_OFFSET))
 
     - name: Configure CMake
       run: >
@@ -90,13 +93,21 @@ jobs:
         -S ${{ github.workspace }}/src
         -DCMAKE_CXX_COMPILER=${{ matrix.cpp_compiler }}-${{matrix.cmp_version}}
         -DCMAKE_C_COMPILER=${{ matrix.c_compiler }}-${{matrix.cmp_version}}
-        -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+        -DCMAKE_BUILD_TYPE=${{ env.CT_BUILD_NO}}
         -DCMAKE_CXX_STANDARD=23
         -DCMAKE_C_STANDARD=17
+        -DMAJOR_VRS=${{env.CT_MAJOR_NO}}
+        -DMINOR_VRS=${{env.CT_MINOR_NO}}
+        -DMINOR_VRS=${{env.CT_BUILD_NO}}
       env:
         CC: ${{ (matrix.c_compiler == 'gcc') && 'gcc-13' || 'clang-18' }}
         CXX: ${{ (matrix.c_compiler == 'g++') && 'g++-13' || 'clang++-18' }}
-
+        BUILD_OFFSET: ${{env.BUILD_OFFSET}}
+        RUN_NO: ${{github.run_number}}
+        CT_MAJOR_NO: ${{env.BUILD_MAJOR || '0'}}
+        CT_MINOR_NO: ${{env.BUILD_MINOR || '0'}}
+        CT_BUILD_NO: ${{env.BUILD_NO || '0'}}
+        
     - name: Build
       run: cmake --build ${{ github.workspace }}/build --config ${{ matrix.build_type }}
 
