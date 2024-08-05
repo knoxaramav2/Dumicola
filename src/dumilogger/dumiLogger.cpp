@@ -69,9 +69,3 @@ void dumiLogger::Logger::flush()
 
     __logBuff.clear();
 }
-
-template <typename... Args>
-inline std::string dumiLogger::Logger::formatstr(const char *f_str, Args... args)
-{
-    return std::string();
-}

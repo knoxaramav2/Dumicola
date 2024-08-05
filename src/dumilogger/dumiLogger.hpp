@@ -2,6 +2,7 @@
 
 #include <string>
 #include <vector>
+#include "dc_string.hpp"
 
 namespace dumiLogger
 {
@@ -24,16 +25,13 @@ namespace dumiLogger
         static void initLogger(unsigned bufferSize, bool color);
         static void log(std::string msg, LogLevel level, LoggerAction action);
         static void flush();      
-        private:
-        template<typename... Args>
-        static std::string formatstr(const char* f_str, Args ... args);  
     };
 }
 
 #define logmsg(msg) dumiLogger::Logger::log(msg, LG_INFO, LG_PRINT)
 #define logmsg_a(msg, action) dumiLogger::Logger::log(msg, LG_INFO, action)
-#define logwrn(msg) dumiLogger::Logger::log(dumiLogger::Logger::formatstr("%s\n(%s : %d)", msg, __FILE__, __LINE__), LG_WARN, LG_PRINT)
-#define logwrn_a(msg, action) dumiLogger::Logger::log(dumiLogger::Logger::formatstr("%s\n(%s : %d)", msg, __FILE__, __LINE__), LG_WARN, action)
-#define logerr(msg) dumiLogger::Logger::log(ddumiLogger::Logger::formatstr("%s\n(%s : %d)", msg, __FILE__, __LINE__), LG_ERR, LG_PRINT)
-#define logerr_a(msg, action) dumiLogger::Logger::log(dumiLogger::Logger::formatstr("%s\n(%s : %d)", msg, __FILE__, __LINE__), LG_ERR, action)
+#define logwrn(msg) dumiLogger::Logger::log(frmstr("%s\n(%s : %d)", msg, __FILE__, __LINE__), LG_WARN, LG_PRINT)
+#define logwrn_a(msg, action) dumiLogger::Logger::log(frmstr("%s\n(%s : %d)", msg, __FILE__, __LINE__), LG_WARN, action)
+#define logerr(msg) dumiLogger::Logger::log(frmstr("%s\n(%s : %d)", msg, __FILE__, __LINE__), LG_ERR, LG_PRINT)
+#define logerr_a(msg, action) dumiLogger::Logger::log(frmstr("%s\n(%s : %d)", msg, __FILE__, __LINE__), LG_ERR, action)
 #define logflush() dumiLogger::Logger::flush()

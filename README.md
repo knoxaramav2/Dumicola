@@ -51,11 +51,16 @@ Dumidesktop is the fully configured environment for running Dumicola on PC. This
 Project | Status | Progress | Active
 --------|--------|----------|-------
 | DumiSdk | Started | ![](https://progress-bar.dev/10/) | Yes 
-| ~~Service Manager~~ | Not Started | ![](https://progress-bar.dev/0/) | No 
+| Service Manager | Not Started | ![](https://progress-bar.dev/0/) | No 
 | DumiCore | Not Started | ![](https://progress-bar.dev/1/) | Yes 
 | DumiMobile | Not Started | ![](https://progress-bar.dev/0/) | No 
 | DumiMicro | Not Started | ![](https://progress-bar.dev/0/) | No 
 | DumiDesktop | Not Started | ![](https://progress-bar.dev/0/) | No 
+
+# Auxiliary Projects
+Project | Status  | Active
+--------|--------|-------
+| DCUtils | Ongoing | Yes
 
 # Standard Libraries
 Plugin | Status | Progress | Active
@@ -69,3 +74,6 @@ GUI | Platform | Status | Progress | Active
 --- | -------- | ------ | -------- | ------
 | WinUI | Windows | Not Started | ![](https://progress-bar.dev/0/) | No
 | GNUI | Linux | Not Started | ![](https://progress-bar.dev/0/) | No
+
+![](./overview_arch_tp.png)
+###### Current architecture

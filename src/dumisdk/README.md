@@ -121,5 +121,6 @@ Next, the network is processed to determine the order in which nodes are execute
 The program then runs, and may be paused, stopped, or restarted.
 
 
-
+![](./dumisdk_arch.png)
+###### Current SDK Architecture
 

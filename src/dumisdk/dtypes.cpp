@@ -1,6 +1,7 @@
 #include "dtypes.hpp"
 #include "utils.hpp"
 #include "dumiexcept.hpp"
+#include "dc_string.hpp"
 
 #include <type_traits>
 #include <stdexcept>
@@ -154,45 +155,24 @@ dumisdk::DCMemObj *dumisdk::__internal::TypeTemplate::build()
     return __builder();
 }
 
-static dumisdk::__internal::TypeTemplateFactory* __ttf_inst = nullptr;
-
 dumisdk::__internal::TypeTemplateFactory::TypeTemplateFactory(){
-    if(__ttf_inst != nullptr){
-        throw dumiexception("Duplicate template factory");
-    }
-
-    __ttf_inst = this;
+    
 }
 
 dumisdk::__internal::TypeTemplateFactory::~TypeTemplateFactory(){
-    if(__ttf_inst != nullptr){
 
-        for(auto i: __ttf_inst->__templates){
-            delete  i.second;
-        }
-
-        __ttf_inst = nullptr;
-    } else {
-        //TODO
-        //logerr_a(dumisdk::formatstr("%s deconstructed with invalid static instance", NAMEOF(TypeTemplateFactory)), LoggerAction::LG_PRINTWRITE);
+    for(auto i: __templates){
+        delete  i.second;
     }
-}
-
-dumisdk::__internal::TypeTemplateFactory* dumisdk::__internal::TypeTemplateFactory::getInstance(){
-    if(__ttf_inst == nullptr){
-        __ttf_inst = new TypeTemplateFactory();
-    }
-    return __ttf_inst;
 }
 
 bool dumisdk::__internal::TypeTemplateFactory::registerTemplate(std::string name, __type_builder builder){
 
     HASHID hash = FNV1A(name);
 
-    for(auto i:__ttf_inst->__templates){
+    for(auto i:__templates){
         if(i.first==hash){ 
-            //TODO
-            //logerr_a(dumisdk::formatstr("Duplicate type name: {}", name), LoggerAction::LG_PRINTWRITE);
+            //throw new std::runtime_error(frmstr("TemplateFactory: Duplicate type name %d\n", name.c_str()));
             return false; 
         }
     }
@@ -229,12 +209,12 @@ bool dumisdk::__internal::TypeTemplateFactory::hasType(HASHID id)
 
 /* DC Data Manager */
 dumisdk::__internal::DCDataManager::DCDataManager(bool loadDefaults){
-    __factory = TypeTemplateFactory::getInstance();
+    __factory = new TypeTemplateFactory();
     if(loadDefaults){ loadDefaultTypes(); }
 }
 
 dumisdk::__internal::DCDataManager::~DCDataManager(){
-
+    delete __factory;
 }
 
 APPSID dumisdk::__internal::DCDataManager::createVar(std::string typeName)

@@ -72,7 +72,7 @@ namespace dumisdk
     {
         struct TypeTemplate:DCMemObj{
             TypeTemplate(std::string name, __type_builder builder);
-            std::string name;
+            HASHID id;
             DCMemObj* build();
             private:
             __type_builder* __builder;
@@ -80,12 +80,11 @@ namespace dumisdk
 
         class TypeTemplateFactory{
             std::map<HASHID, TypeTemplate*> __templates;
-            TypeTemplateFactory();
-            ~TypeTemplateFactory();
 
             public:
 
-            static TypeTemplateFactory* getInstance();
+            TypeTemplateFactory();
+            ~TypeTemplateFactory();
 
             bool registerTemplate(std::string name, __type_builder builder);
             DCMemObj* instanceOf(std::string name);

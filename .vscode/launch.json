@@ -16,6 +16,19 @@
         "environment": [],
         "MIMode": "gdb",
         "miDebuggerPath": "/usr/bin/gdb"
+      },
+      {
+        "name": "Misc Test",
+        "type": "cppdbg",
+        "request": "launch",
+        //"program": "${workspaceFolder}/build/dumidesk/DUMIDESK",
+        "program": "${workspaceFolder}/build/test/test_msc",
+        "args": [],
+        "stopAtEntry": true,
+        "cwd": "${workspaceFolder}",
+        "environment": [],
+        "MIMode": "gdb",
+        "miDebuggerPath": "/usr/bin/gdb"
       }
     ]
   }
