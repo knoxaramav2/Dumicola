@@ -12,6 +12,7 @@ configure_file(dumisdk_version.hpp.in ${CMAKE_CURRENT_SOURCE_DIR}/dumisdk_versio
 
 message("INCLUDE ${CMAKE_BINARY_DIR}/dumisdk")
 target_include_directories(dumisdk PRIVATE "${CMAKE_BINARY_DIR}/dumisdk")
+target_link_libraries(dumisdk PUBLIC dcutils)
 
 target_sources(
     dumisdk

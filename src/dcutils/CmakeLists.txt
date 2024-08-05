@@ -1,0 +1,9 @@
+message(">> utils @ ${CMAKE_CURRENT_SOURCE_DIR}")
+
+add_library(dcutils STATIC)
+target_include_directories(dcutils PRIVATE DCUTILS_DIR)
+
+target_sources(dcutils
+PRIVATE
+    dc_string.cpp
+)
