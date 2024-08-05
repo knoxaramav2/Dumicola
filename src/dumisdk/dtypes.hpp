@@ -72,7 +72,7 @@ namespace dumisdk
     {
         struct TypeTemplate:DCMemObj{
             TypeTemplate(std::string name, __type_builder builder);
-            HASHID id;
+            std::string name;
             DCMemObj* build();
             private:
             __type_builder* __builder;
