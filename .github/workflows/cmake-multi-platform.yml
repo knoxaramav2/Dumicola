@@ -90,12 +90,12 @@ jobs:
     - name: Set build version
       run: >
           echo "CT_BUILD_NO=$(( ${{ github.run_number }} - ${{ env.BUILD_OFFSET }} ))" >> $GITHUB_ENV &&
-          echo "CT_MAJOR_NO=$(( ${{ env.BUILD_MAJOR }} ))" >> GITHUB_ENV &&
-          echo "CT_MINOR_NO=$(( ${{ env.BUILD_MINOR }} ))" >> GITHUB_ENV
+          echo "CT_MAJOR_NO=$(( ${{ env.BUILD_MAJOR }} ))" >> $GITHUB_ENV &&
+          echo "CT_MINOR_NO=$(( ${{ env.BUILD_MINOR }} ))" >> $GITHUB_ENV
 
     - name: Configure CMake
       run: >
-        echo "Building $CT_BUILD_NO . $CT_MAJOR_NO . $CT_MINOR_NO ..." &&
+        echo "Building . $CT_MAJOR_NO . $CT_MINOR_NO . $CT_BUILD_NO  ..." &&
         cmake -B ${{ github.workspace }}/build
         -S ${{ github.workspace }}/src
         -DCMAKE_CXX_COMPILER=${{ matrix.cpp_compiler }}-${{matrix.cmp_version}}
