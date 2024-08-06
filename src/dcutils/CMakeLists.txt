@@ -7,4 +7,5 @@ target_include_directories(dcutils PUBLIC ${DCUTILS_DIR})
 target_sources(dcutils
 PUBLIC
     dc_string.hpp
+    id.cpp
 )

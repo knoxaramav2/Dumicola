@@ -50,12 +50,14 @@ Dumidesktop is the fully configured environment for running Dumicola on PC. This
 
 Project | Status | Progress | Active
 --------|--------|----------|-------
-| DumiSdk | Started | ![](https://progress-bar.dev/10/) | Yes 
-| Service Manager | Not Started | ![](https://progress-bar.dev/0/) | No 
-| DumiCore | Not Started | ![](https://progress-bar.dev/1/) | Yes 
+| DumiSdk | Started | ![](https://progress-bar.dev/20/) | Yes 
+| Data Manager | Started | ![](https://progress-bar.dev/20/) | Yes 
+| Service Manager | Paused | ![](https://progress-bar.dev/3/) | Yes 
+| App Runner | Paused | ![](https://progress-bar.dev/0/) | Yes 
+| DumiCore | Started | ![](https://progress-bar.dev/5/) | Yes 
 | DumiMobile | Not Started | ![](https://progress-bar.dev/0/) | No 
 | DumiMicro | Not Started | ![](https://progress-bar.dev/0/) | No 
-| DumiDesktop | Not Started | ![](https://progress-bar.dev/0/) | No 
+| DumiDesktop | Pause | ![](https://progress-bar.dev/1/) | Yes 
 
 # Auxiliary Projects
 Project | Status  | Active

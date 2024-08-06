@@ -1,8 +1,8 @@
-#include "dumisdk.hpp"
+#include "dataman.hpp"
 #include "kassert.hpp"
 #include "stdio.h"
 
-dumisdk::__internal::DCDataManager __dcDm;
+dataman::DCDataManager __dcDm;
 
 void test_default_types(){
 

@@ -1,7 +1,7 @@
 message(">> dumisdk @ ${CMAKE_CURRENT_SOURCE_DIR}")
 
 #Setup library
-add_library(dumisdk SHARED)
+add_library(dumisdk STATIC)
 
 configure_file(dumisdk_version.hpp.in ${CMAKE_CURRENT_SOURCE_DIR}/dumisdk_version.hpp)
 
@@ -14,7 +14,6 @@ target_sources(
     dumisdk
 PUBLIC 
     dumisdk.cpp
-    utils.cpp
     dtypes.cpp
 PRIVATE
 
