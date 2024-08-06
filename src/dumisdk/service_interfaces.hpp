@@ -34,6 +34,10 @@ namespace dumisdk{
         IService(IServiceScope& scope){this->__scope = &scope;}
     };
 
+    class IServiceBuilder{
+        virtual IService* create() = 0;
+    };
+
     class IDbService: IService{
         public:
     };
@@ -42,9 +46,14 @@ namespace dumisdk{
         public:
     };
 
+    
+
     class IServiceManager{
-        public:
+
         
+
+        public:
+        virtual void addInstanceService();
     };
 }
 
