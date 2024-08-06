@@ -25,6 +25,7 @@ namespace dumicore{
 
         static void start();
         static void shutdown();
+        static int checkStatus();
     };
 }
 

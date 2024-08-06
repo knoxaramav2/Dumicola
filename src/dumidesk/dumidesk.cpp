@@ -5,6 +5,9 @@ int main(){
 
     InitDumiCore
     
-    
-    return 0;
+    auto status = dumicore::DumiCore::checkStatus();
+
+    printf("CORE STATE: %s\n", status == 0 ? "OK" : "ERR");
+
+    return status != 0;
 }
