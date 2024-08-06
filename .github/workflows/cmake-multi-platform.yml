@@ -101,7 +101,7 @@ jobs:
         -DCMAKE_CXX_COMPILER=${{ matrix.cpp_compiler }}-${{matrix.cmp_version}}
         -DCMAKE_C_COMPILER=${{ matrix.c_compiler }}-${{matrix.cmp_version}}
         -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
-        -DCMAKE_CXX_STANDARD=23
+        -DCMAKE_CXX_STANDARD=17
         -DCMAKE_C_STANDARD=17
         -DMAJOR_VRS=${{env.CT_MAJOR_NO}}
         -DMINOR_VRS=${{env.CT_MINOR_NO}}
