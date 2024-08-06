@@ -6,8 +6,9 @@
 namespace dumisdk{
 
     enum ServiceLifespan{
-        Singleton,
-        Scoped,
+        SL_INSTANCE,
+        SL_SINGELTON,
+        SL_SCOPED,
     };
 
     class IService;
@@ -19,6 +20,11 @@ namespace dumisdk{
         public:
 
         friend IService;
+    };
+
+    class IScopedProvider{
+        public:
+        
     };
 
     class IService{
@@ -34,6 +40,11 @@ namespace dumisdk{
 
     class INetworkService: IService{
         public:
+    };
+
+    class IServiceManager{
+        public:
+        
     };
 }
 

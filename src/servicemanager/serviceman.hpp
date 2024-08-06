@@ -1,6 +1,6 @@
 #pragma once
 
-#include "services.hpp"
+#include "service_interfaces.hpp"
 #include <vector>
 
 namespace serviceman{

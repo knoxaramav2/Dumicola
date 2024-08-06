@@ -7,10 +7,17 @@ The App Runner acts as a service, and handles the execution of applications duri
 Applications may be run in Multiprocessing mode to take advantage of multiple cores if possible, or under a thread pool for single core execution.
 
 ## Memory Management
-Each application shares a single DataManager instance, although this is likely to change in the future. As such, threaded/mulitprocess configurations currently require Dumicore to be compiled with -DCORE_UTIL=N, where:
+Each application shares a single DataManager instance, although this is likely to change in the future. As such, threaded/mulitprocess configurations currently require Dumicore to be compiled with -DNUMCORE=N, where:
 * N = 0: Max available cores
 * N = 1: Single thread mode
 * N > 1: Dumicore will attempt to optimize utilization of the given number of cores, so long as the number does not exceed available logical cores. 
+
+## Build Flags
+Flag | Values | Description
+---- | ------ | -----------
+NUMCORE | 0 | Use all available cores  
+| | 1 | Single thread mode
+| | N > 1 | Use up to N Cores
 
 
 ### Lifecycle
