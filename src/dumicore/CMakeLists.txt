@@ -4,11 +4,21 @@ add_library(dumicore SHARED)
 
 target_include_directories(
     dumicore 
-PRIVATE 
-    ${DUMISDK_DIR} ${DATAMAN_DIR} 
-    ${SERVICEMAN_DIR} ${APPRUNNER_DIR})
+PUBLIC 
+    ${DUMISDK_DIR} 
+    ${DATAMAN_DIR} 
+    ${SERVICEMAN_DIR} 
+    ${APPRUNNER_DIR}
+    )
     
-target_link_libraries(dumicore PRIVATE dcutils dumisdk dataman apprunner)
+target_link_libraries(
+    dumicore 
+PRIVATE 
+    dcutils 
+    dumisdk 
+    serviceman 
+    dataman 
+    apprunner)
 
 target_sources(
     dumicore

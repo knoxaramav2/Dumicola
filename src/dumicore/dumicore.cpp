@@ -1,6 +1,8 @@
 #include "dumicore.hpp"
 #include "dumiexcept.hpp"
 
+dumicore::DumiCore* dumicore::DumiCore::__inst__;
+
 dumicore::__dcSysState::__dcSysState()
 {
     active = true;
