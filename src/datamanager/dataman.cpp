@@ -1,4 +1,5 @@
 #include "dataman.hpp"
+#include "maputil.hpp"
 
 /** 
  * Type definitions 
@@ -135,7 +136,7 @@ dumisdk::DCMemObj *dataman::TypeTemplateFactory::instanceOf(std::string name)
 
 dumisdk::DCMemObj *dataman::TypeTemplateFactory::instanceOf(HASHID id)
 {
-    if(__templates.contains(id)){
+    if(mapcontains(__templates, id)){
         auto inst = __templates[id]->build();
         return inst;
     }
@@ -149,7 +150,7 @@ bool dataman::TypeTemplateFactory::hasType(std::string name)
 
 bool dataman::TypeTemplateFactory::hasType(HASHID id)
 {
-    return __templates.contains(id);
+    return mapcontains(__templates, id);
 }
 
 dataman::DCDataManager::DCDataManager(bool loadDefaults){
@@ -183,19 +184,19 @@ APPSID dataman::DCDataManager::createVar(HASHID typeId)
 
 dumisdk::DCMemObj *dataman::DCDataManager::requestVar(APPSID id)
 {
-    if(__dTypeStorage.contains(id)){
+    if(mapcontains(__dTypeStorage, id)){
         return __dTypeStorage[id];
     } else {
         return nullptr;
     }
 
-    return __dTypeStorage.contains(id) ? 
+    return __dTypeStorage.find(id) == __dTypeStorage.end() ? 
         __dTypeStorage[id] : nullptr;
 }
 
 bool dataman::DCDataManager::deleteVar(APPSID id)
 {
-    if(__dTypeStorage.contains(id)){
+    if(mapcontains(__dTypeStorage, id)){
         __dTypeStorage.erase(id);
         return true;
     }
