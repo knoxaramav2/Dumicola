@@ -1,14 +1,12 @@
 message(">> DUMICORE @ ${DUMICORE_DIR}")
 
-add_library(DUMICORE STATIC)
+add_library(dumicore SHARED)
 
-target_include_directories(DUMICORE PRIVATE ${DUMISDK_DIR})
-target_link_libraries(DUMICORE PRIVATE DUMISDK)
-
-message("LINK TO ${DUMISDK_DIR}")
+target_include_directories(dumicore PRIVATE ${DUMISDK_DIR} ${DATAMAN_DIR} ${SERVICEMAN_DIR} ${APPRUNNER_DIR})
+target_link_libraries(dumicore PRIVATE dcutils dumisdk dataman apprunner)
 
 target_sources(
-    DUMICORE
+    dumicore
 PUBLIC
 
 PRIVATE

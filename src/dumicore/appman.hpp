@@ -1,14 +1,7 @@
 #pragma once
-#include "dtypes.hpp"
 
-namespace dumisdk{
+namespace dumicore{
    
     
-    class AppManager{
 
-    };
-
-    class AppSandbox{
-
-    };
 }
