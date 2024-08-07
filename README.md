@@ -50,32 +50,33 @@ Dumidesktop is the fully configured environment for running Dumicola on PC. This
 
 Project | Status | Progress | Active
 --------|--------|----------|-------
-| DumiSdk | Started | ![](https://progress-bar.dev/20/) | Yes 
-| Data Manager | Started | ![](https://progress-bar.dev/20/) | Yes 
-| Service Manager | Paused | ![](https://progress-bar.dev/3/) | Yes 
-| App Runner | Paused | ![](https://progress-bar.dev/0/) | Yes 
-| DumiCore | Started | ![](https://progress-bar.dev/5/) | Yes 
-| DumiMobile | Not Started | ![](https://progress-bar.dev/0/) | No 
-| DumiMicro | Not Started | ![](https://progress-bar.dev/0/) | No 
-| DumiDesktop | Pause | ![](https://progress-bar.dev/1/) | Yes 
+| DumiSdk | Started | ![](https://geps.dev/progress/22/) | Yes 
+| Data Manager | Started | ![](https://geps.dev/progress/20/) | Yes 
+| Service Manager | Paused | ![](https://geps.dev/progress/3/) | Yes 
+| App Runner | Paused | ![](https://geps.dev/progress/0/) | Yes 
+| DumiCore | Started | ![](https://geps.dev/progress/5/) | Yes 
+| DumiMobile | Design | ![](https://geps.dev/progress/0/) | Yes 
+| DumiMicro | Not Started | ![](https://geps.dev/progress/0/) | No 
+| DumiDesktop | Pause | ![](https://geps.dev/progress/2/) | Yes 
 
 # Auxiliary Projects
 Project | Status  | Active
 --------|--------|-------
 | DCUtils | Ongoing | Yes
+| DumiLogger | Ongoing | Yes
 
 # Standard Libraries
 Plugin | Status | Progress | Active
 ------ | ------ | -------- | ------
-| Vulkan (STL) | Not Started | ![](https://progress-bar.dev/0/) | No 
-| Hypatia (STL) | Not Started | ![](https://progress-bar.dev/0/) | No 
-| Porus (STL) | Not Started | ![](https://progress-bar.dev/0/) | No 
+| Vulkan (STL) | Not Started | ![](https://geps.dev/progress/0/) | No 
+| Hypatia (STL) | Not Started | ![](https://geps.dev/progress/0/) | No 
+| Porus (STL) | Not Started | ![](https://geps.dev/progress/0/) | No 
 
 # User Interfaces
 GUI | Platform | Status | Progress | Active
 --- | -------- | ------ | -------- | ------
-| WinUI | Windows | Not Started | ![](https://progress-bar.dev/0/) | No
-| GNUI | Linux | Not Started | ![](https://progress-bar.dev/0/) | No
+| WinUI | Windows | Not Started | ![](https://geps.dev/progress/0/) | No
+| GNUI | Linux | Not Started | ![](https://geps.dev/progress/0/) | No
 
 ![](./overview_arch_tp.png)
 ###### Current architecture
