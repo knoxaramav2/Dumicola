@@ -2,6 +2,7 @@
 
 #include "service_interfaces.hpp"
 #include "defs.hpp"
+#include "maputil.hpp"
 #include <map>
 #include <typeinfo>
 
@@ -17,14 +18,14 @@ namespace serviceman{
 
         //template<typename T>
         
-        template <typename T> typename \
-        std::enable_if<std::is_base_of<dumisdk::IService, T>::value>::type
-        addScoped(){
-            auto hash = typeid(T).hash_code();
-            if(__scopedServices.contains(hash)){ return false; }
-            __scopedServices[hash] = 
-            return true;
-        }
+        // template <typename T> typename \
+        // std::enable_if<std::is_base_of<dumisdk::IService, T>::value>::type
+        // addScoped(){
+        //     auto hash = typeid(T).hash_code();
+        //     if(mapcontains(__scopedServices, hash)){ return false; }
+        //     __scopedServices[hash] = 
+        //     return true;
+        // }
     };
 
     class ServiceManager : dumisdk::IServiceManager{
@@ -33,12 +34,12 @@ namespace serviceman{
 
         public:
 
-        __svm_tmpl__(dumisdk::IServiceBuilder) addSingeltonService(){
-            T();
-            __scopedServices.push_back(T);
-            auto x = __scopedServices[0];
-            auto a = (x)();
-        }
+        // __svm_tmpl__(dumisdk::IServiceBuilder) addSingeltonService(){
+        //     T();
+        //     __scopedServices.push_back(T);
+        //     auto x = __scopedServices[0];
+        //     auto a = (x)();
+        // }
 
         // void addInstanceService();
         // void addSingeltonService();
