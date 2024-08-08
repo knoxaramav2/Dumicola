@@ -1,5 +1,6 @@
 #include "dumicore.hpp"
 #include "dumiexcept.hpp"
+#include "logging.hpp"
 
 dumicore::DumiCore* dumicore::DumiCore::__inst__;
 
@@ -32,15 +33,20 @@ dumicore::DumiCore::~DumiCore()
 void dumicore::DumiCore::start()
 {
     if(__inst__ != nullptr){
+        logerr_a("Duplicore Dumicore initialization", dumiLogger::LG_PRINTWRITE);
         return;
     }
     new dumicore::DumiCore();
     __runAsCncModeAuto();
+
+    logmsg("DumiCore started...");
 }
 
 void dumicore::DumiCore::shutdown()
 {
     __inst__->__state.active = false;
+
+    logmsg("DumiCore shutodwn...");
 }
 
 int dumicore::DumiCore::checkStatus()
@@ -50,4 +56,9 @@ int dumicore::DumiCore::checkStatus()
     }
 
     return 0;
+}
+
+void dumicore::DumiCore::registerServices(std::function<void(serviceman::ServiceManager &)> func)
+{
+    func(__inst__->__serviceManager);
 }

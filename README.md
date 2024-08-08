@@ -52,7 +52,7 @@ Project | Status | Progress | Active
 --------|--------|----------|-------
 | DumiSdk | Started | ![](https://geps.dev/progress/22/) | Yes 
 | Data Manager | Started | ![](https://geps.dev/progress/20/) | Yes 
-| Service Manager | Paused | ![](https://geps.dev/progress/3/) | Yes 
+| Service Manager | Paused | ![](https://geps.dev/progress/20/) | Yes 
 | App Runner | Paused | ![](https://geps.dev/progress/0/) | Yes 
 | DumiCore | Started | ![](https://geps.dev/progress/5/) | Yes 
 | DumiMobile | Design | ![](https://geps.dev/progress/0/) | Yes 

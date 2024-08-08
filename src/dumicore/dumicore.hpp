@@ -2,9 +2,10 @@
 
 #include "serviceman.hpp"
 #include "dataman.hpp"
+#include <functional>
 
 namespace dumicore{
-    
+
     struct __dcSysState{
         bool active;
 
@@ -16,6 +17,8 @@ namespace dumicore{
         static DumiCore* __inst__;
         __dcSysState __state;
 
+        serviceman::ServiceManager __serviceManager;
+
         static void __runAsCncModeAuto();
 
         DumiCore();
@@ -26,8 +29,12 @@ namespace dumicore{
         static void start();
         static void shutdown();
         static int checkStatus();
+
+        static void registerServices(std::function<void(serviceman::ServiceManager&)> func);
     };
 }
 
 #define InitDumiCore dumicore::DumiCore::start();
+#define Shutdown dumicore::DumiCore::shutdown();
+#define RegisterServices(fnc) dumicore::DumiCore::registerServices(fnc);
 

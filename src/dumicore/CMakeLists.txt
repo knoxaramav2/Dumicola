@@ -6,6 +6,7 @@ target_include_directories(
     dumicore 
 PUBLIC 
     ${DUMISDK_DIR} 
+    ${DUMILOGGER_DIR}
     ${DATAMAN_DIR} 
     ${SERVICEMAN_DIR} 
     ${APPRUNNER_DIR}
@@ -16,6 +17,7 @@ target_link_libraries(
 PRIVATE 
     dcutils 
     dumisdk 
+    dumilogger
     serviceman 
     dataman 
     apprunner)

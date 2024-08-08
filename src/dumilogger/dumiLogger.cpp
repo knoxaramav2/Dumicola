@@ -1,16 +1,17 @@
 #include<stdio.h>
 #include "dumiLogger.hpp"
+#include "dc_string.hpp"
 
-dumiLogger::Logger* dumiLogger::Logger::__inst = nullptr;
-bool dumiLogger::Logger::__color = false;
-unsigned dumiLogger::Logger::__bufferSize = 10;
-std::vector<std::string> dumiLogger::Logger::__logBuff;
+// dumiLogger::Logger* dumiLogger::Logger::__inst = nullptr;
+// bool dumiLogger::Logger::__color = false;
+// unsigned dumiLogger::Logger::__bufferSize = 10;
+// std::vector<std::string> dumiLogger::Logger::__logBuff;
 
 inline void dumiLogger::Logger::__ensureLogger()
 {
     if(__inst == nullptr){
         __inst = new Logger();
-        logwrn("Using default logger");
+        log("Using default logger", LG_WARN, LG_PRINTWRITE);
     }
 }
 
@@ -22,7 +23,7 @@ dumiLogger::Logger::Logger(unsigned _bfSize, bool _color){
 void dumiLogger::Logger::initLogger(unsigned bufferSize=10, bool color=false)
 {
     if(__inst != nullptr){
-        logwrn_a("Ignoring duplication logger instantiation", LG_PRINT);
+        log("Ignoring duplication logger instantiation", LG_WARN, LG_PRINT);
         return;
     }
 
@@ -57,7 +58,7 @@ void dumiLogger::Logger::log(std::string msg, LogLevel level, LoggerAction actio
         __logBuff.push_back(f_msg);
 
         if(__logBuff.size() >= __bufferSize){
-            logflush();
+            flush();
         }
     }
 }
@@ -65,7 +66,7 @@ void dumiLogger::Logger::log(std::string msg, LogLevel level, LoggerAction actio
 void dumiLogger::Logger::flush()
 {
     __ensureLogger();
-    //TODO
+    //TODO Write to file if applicable
 
     __logBuff.clear();
 }
