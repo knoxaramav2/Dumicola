@@ -3,53 +3,69 @@
 #include "service_interfaces.hpp"
 #include "defs.hpp"
 #include "maputil.hpp"
+#include "dc_string.hpp"
+#include "dumiexcept.hpp"
 #include <map>
+#include <typeindex>
 #include <typeinfo>
+#include <memory>
 
 namespace serviceman{
 
-    #define __svm_tmpl__(base) template <typename T> typename \
-        std::enable_if<std::is_base_of<base, T>::value>::type
-
-    struct ServiceMapper{
-        std::map<size_t, dumisdk::IServiceBuilder> __scopedServices;
-        std::map<size_t, dumisdk::IServiceBuilder> __instanceServices;
-        std::map<size_t, dumisdk::IServiceBuilder> __lifetimeServices;
-
-        //template<typename T>
-        
-        // template <typename T> typename \
-        // std::enable_if<std::is_base_of<dumisdk::IService, T>::value>::type
-        // addScoped(){
-        //     auto hash = typeid(T).hash_code();
-        //     if(mapcontains(__scopedServices, hash)){ return false; }
-        //     __scopedServices[hash] = 
-        //     return true;
-        // }
+    struct __smEntrySlot{
+        public:
+        virtual ~__smEntrySlot() = default;
+        virtual std::unique_ptr<__smEntrySlot> clone() const = 0;
     };
 
-    class ServiceManager : dumisdk::IServiceManager{
+    template<typename T>
+    struct __smTypeContainer: __smEntrySlot{
+        public:
+        __smTypeContainer() = default;
+        std::unique_ptr<__smEntrySlot> clone() const override{
+            return std::make_unique<__smTypeContainer<T>>();
+        }
+    };
 
-        ServiceMapper __mapper;
+    class ServiceManager{
+
+        std::map<std::type_index, std::unique_ptr<__smEntrySlot>> __serviceList;
+
+        template<typename T>
+        bool __registerType(){
+
+            std::type_index sid(typeid(T));
+            if(mapcontains(__serviceList, sid)){ return false; }
+
+            __serviceList[sid] = std::make_unique<__smTypeContainer<T>>();
+
+            return true;
+        }
+
+        template<typename T>
+        std::unique_ptr<T> __resolveType(){
+
+            std::type_index sid(typeid(T));
+            if(!mapcontains(__serviceList, sid)){
+                throw dumiexception("Failed to resolve managed service");
+            }
+
+            return std::make_unique<T>();
+        }
 
         public:
 
-        // __svm_tmpl__(dumisdk::IServiceBuilder) addSingeltonService(){
-        //     T();
-        //     __scopedServices.push_back(T);
-        //     auto x = __scopedServices[0];
-        //     auto a = (x)();
-        // }
+        template<typename T>
+        bool registerSingelton(){
+            return __registerType<T>();
+        }
 
-        // void addInstanceService();
-        // void addSingeltonService();
-        // bool addScopedService();
+        template<typename T>
+        std::unique_ptr<T> resolveService(){
+            return __resolveType<T>();
+        }
 
-        // void addNetworkService();
-        // void addDbService();
-
-        // dumisdk::IServiceScope* createScope();
-        // void releaseScope();
     };
+
 }
 

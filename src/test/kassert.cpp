@@ -42,6 +42,12 @@ void KTEST::__applyAsserts()
     if(__hasFail){ exit(1); }
 }
 
+bool KTEST::__hasFailure()
+{
+    __applyAsserts();
+    return __hasFail;
+}
+
 void KTEST::__assertMultiple(
     const std::vector<std::function<bool()>> funcs, 
     const char * file, int line)

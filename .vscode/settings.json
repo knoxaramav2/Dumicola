@@ -50,7 +50,8 @@
         "span": "cpp",
         "variant": "cpp",
         "format": "cpp",
-        "cstring": "cpp"
+        "cstring": "cpp",
+        "typeindex": "cpp"
     },
     "makefile.makefilePath": "./src/cpp",
     "makefile.buildLog": "."

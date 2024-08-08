@@ -13,4 +13,8 @@ target_include_directories(test_msc PRIVATE ${DUMISDK_DIR} ${DCUTILS_DIR})
 target_link_libraries(test_msc PRIVATE kassert dcutils dumisdk )
 add_test(NAME TestMisc COMMAND test_msc)
 
+add_executable(test_services service_tests.cpp)
+target_include_directories(test_services PRIVATE ${DUMISDK_DIR} ${DCUTILS_DIR} ${SERVICEMAN_DIR})
+target_link_libraries(test_services PRIVATE kassert dcutils dumisdk serviceman)
+add_test(NAME TestServices COMMAND test_services)
 
