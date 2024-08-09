@@ -1,4 +1,4 @@
-message(">> DUMICORE @ ${DUMICORE_DIR}")
+message(">> DUMICORE @ ${CMAKE_CURRENT_SOURCE_DIR}")
 
 add_library(dumicore SHARED)
 
@@ -10,6 +10,7 @@ PUBLIC
     ${DATAMAN_DIR} 
     ${SERVICEMAN_DIR} 
     ${APPRUNNER_DIR}
+    ${DUMICORE_DIR}
     )
     
 target_link_libraries(
@@ -25,7 +26,7 @@ PRIVATE
 target_sources(
     dumicore
 PUBLIC
-
+    #dumicore.hpp
 PRIVATE
     dumicore.cpp
 INTERFACE

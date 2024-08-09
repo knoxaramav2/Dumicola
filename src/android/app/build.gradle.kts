@@ -40,8 +40,10 @@ android {
     }
     externalNativeBuild {
         cmake {
-            path = file("src/main/cpp/CMakeLists.txt")
-            version = "3.22.1"
+//            path = file("src/main/cpp/CMakeLists.txt")
+            //path = file("../../dumimobile/CMakeLists.txt")
+            path = file("../../CMakeLists.txt")
+            version = "3.28.3"
         }
     }
     buildFeatures {

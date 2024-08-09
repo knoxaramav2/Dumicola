@@ -1,4 +1,4 @@
-message(">> DATAMANAGER @ ${DUMICORE_DIR}")
+message(">> DATAMANAGER @ ${CMAKE_CURRENT_SOURCE_DIR}")
 
 add_library(dataman STATIC)
 

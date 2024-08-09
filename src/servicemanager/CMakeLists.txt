@@ -1,4 +1,4 @@
-message(">> SERVICEMANAGER @ ${DUMICORE_DIR}")
+message(">> SERVICEMANAGER @ ${CMAKE_CURRENT_SOURCE_DIR}")
 
 add_library(serviceman STATIC)
 

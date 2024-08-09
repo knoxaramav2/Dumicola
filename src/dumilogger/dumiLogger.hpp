@@ -4,6 +4,20 @@
 #include <vector>
 #include "dc_string.hpp"
 
+/**
+ * TODO
+ * Apply logging methods based on target platform
+ * Defaults:
+ * Desktop:
+ *  Normal
+ * Mobile
+ *  Include android/log.h
+ *  __android_log_print(...)
+ * Microcontrollers
+ *  Do nothing
+ *   (Custom log service?)
+ */
+
 namespace dumiLogger
 {
     enum LoggerAction{
