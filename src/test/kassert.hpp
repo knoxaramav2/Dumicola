@@ -2,6 +2,7 @@
 
 #include<vector>
 #include<functional>
+#include<exception>
 
 namespace KTEST
 {
@@ -11,11 +12,13 @@ namespace KTEST
     void __assertMultipleLater(const std::vector<std::function<bool()>> funcs, const char* file, int line);
     void __applyAsserts();
     bool __hasFailure();
-
-    #define assert(cond) __assert(cond, __FILE__, __LINE__)
-    #define assertLater(cond) __assertLater(cond, __FILE__, __LINE__)
-    #define applyAsserts() __applyAsserts()
-    #define assertMultiple(funcs) __assertMultiple(funcs, __FILE__, __LINE__)
-    #define assertMultipleLater(funcs) __assertMultipleLater(funcs, __FILE__, __LINE__)
-    #define testsFailed __hasFailure()
 }
+
+#define assert(cond) KTEST::__assert(cond, __FILE__, __LINE__)
+#define assertLater(cond) KTEST::__assertLater(cond, __FILE__, __LINE__)
+#define applyAsserts() KTEST::__applyAsserts()
+#define assertMultiple(funcs) KTEST::__assertMultiple(funcs, __FILE__, __LINE__)
+#define assertMultipleLater(funcs) KTEST::__assertMultipleLater(funcs, __FILE__, __LINE__)
+#define testsFailed KTEST::__hasFailure()
+#define assertThrows(expr) try { (expr); KTEST::__assert(false, __FILE__, __LINE__); } catch (...) {}
+#define assertNotThrows(expr) try{ (expr); } catch (...) {KTEST::__assert(false, __FILE__, __LINE__); }

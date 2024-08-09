@@ -13,39 +13,39 @@ void test_default_types(){
     auto listVarId = __dcDm.createVar(DC_LIST);
     auto mapVarId = __dcDm.createVar(DC_MAP);
 
-    KTEST::assertLater(intVarId != 0);
-    KTEST::assertLater(deciVarId != 0);
-    KTEST::assertLater(boolVarId != 0);
-    KTEST::assertLater(stringVarId != 0);
-    KTEST::assertLater(listVarId != 0);
-    KTEST::assertLater(mapVarId != 0);
+    assertLater(intVarId != 0);
+    assertLater(deciVarId != 0);
+    assertLater(boolVarId != 0);
+    assertLater(stringVarId != 0);
+    assertLater(listVarId != 0);
+    assertLater(mapVarId != 0);
 
-    KTEST::assertLater(__dcDm.requestVar(intVarId) != nullptr);
-    KTEST::assertLater(__dcDm.requestVar(deciVarId) != nullptr);
-    KTEST::assertLater(__dcDm.requestVar(boolVarId) != nullptr);
-    KTEST::assertLater(__dcDm.requestVar(stringVarId) != nullptr);
-    KTEST::assertLater(__dcDm.requestVar(listVarId) != nullptr);
-    KTEST::assertLater(__dcDm.requestVar(mapVarId) != nullptr);
+    assertLater(__dcDm.requestVar(intVarId) != nullptr);
+    assertLater(__dcDm.requestVar(deciVarId) != nullptr);
+    assertLater(__dcDm.requestVar(boolVarId) != nullptr);
+    assertLater(__dcDm.requestVar(stringVarId) != nullptr);
+    assertLater(__dcDm.requestVar(listVarId) != nullptr);
+    assertLater(__dcDm.requestVar(mapVarId) != nullptr);
 
-    KTEST::assertLater(__dcDm.deleteVar(intVarId));
-    KTEST::assertLater(__dcDm.deleteVar(deciVarId));
-    KTEST::assertLater(__dcDm.deleteVar(boolVarId));
-    KTEST::assertLater(__dcDm.deleteVar(stringVarId));
-    KTEST::assertLater(__dcDm.deleteVar(listVarId));
-    KTEST::assertLater(__dcDm.deleteVar(mapVarId));
+    assertLater(__dcDm.deleteVar(intVarId));
+    assertLater(__dcDm.deleteVar(deciVarId));
+    assertLater(__dcDm.deleteVar(boolVarId));
+    assertLater(__dcDm.deleteVar(stringVarId));
+    assertLater(__dcDm.deleteVar(listVarId));
+    assertLater(__dcDm.deleteVar(mapVarId));
 
-    KTEST::assertLater(__dcDm.requestVar(intVarId) == nullptr);
-    KTEST::assertLater(__dcDm.requestVar(deciVarId) == nullptr);
-    KTEST::assertLater(__dcDm.requestVar(boolVarId) == nullptr);
-    KTEST::assertLater(__dcDm.requestVar(stringVarId) == nullptr);
-    KTEST::assertLater(__dcDm.requestVar(listVarId) == nullptr);
-    KTEST::assertLater(__dcDm.requestVar(mapVarId) == nullptr);
+    assertLater(__dcDm.requestVar(intVarId) == nullptr);
+    assertLater(__dcDm.requestVar(deciVarId) == nullptr);
+    assertLater(__dcDm.requestVar(boolVarId) == nullptr);
+    assertLater(__dcDm.requestVar(stringVarId) == nullptr);
+    assertLater(__dcDm.requestVar(listVarId) == nullptr);
+    assertLater(__dcDm.requestVar(mapVarId) == nullptr);
 }
 
 int main(){
     test_default_types();
 
-    KTEST::applyAsserts();
+    applyAsserts();
 
     return 0;
 }

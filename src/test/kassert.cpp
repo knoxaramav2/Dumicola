@@ -1,14 +1,12 @@
 #include "kassert.hpp"
+#include "dc_string.hpp"
 #include <stdio.h>
 #include <string>
-//#include "utils.hpp"
 
-static std::vector<std::function<void()>> __testFncs();
 static std::vector<std::string> __errMsgs;
 static bool __hasFail = false;
 
-//#define assertFailMsg(file, line) dumisdk::formatstr("Assert fail: %s @ line: %d\n", file, line);
-#define assertFailMsg(file, line) std::string("FAIL: _FILE_ _LINE_")
+#define assertFailMsg(file, line) frmstr("Assert fail: %s @ line: %d\n", file, line);
 
 inline void __prntDbgAssert(const char* file, int line) { 
     #ifndef KASSERT_SILENT
