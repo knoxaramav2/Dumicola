@@ -51,4 +51,4 @@ add_subdirectory(android/app/src/main/cpp)
 #Testing
 enable_testing()
 set(DUMITEST_DIR ${CMAKE_CURRENT_SOURCE_DIR}/dumitest)
-#add_subdirectory(test)
+add_subdirectory(test)
