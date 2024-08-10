@@ -1,5 +1,6 @@
 #pragma once
 
+#include "service_interfaces.hpp"
 #include "serviceman.hpp"
 #include "dataman.hpp"
 #include <functional>
@@ -18,11 +19,14 @@ namespace dumicore{
         __dcSysState __state;
 
         serviceman::ServiceManager __serviceManager;
+        dumisdk::ILogger* _logger;
 
         static void __runAsCncModeAuto();
 
         DumiCore();
         ~DumiCore();
+
+        void __cacheServices();
 
         public:
 
@@ -31,10 +35,15 @@ namespace dumicore{
         static int checkStatus();
 
         static void registerServices(std::function<void(serviceman::ServiceManager&)> func);
+        static serviceman::ServiceManager& serviceManager();
+        
+        static std::unique_ptr<dumisdk::ILogger> getLogger();
     };
 }
 
 #define InitDumiCore dumicore::DumiCore::start();
 #define Shutdown dumicore::DumiCore::shutdown();
 #define RegisterServices(fnc) dumicore::DumiCore::registerServices(fnc);
+//#define GetLogger(T) dynamic_cast<T*>(dumicore::DumiCore::getLogger().get())
+#define GetLogger() dumicore::DumiCore::getLogger()
 

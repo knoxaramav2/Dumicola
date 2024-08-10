@@ -1,19 +1,44 @@
 #include "dumicore.hpp"
-#include <stdio.h>
+#include "logger.hpp"
+#include <cstdio>
+
+class Base {
+public:
+    const char* name;
+    Base():name("BASE"){};
+    Base(const char* _name):name(_name){};
+    virtual void sayHello() const = 0;
+    virtual ~Base() = default; // Ensure proper cleanup of derived objects
+};
+
+class Derived : public Base {
+public:
+    Derived():Base("DERIVED"){}
+    void sayHello() const override {
+        printf("Derived init...");
+    }
+};
 
 int main(){
 
     InitDumiCore
     
-
-    RegisterServices([](serviceman::ServiceManager& sm){
-        sm.registerInstance<bool>();
+    dumicore::DumiCore::registerServices([](serviceman::ServiceManager& sm){
+        //sm.registerTransient<Base, Derived>();
+        sm.registerTransient<dumisdk::ILogger, DesktopLogger>();
+        // sm.registerTransient<Base, Derived>();
+        // auto b = sm.resolveTransient<Base>();
+        // if(b) 
+        //     b->sayHello();
     });
 
+    auto logger = GetLogger();
+    logger->log("!!!");
 
     auto status = dumicore::DumiCore::checkStatus();
 
-    printf("CORE STATE: %s\n", status == 0 ? "OK" : "ERR");
+    // const char* statMsg = status == 0 ? "OK" : "ERR";
+    // printf("CORE STATE: %s\n", statMsg);
 
     Shutdown
 

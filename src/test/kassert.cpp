@@ -1,5 +1,5 @@
 #include "kassert.hpp"
-#include "dc_string.hpp"
+#include "utils.hpp"
 #include <stdio.h>
 #include <string>
 

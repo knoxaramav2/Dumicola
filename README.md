@@ -55,7 +55,7 @@ Project | Status | Progress | Active
 | Service Manager | Paused | ![](https://geps.dev/progress/40/) | Yes 
 | App Runner | Paused | ![](https://geps.dev/progress/0/) | Yes 
 | DumiCore | Started | ![](https://geps.dev/progress/6/) | Yes 
-| DumiMobile | Design | ![](https://geps.dev/progress/0/) | Yes 
+| DumiMobile | Started | ![](https://geps.dev/progress/1/) | Yes 
 | DumiMicro | Not Started | ![](https://geps.dev/progress/0/) | No 
 | DumiDesktop | Pause | ![](https://geps.dev/progress/2/) | Yes 
 

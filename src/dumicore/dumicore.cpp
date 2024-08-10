@@ -30,23 +30,22 @@ dumicore::DumiCore::~DumiCore()
     
 }
 
+void dumicore::DumiCore::__cacheServices()
+{
+    //_logger = __serviceManager.resolveLogger().get();
+}
+
 void dumicore::DumiCore::start()
 {
-    if(__inst__ != nullptr){
-        logerr_a("Duplicore Dumicore initialization", dumiLogger::LG_PRINTWRITE);
-        return;
-    }
     new dumicore::DumiCore();
     __runAsCncModeAuto();
-
-    logmsg("DumiCore started...");
 }
 
 void dumicore::DumiCore::shutdown()
 {
     __inst__->__state.active = false;
 
-    logmsg("DumiCore shutodwn...");
+    //__inst__->_logger->log("DumiCore shutodwn...");
 }
 
 int dumicore::DumiCore::checkStatus()
@@ -61,4 +60,15 @@ int dumicore::DumiCore::checkStatus()
 void dumicore::DumiCore::registerServices(std::function<void(serviceman::ServiceManager &)> func)
 {
     func(__inst__->__serviceManager);
+    __inst__->__cacheServices();
+}
+
+serviceman::ServiceManager &dumicore::DumiCore::serviceManager()
+{
+    return __inst__->__serviceManager;
+}
+
+std::unique_ptr<dumisdk::ILogger> dumicore::DumiCore::getLogger()
+{
+    return __inst__->__serviceManager.resolveSingelton<dumisdk::ILogger>();
 }

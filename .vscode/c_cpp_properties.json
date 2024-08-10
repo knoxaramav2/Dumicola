@@ -4,7 +4,8 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/**",
-                "${workspaceFolder}/src/dumisdk/"
+                "${workspaceFolder}/src/dumisdk/",
+                "/home/knox/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/g++",

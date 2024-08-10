@@ -1,4 +1,4 @@
-if(NOT DEFINED ANDROID_ABI)
+if(NOT DEFINED _ANDROID)#ANDROID_ABI)
     return()
 endif()
 
@@ -32,11 +32,13 @@ cmake_minimum_required(VERSION 3.28.3)
 # used in the AndroidManifest.xml file.
 add_library(dumimobile SHARED
         # List C/C++ source files with relative paths to this CMakeLists.txt.
-        native-lib.cpp)
+        native-lib.cpp jInterop.cpp mobileLogger.cpp)
 
 target_link_directories(dumimobile PUBLIC
-        #${DUMICORE_DIR}
-        #${DCUTILS_DIR}
+        ${CONFIG_DIR}
+        ${DUMISDK_DIR}
+        ${DUMICORE_DIR}
+        ${DCUTILS_DIR}
 )
 
 # Specifies libraries CMake should link to your target library. You
@@ -44,11 +46,8 @@ target_link_directories(dumimobile PUBLIC
 # build script, prebuilt third-party libraries, or Android system libraries.
 target_link_libraries(dumimobile
         # List libraries link to the target library
+        dumisdk
         dumicore
         dcutils
         android
         log)
-
-message("ANDROID IMPORT << ${dumicore}")
-message("CMAKE_PREFIX IMPORT << ${CMAKE_PREFIX_PATH}")
-message("CMAKE FIND ROOT << ${CMAKE_FIND_ROOT_PATH}")
