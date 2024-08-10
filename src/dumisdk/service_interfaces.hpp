@@ -43,23 +43,27 @@ namespace dumisdk{
         ILogger();
 
         template<typename ... Args>
-        OINLINE inline void log_info(const char* format, Args && ... args) const {
-            __logAs(LOG_DEFAULT, ILoggerMsgType::LOG_INFO, __logFormat(format, std::forward<Args>(args)...));
+        OINLINE inline void log_info(const char* format, Args && ... args) {
+            std::string frmt = __logFormat(format, std::forward<Args>(args)...);
+            __logAs(ILoggerAction::LOG_DEFAULT, ILoggerMsgType::LOG_INFO, frmt);
         }
 
         template<typename ... Args>
-        OINLINE inline void log_warn(const char* format, Args && ... args) const {
-            __logAs(LOG_DEFAULT, ILoggerMsgType::LOG_WARN, __logFormat(format, std::forward<Args>(args)...));
+        OINLINE inline void log_warn(const char* format, Args && ... args) {
+            std::string frmt = __logFormat(format, std::forward<Args>(args)...);
+            __logAs(ILoggerAction::LOG_DEFAULT, ILoggerMsgType::LOG_WARN, frmt);
         }
 
         template<typename ... Args>
-        OINLINE inline void log_error(const char* format, Args && ... args) const {
-            __logAs(LOG_DEFAULT, ILoggerMsgType::LOG_ERROR, __logFormat(format, std::forward<Args>(args)...));
+        OINLINE inline void log_error(const char* format, Args && ... args) {
+            std::string frmt = __logFormat(format, std::forward<Args>(args)...);
+            __logAs(ILoggerAction::LOG_DEFAULT, ILoggerMsgType::LOG_ERROR, frmt);
         }
 
         template<typename ... Args>
-        OINLINE inline void log_debug(const char* format, Args && ... args) const {
-            __logAs(LOG_DEFAULT, ILoggerMsgType::LOG_DEBUG, __logFormat(format, std::forward<Args>(args)...));
+        OINLINE inline void log_debug(const char* format, Args && ... args) {
+            std::string frmt = __logFormat(format, std::forward<Args>(args)...);
+            __logAs(ILoggerAction::LOG_DEFAULT, ILoggerMsgType::LOG_DEBUG, frmt);
         }
 
 //        template<typename ... Args>

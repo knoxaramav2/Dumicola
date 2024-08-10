@@ -34,6 +34,10 @@ int main(){
 
     auto logger = GetLogger();
     logger->log("!!!");
+    logger->log_debug("DEBUG");
+    logger->log_info("INFO");
+    logger->log_warn("WARNING");
+    logger->log_error("ERROR");
 
     auto status = dumicore::DumiCore::checkStatus();
 
