@@ -40,8 +40,6 @@ namespace dumisdk{
 
         public:
 
-        ILogger();
-
         template<typename ... Args>
         OINLINE inline void log_info(const char* format, Args && ... args) {
             std::string frmt = __logFormat(format, std::forward<Args>(args)...);

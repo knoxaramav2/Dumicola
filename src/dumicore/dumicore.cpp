@@ -28,7 +28,7 @@ dumicore::DumiCore::~DumiCore()
 
 void dumicore::DumiCore::__loadServiceDefaults()
 {
-    __serviceManager.registerLogger<dumisdk::ILogger>();
+    __serviceManager.registerLogger<dumisdk::DefaultLogger>();
 }
 
 void dumicore::DumiCore::start()
@@ -57,7 +57,7 @@ serviceman::ServiceManager &dumicore::DumiCore::serviceManager()
     return __serviceManager;
 }
 
-dumisdk::ILogger& dumicore::DumiCore::getLogger()
+std::shared_ptr<dumisdk::ILogger> dumicore::DumiCore::getLogger()
 {
     return __serviceManager.getLogger();
 }
@@ -65,7 +65,7 @@ dumisdk::ILogger& dumicore::DumiCore::getLogger()
 void dumicore::DumiCore::__init_core()
 {
     if(__core_inst){ 
-        __core_inst->getLogger().log_warn("Dumicore already initialized");
+        __core_inst->getLogger()->log_warn("Dumicore already initialized");
         return; 
     }
 

@@ -26,35 +26,83 @@ namespace serviceman{
 
     typedef void* (*__ITypeBuilder)();
 
+    struct __smTypeSlot{
+        public:
+        virtual std::unique_ptr<__smTypeSlot> clone() const = 0;
+    };
+
+    template<typename T>
+    struct __smTypeContainer: __smTypeSlot{
+        __smTypeContainer() = default;
+        std::unique_ptr<__smTypeSlot> clone() const override{
+            return std::make_unique<__smTypeContainer<T>>();
+        }
+        __serviceLifetime__ getLifetime(){return __lifetime;}
+        protected:
+        __serviceLifetime__ __lifetime;
+        __smTypeContainer(__serviceLifetime__ __lifetime) : __smTypeSlot(), __lifetime(__lifetime){}
+        virtual std::shared_ptr<T> getInstance(){throw dumiexception("Invalid type container");};
+    };
+
+    template<typename T>
+    struct __smSingeltonContainer: public __smTypeContainer<T>{
+
+        __ITypeBuilder __builder;
+        const char* __cType;
+
+        __smSingeltonContainer():__smTypeContainer<T>(__serviceLifetime__::__DCSM_SINGELTON__){
+            __builder = []() -> void* {return new T();};
+            __cType = typeid(T).name();
+        }
+        std::shared_ptr<T> getInstance() override{
+            if(__inst == nullptr){
+                __inst = (T*)__builder();
+                __mn_ref = std::make_shared<T>(*__inst);
+            }
+            return __mn_ref;
+        }
+        private:
+        T* __inst;
+        std::shared_ptr<T> __mn_ref;
+    };
+
     class ServiceManager{
 
-        // std::unordered_map<std::type_index, std::function<std::any()>> 
-        // // std::unordered_map<std::type_index, std::function<void*()>> 
-        //     __typeFactories;
-
+        std::map<std::type_index, std::unique_ptr<__smTypeSlot>> __singeltons;
         std::map<std::type_index, __ITypeBuilder> __typeFactories;
 
         template<typename T, typename U>
-        void __registerFactory(){
+        void __registerTypeWithLifetime(__serviceLifetime__ lifetime){
             static_assert(!std::is_void<U>::value, "Factory type cannot be null");
-            std::type_index sid = idFromTU(T, U);
-
-            __typeFactories[sid] = []() -> void* {
-                return new U();
-            };
+            auto sid = idFromTU(T,U);
+            if(lifetime == __serviceLifetime__::__DCSM_SINGELTON__){
+                __singeltons[sid] = std::make_unique<__smSingeltonContainer<U>>();
+                if(std::is_base_of<dumisdk::ILogger, U>::value){
+                    __smSingeltonContainer<T>* inst = static_cast<__smSingeltonContainer<T>*>(__singeltons[sid].get());
+                }
+            } else if (lifetime == __serviceLifetime__::__DCSM_INSTANCE__){
+                __typeFactories[sid] = []() -> void* {
+                    return new U();
+                };
+            } else{
+                throw dumiexception("Illegal type lifetime registration");
+            }
         }
 
         template<typename T>
-        std::unique_ptr<T> __resolveInstance(__serviceLifetime__ lifetime){
+        std::shared_ptr<T> __resolveLifetime(__serviceLifetime__ lifetime){
             std::type_index sid = idFromT(T);
-            auto it = __typeFactories.find(sid);
-            if(it == __typeFactories.end()) { return nullptr; }
 
             if(lifetime == __serviceLifetime__::__DCSM_INSTANCE__){
+                auto it = __typeFactories.find(sid);
+                if(it == __typeFactories.end()) { return nullptr; }
                 auto inst = (T*) it->second();
-                return std::unique_ptr<T>(inst);
+                return std::shared_ptr<T>(inst);
             } else if (lifetime == __serviceLifetime__::__DCSM_SINGELTON__){
-
+                auto it = __singeltons.find(sid);
+                if(it == __singeltons.end()) { return nullptr; }
+                __smSingeltonContainer<T>* inst = static_cast<__smSingeltonContainer<T>*>(__singeltons[sid].get());
+                return inst->getInstance();
             }
 
             throw dumiexception("Resolve scope not implemented");
@@ -71,24 +119,22 @@ namespace serviceman{
         /// @tparam U Concrete  / Void
         template<typename T, typename U>
         void registerTransient(){
-            __registerFactory<T,U>();
-            //TODO...
+            __registerTypeWithLifetime<T, U>(__serviceLifetime__::__DCSM_INSTANCE__);
         }
 
         /// @brief Register object with transient lifetime
         /// @tparam U Concrete
         template<typename U>
         void registerTransient(){
-            __registerFactory<void,U>();
-            //TODO...
+            __registerTypeWithLifetime<void, U>(__serviceLifetime__::__DCSM_INSTANCE__);
         }
 
         /// @brief Resolve type with transient lifetime
         /// @tparam T Interface/type to resolve
         /// @return Instance of resolved type
         template<typename T>
-        std::unique_ptr<T> resolveTransient(){
-            return __resolveInstance<T>(__serviceLifetime__::__DCSM_INSTANCE__);
+        std::shared_ptr<T> resolveTransient(){
+            return __resolveLifetime<T>(__serviceLifetime__::__DCSM_INSTANCE__);
         }
 
         /// @brief Register object with transient lifetime
@@ -96,17 +142,24 @@ namespace serviceman{
         /// @tparam U Concrete  / Void
         template<typename T, typename U>
         void registerSingelton(){
-            __registerFactory<T,U>();
-            //TODO...
+            __registerTypeWithLifetime<T,U>(__serviceLifetime__::__DCSM_SINGELTON__);
+        }
+
+        /// @brief Register object with transient lifetime
+        /// @tparam T Interface / Concrete
+        /// @tparam U Concrete  / Void
+        template<typename U>
+        void registerSingelton(){
+            __registerTypeWithLifetime<void,U>(__serviceLifetime__::__DCSM_SINGELTON__);
         }
 
         /// @brief Resolve type with transient lifetime
         /// @tparam T Interface/type to resolve
         /// @return Instance of resolved type
         template<typename T>
-        std::unique_ptr<T> resolveSingelton(){
+        std::shared_ptr<T> resolveSingelton(){
 
-            return __resolveInstance<T>(__serviceLifetime__::__DCSM_SINGELTON__);
+            return __resolveLifetime<T>(__serviceLifetime__::__DCSM_SINGELTON__);
         }
 
         /**
@@ -115,11 +168,11 @@ namespace serviceman{
         template<typename T>
         void registerLogger(){
             static_assert(std::is_base_of<dumisdk::ILogger, T>::value, "Logger must extend ILogger");
-            __registerFactory<dumisdk::ILogger, T>();
+            __registerTypeWithLifetime<dumisdk::ILogger, T>(__serviceLifetime__::__DCSM_SINGELTON__);
         }
 
-        dumisdk::ILogger& getLogger(){
-            return *__resolveInstance<dumisdk::ILogger>(__serviceLifetime__::__DCSM_SINGELTON__);
+        std::shared_ptr<dumisdk::ILogger> getLogger(){
+            return resolveSingelton<dumisdk::ILogger>();
         }
     };
 }

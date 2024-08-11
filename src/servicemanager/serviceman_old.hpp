@@ -44,15 +44,15 @@ namespace serviceman{
         __smSingeltonContainer():__smTypeContainer<T>(__serviceLifetime__::__DCSM_SINGELTON__){
             printf("Singelton Registered (%s)\n", typeid(T).name());
         }
-        std::unique_ptr<T> getInstance(){
-            std::unique_ptr<T> ret;
+        std::shared_ptr<T> getInstance(){
+            std::shared_ptr<T> ret;
             if(__inst == nullptr){
                 ret = std::make_unique<T>();
                 this->__inst = ret.get();
                 printf("Singelton instance @ %p of type %s\n", __inst, typeid(T).name());
             } else {
                 printf("Singelton returned @ %p of type %s\n", __inst, typeid(T).name());
-                ret = std::unique_ptr<T>(__inst);
+                ret = std::shared_ptr<T>(__inst);
             }
             return ret;
         }
@@ -63,27 +63,7 @@ namespace serviceman{
     template<typename T>
     struct __smInstanceContainer: public __smTypeContainer<T>{
         __smInstanceContainer():__smTypeContainer<T>(__serviceLifetime__::__DCSM_INSTANCE__){}
-        std::unique_ptr<T> getInstance(){ return std::make_unique<T>();}
-    };
-
-    class ServiceScope{
-        std::map<std::type_index, std::unique_ptr<__smTypeSlot>> __services;
-        public:
-        template<typename T, typename U>
-        bool registerService(){
-            std::type_index sid = idFromTU(T,U);
-            if(mapcontains(__services, sid)){return false;}
-            __services[sid] = std::make_unique<__smInstanceContainer<U>>();
-            return true;
-        }
-
-        template<typename T>
-        std::unique_ptr<T> resolveType(){
-            std::type_index sid = std::type_index(typeid(T));
-            if(mapcontains(__services, sid)){ throw dumiexception("Unregistered scoped service"); }
-            __smInstanceContainer<T> * inst = static_cast<__smInstanceContainer<T> *>(__services[sid].get());
-            return inst->getInstance();
-        };
+        std::shared_ptr<T> getInstance(){ return std::make_shared<T>();}
     };
 
     class ServiceManager{
@@ -125,8 +105,7 @@ namespace serviceman{
 
         //T: Interface
         template<typename T>
-        //std::unique_ptr<T> __resolveType(ServiceScope* _scope, __serviceLifetime__ lifetime)
-        std::unique_ptr<T> __resolveType(__serviceLifetime__ lifetime)
+        std::shared_ptr<T> __resolveType(__serviceLifetime__ lifetime)
         {
 
             if(lifetime == __serviceLifetime__::__DCSM_SCOPED__){
@@ -205,12 +184,12 @@ namespace serviceman{
 
         //Resolution
         template<typename T>
-        std::unique_ptr<T> resolveServiceInstance(){
+        std::shared_ptr<T> resolveServiceInstance(){
             return __resolveType<T>(__serviceLifetime__::__DCSM_INSTANCE__);
         }
 
         template<typename T>
-        std::unique_ptr<T> resolveServiceSingelton(){
+        std::shared_ptr<T> resolveServiceSingelton(){
             return __resolveType<T>(__serviceLifetime__::__DCSM_SINGELTON__);
         }
 
@@ -227,7 +206,7 @@ namespace serviceman{
             return __registerType<dumisdk::ILogger, T>(__serviceLifetime__::__DCSM_SINGELTON__);
         }
 
-        std::unique_ptr<dumisdk::ILogger> resolveLogger(){
+        std::shared_ptr<dumisdk::ILogger> resolveLogger(){
             return __resolveType<dumisdk::ILogger>(__serviceLifetime__::__DCSM_SINGELTON__);
         }
     };

@@ -37,7 +37,7 @@ namespace dumicore{
         void registerServices(std::function<void(serviceman::ServiceManager&)> func);
         serviceman::ServiceManager& serviceManager();
         
-        dumisdk::ILogger& getLogger();
+        std::shared_ptr<dumisdk::ILogger> getLogger();
 
         static void __init_core();
     };
