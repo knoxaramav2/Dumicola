@@ -2,7 +2,7 @@
 #include "dumiexcept.hpp"
 #include "logging.hpp"
 
-dumicore::DumiCore* dumicore::DumiCore::__inst__;
+dumicore::DumiCore* __core_inst = nullptr;
 
 dumicore::__dcSysState::__dcSysState()
 {
@@ -18,11 +18,7 @@ void dumicore::DumiCore::__runAsCncModeAuto()
 }
 
 dumicore::DumiCore::DumiCore(){
-    if(__inst__ != nullptr){
-        throw dumiexception("Duplicate instantation of Dumicore");
-    }
 
-    __inst__ = this;
 }
 
 dumicore::DumiCore::~DumiCore()
@@ -30,45 +26,51 @@ dumicore::DumiCore::~DumiCore()
     
 }
 
-void dumicore::DumiCore::__cacheServices()
+void dumicore::DumiCore::__loadServiceDefaults()
 {
-    //_logger = __serviceManager.resolveLogger().get();
+    __serviceManager.registerLogger<dumisdk::ILogger>();
 }
 
 void dumicore::DumiCore::start()
 {
-    new dumicore::DumiCore();
     __runAsCncModeAuto();
 }
 
 void dumicore::DumiCore::shutdown()
 {
-    __inst__->__state.active = false;
-
-    //__inst__->_logger->log("DumiCore shutodwn...");
+    __state.active = false;
 }
 
 int dumicore::DumiCore::checkStatus()
 {
-    if(__inst__ == nullptr){
-        return -1;
-    }
 
     return 0;
 }
 
 void dumicore::DumiCore::registerServices(std::function<void(serviceman::ServiceManager &)> func)
 {
-    func(__inst__->__serviceManager);
-    __inst__->__cacheServices();
+    func(__serviceManager);
 }
 
 serviceman::ServiceManager &dumicore::DumiCore::serviceManager()
 {
-    return __inst__->__serviceManager;
+    return __serviceManager;
 }
 
-std::unique_ptr<dumisdk::ILogger> dumicore::DumiCore::getLogger()
+dumisdk::ILogger& dumicore::DumiCore::getLogger()
 {
-    return __inst__->__serviceManager.resolveSingelton<dumisdk::ILogger>();
+    return __serviceManager.getLogger();
 }
+
+void dumicore::DumiCore::__init_core()
+{
+    if(__core_inst){ 
+        __core_inst->getLogger().log_warn("Dumicore already initialized");
+        return; 
+    }
+
+    __core_inst = new DumiCore();
+    __core_inst->__loadServiceDefaults();
+    __core_inst->start();
+}
+

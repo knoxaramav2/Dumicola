@@ -30,7 +30,3 @@ void DesktopLogger::__logAs(dumisdk::ILoggerAction action, dumisdk::ILoggerMsgTy
 
     printf("\033[%dm%s %s\033[0m\n", clr, prfx, msg.c_str());
 }
-
-DesktopLogger::DesktopLogger(){
-    printf("Desktop Logger Init\n");
-}

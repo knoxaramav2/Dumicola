@@ -4,13 +4,12 @@
 
 #include "mobileLogger.h"
 
-OINLINE void DesktopLogger::__logAs(dumisdk::ILoggerAction action, dumisdk::ILoggerMsgType msgType, std::string& msg){
+void AndroidLogger::__logAs(dumisdk::ILoggerAction action, dumisdk::ILoggerMsgType msgType, std::string& msg) {
     android_LogPriority logtype;
     switch (msgType) {
         case dumisdk::ILoggerMsgType::LOG_DEBUG:
             logtype=ANDROID_LOG_DEBUG; break;
         case dumisdk::ILoggerMsgType::LOG_WARN:
-
             logtype=ANDROID_LOG_WARN; break;
         case dumisdk::ILoggerMsgType::LOG_ERROR:
             logtype=ANDROID_LOG_ERROR; break;

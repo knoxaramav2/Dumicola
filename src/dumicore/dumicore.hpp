@@ -7,6 +7,8 @@
 
 namespace dumicore{
 
+    
+
     struct __dcSysState{
         bool active;
 
@@ -15,35 +17,36 @@ namespace dumicore{
 
     class DumiCore{
 
-        static DumiCore* __inst__;
         __dcSysState __state;
 
         serviceman::ServiceManager __serviceManager;
-        dumisdk::ILogger* _logger;
 
-        static void __runAsCncModeAuto();
+        void __runAsCncModeAuto();
 
         DumiCore();
         ~DumiCore();
 
-        void __cacheServices();
+        void __loadServiceDefaults();
 
         public:
 
-        static void start();
-        static void shutdown();
-        static int checkStatus();
+        void start();
+        void shutdown();
+        int checkStatus();
 
-        static void registerServices(std::function<void(serviceman::ServiceManager&)> func);
-        static serviceman::ServiceManager& serviceManager();
+        void registerServices(std::function<void(serviceman::ServiceManager&)> func);
+        serviceman::ServiceManager& serviceManager();
         
-        static std::unique_ptr<dumisdk::ILogger> getLogger();
+        dumisdk::ILogger& getLogger();
+
+        static void __init_core();
     };
+
+    DumiCore* __core_inst;
 }
 
-#define InitDumiCore dumicore::DumiCore::start();
-#define Shutdown dumicore::DumiCore::shutdown();
-#define RegisterServices(fnc) dumicore::DumiCore::registerServices(fnc);
-//#define GetLogger(T) dynamic_cast<T*>(dumicore::DumiCore::getLogger().get())
-#define GetLogger() dumicore::DumiCore::getLogger()
+#define InitDumiCore dumicore::DumiCore::__init_core();
+#define Shutdown dumicore::__core_inst->shutdown();
+#define RegisterServices(fnc) dumicore::__core_inst->registerServices(fnc);
+#define GetLogger() dumicore::__core_inst->getLogger()
 

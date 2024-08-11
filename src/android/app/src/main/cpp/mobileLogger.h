@@ -8,11 +8,10 @@
 #include <android/log.h>
 #include "service_interfaces.hpp"
 
-class DesktopLogger: public dumisdk::ILogger{
-    OINLINE void __logAs(dumisdk::ILoggerAction action, dumisdk::ILoggerMsgType msgType, std::string& msg) override;
-
-public:
-    const char* Title = "Mobile Logger";
+class AndroidLogger: public dumisdk::ILogger{
+    void __logAs(dumisdk::ILoggerAction action, dumisdk::ILoggerMsgType msgType, std::string& msg);
 };
+
+
 
 #endif //DUMIMOBILE_MOBILELOGGER_H

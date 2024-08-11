@@ -8,6 +8,7 @@
 #include <any>
 #include <iostream>
 #include "dumiexcept.hpp"
+#include "service_interfaces.hpp"
 
 namespace serviceman{    
 
@@ -61,6 +62,9 @@ namespace serviceman{
 
         public:
 
+        /**
+         * General Registration / Resolution
+         */
 
         /// @brief Register object with transient lifetime
         /// @tparam T Interface / Concrete
@@ -85,8 +89,6 @@ namespace serviceman{
         template<typename T>
         std::unique_ptr<T> resolveTransient(){
             return __resolveInstance<T>(__serviceLifetime__::__DCSM_INSTANCE__);
-            // return static_cast<T>(__resolveInstance<T>(__serviceLifetime__::__DCSM_INSTANCE__)
-            // .release());
         }
 
         /// @brief Register object with transient lifetime
@@ -104,11 +106,20 @@ namespace serviceman{
         template<typename T>
         std::unique_ptr<T> resolveSingelton(){
 
-            return resolveTransient<T>();
-
-            // return static_cast<T>(__resolveInstance<T>(__serviceLifetime__::__DCSM_SINGELTON__)
-            // .release());
+            return __resolveInstance<T>(__serviceLifetime__::__DCSM_SINGELTON__);
         }
 
+        /**
+         * Special Registration / Resolution
+         */
+        template<typename T>
+        void registerLogger(){
+            static_assert(std::is_base_of<dumisdk::ILogger, T>::value, "Logger must extend ILogger");
+            __registerFactory<dumisdk::ILogger, T>();
+        }
+
+        dumisdk::ILogger& getLogger(){
+            return *__resolveInstance<dumisdk::ILogger>(__serviceLifetime__::__DCSM_SINGELTON__);
+        }
     };
 }
