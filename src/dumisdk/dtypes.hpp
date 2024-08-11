@@ -42,6 +42,11 @@ namespace dumisdk
         virtual bool remove(DCMemObj* item) = 0;
     };
 
+    /// @brief Dynamic type for DC programs
+    struct DynaType{
+        
+    };
+
     class IDataManager{
         public:
         virtual APPSID createVar(std::string typeName)=0;

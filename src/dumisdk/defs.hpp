@@ -8,6 +8,7 @@
 typedef std::uintptr_t APPSID;
 typedef size_t RSCID;
 typedef uint32_t HASHID;
+typedef uint32_t UNIQUEID;
 
 //#define appId(ptr) reinterpret_cast<std::uintptr_t>(&ptr)
 #define appId(ptr) reinterpret_cast<std::uintptr_t>(ptr)

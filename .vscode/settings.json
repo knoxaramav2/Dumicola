@@ -81,7 +81,8 @@
         "__verbose_abort": "cpp",
         "ios": "cpp",
         "locale": "cpp",
-        "queue": "cpp"
+        "queue": "cpp",
+        "stack": "cpp"
     },
     "makefile.makefilePath": "./src/cpp",
     "makefile.buildLog": "."
