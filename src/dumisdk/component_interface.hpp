@@ -65,6 +65,7 @@ struct IDCFieldTemplate: public virtual IDCFieldDefinition,
 
 struct IDCField: public virtual IDCObject, public virtual IDCFieldDefinition{
     ~IDCField() = default;
+    virtual void Set() = 0;
 };
 
 enum FieldLock{ AlwaysLocked, AlwaysUnlocked, Locked, Unlocked };

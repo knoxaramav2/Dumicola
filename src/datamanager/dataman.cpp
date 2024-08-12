@@ -66,13 +66,13 @@ bool dataman::TypeTemplateFactory::hasType(HASHID id)
     return mapcontains(__templates, id);
 }
 
-dataman::DCDataManager::DCDataManager(bool loadDefaults){
-    __factory = new TypeTemplateFactory();
+dataman::DCDataManager::DCDataManager(bool loadDefaults)
+    :__typeFactory(){
     if(loadDefaults){ loadDefaultTypes(); }
 }
 
 dataman::DCDataManager::~DCDataManager(){
-    delete __factory;
+
 }
 
 APPSID dataman::DCDataManager::createVar(std::string typeName)
@@ -82,14 +82,14 @@ APPSID dataman::DCDataManager::createVar(std::string typeName)
 
 APPSID dataman::DCDataManager::createVar(HASHID typeId)
 {
-    bool hasType = __factory->hasType(typeId);
+    bool hasType = __typeFactory.hasType(typeId);
     static uintptr_t utest = 0;
 
-    if(__factory->hasType(typeId)){
-        auto typeInst = __factory->instanceOf(typeId);
+    if(__typeFactory.hasType(typeId)){
+        auto typeInst = __typeFactory.instanceOf(typeId);
         auto instId = appId(typeInst);
         utest = instId;
-        __dTypeStorage[instId] = typeInst;
+        __varStorage[instId] = typeInst;
         return instId;
     }
     return 0;
@@ -97,20 +97,14 @@ APPSID dataman::DCDataManager::createVar(HASHID typeId)
 
 dumisdk::DCMemObj *dataman::DCDataManager::requestVar(APPSID id)
 {
-    if(mapcontains(__dTypeStorage, id)){
-        return __dTypeStorage[id];
-    } else {
-        return nullptr;
-    }
-
-    return __dTypeStorage.find(id) == __dTypeStorage.end() ? 
-        __dTypeStorage[id] : nullptr;
+    return mapcontains(__varStorage, id) ?
+        __varStorage[id] : nullptr;
 }
 
 bool dataman::DCDataManager::deleteVar(APPSID id)
 {
-    if(mapcontains(__dTypeStorage, id)){
-        __dTypeStorage.erase(id);
+    if(mapcontains(__varStorage, id)){
+        __varStorage.erase(id);
         return true;
     }
     return false;
@@ -124,12 +118,12 @@ void dataman::DCDataManager::loadDefaultTypes(){
     auto mk_list = [](){return (dumisdk::DCMemObj*)(new dumisdk::DCList());};
     auto mk_map = [](){return (dumisdk::DCMemObj*)(new dumisdk::DCMap());};
 
-    __factory->registerTemplate(DC_BOOL, mk_bool);
-    __factory->registerTemplate(DC_INTEGER, mk_integer);
-    __factory->registerTemplate(DC_DECIMAL, mk_decimal);
-    __factory->registerTemplate(DC_STRING, mk_string);
-    __factory->registerTemplate(DC_LIST, mk_list);
-    __factory->registerTemplate(DC_MAP, mk_map);
+    __typeFactory.registerTemplate(DC_BOOL, mk_bool);
+    __typeFactory.registerTemplate(DC_INTEGER, mk_integer);
+    __typeFactory.registerTemplate(DC_DECIMAL, mk_decimal);
+    __typeFactory.registerTemplate(DC_STRING, mk_string);
+    __typeFactory.registerTemplate(DC_LIST, mk_list);
+    __typeFactory.registerTemplate(DC_MAP, mk_map);
 }
 
 

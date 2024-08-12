@@ -43,7 +43,7 @@ namespace dumisdk
     };
 
     /// @brief Dynamic type for DC programs
-    struct DynaType{
+    struct DCVar{
         
     };
 
@@ -61,6 +61,11 @@ namespace dumisdk
     #define DC_STRING "__DC_IT_STRING"
     #define DC_MAP "__DC_IT_MAP"
     #define DC_LIST "__DC_IT_LIST"
+
+    enum DCTypes{
+        DCBOOL, DCINT, DCDECI,
+        DCSTR, DCMAP, DCLIST
+    };
 
     struct DCBoolean: dumisdk::DCLiteral<bool>{ DCBoolean(); };
     struct DCInteger: dumisdk::DCLiteral<int32_t>{ DCInteger(); };

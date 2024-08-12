@@ -30,8 +30,8 @@ namespace dataman
     };
 
     class DCDataManager: dumisdk::IDataManager{
-        TypeTemplateFactory* __factory;
-        std::map<APPSID, dumisdk::DCMemObj*> __dTypeStorage;
+        TypeTemplateFactory __typeFactory;
+        std::map<APPSID, dumisdk::DCMemObj*> __varStorage;
         void loadDefaultTypes();
     public:
         DCDataManager(bool loadDefaults=true);
