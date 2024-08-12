@@ -54,5 +54,32 @@ namespace dumisdk
         virtual DCMemObj* requestVar(APPSID id) = 0;
         virtual bool deleteVar(APPSID id) = 0;
     };
+
+    #define DC_BOOL "__DC_IT_BOOL"
+    #define DC_INTEGER "__DC_IT_INTEGER"
+    #define DC_DECIMAL "__DC_IT_DECIMAL"
+    #define DC_STRING "__DC_IT_STRING"
+    #define DC_MAP "__DC_IT_MAP"
+    #define DC_LIST "__DC_IT_LIST"
+
+    struct DCBoolean: dumisdk::DCLiteral<bool>{ DCBoolean(); };
+    struct DCInteger: dumisdk::DCLiteral<int32_t>{ DCInteger(); };
+    struct DCDecimal: dumisdk::DCLiteral<double>{ DCDecimal(); };
+    struct DCString: dumisdk::DCLiteral<std::string>{ DCString(); };
+
+    struct DCMap: dumisdk::DCCollection<std::map<APPSID, dumisdk::DCMemObj*>, APPSID>{ 
+        DCMap();
+        DCMemObj* operator[](APPSID id);
+        bool remove(APPSID id);
+        bool remove(DCMemObj* item);
+    };
+
+    struct DCList: dumisdk::DCCollection<std::vector<dumisdk::DCMemObj*>, size_t>{ 
+        DCList(); 
+        DCMemObj* operator[](size_t index);
+        void push_back(DCMemObj* item);
+        bool remove(size_t index);
+        bool remove(dumisdk::DCMemObj* item);
+    };
 };
 

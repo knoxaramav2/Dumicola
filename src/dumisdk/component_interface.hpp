@@ -7,22 +7,27 @@
 struct IDCBase{
     HASHID id;
     HASHID parentId;
+    virtual ~IDCBase() = default;
 };
 
 /* Forward declares */
-struct IDCInputTemplate;
-struct IDCOutputTemplate;
-struct IDCFieldTemplate;
-struct IDCViewTemplate;
+struct IDCInput; struct IDCInputTemplate;
+struct IDCOutput; struct IDCOutputTemplate;
+struct IDCField; struct IDCFieldTemplate;
+struct IDCView; struct IDCViewTemplate;
+struct IDCComponent; template<typename T> struct IDCComponentTemplate;
 
-struct IDCObject: public IDCBase{};
+
+struct IDCObject: public virtual IDCBase{
+    virtual ~IDCObject() = default;
+};
 
 /// @brief Base template interface
 /// @tparam T Type of component
 template<typename T>
-struct IDCTemplate: public IDCBase{
-    static_assert(std::is_base_of<T, IDCObject>::value);
-    T* createInstance() = 0;
+struct IDCTemplate: public virtual IDCBase{
+    virtual T* createInstance() = 0;
+    virtual ~IDCTemplate() = default;
 };
 
 #pragma endregion IDC_Basic
@@ -36,42 +41,45 @@ struct IDCLibrary{
     const char* platform;
     const char* author;
     const char* repository;
-    const char* description;
     
     HASHID id;
     //const std::vector<IDCComponentTemplate<IDCComponent>> getComponents();
-    //IDComponent* getComponent();
+    virtual IDCComponent* getComponent() = 0;
+    virtual ~IDCLibrary() = default;
 };
 
 #pragma endregion IDC_Library
 
 #pragma region IDC_Field
 
-struct IDCFieldDefinition: public IDCBase{
+struct IDCFieldDefinition: public virtual IDCBase{
     bool visible;
+
+    ~IDCFieldDefinition() = default;
 };
 
-struct IDCFieldTemplate: public IDCFieldDefinition, public IDCTemplate<IDCField>{
-
+struct IDCFieldTemplate: public virtual IDCFieldDefinition, 
+    public virtual IDCTemplate<IDCField>{
+    ~IDCFieldTemplate() = default;
 };
 
-struct IDCField: public IDCObject, public IDCFieldDefinition{
-
+struct IDCField: public virtual IDCObject, public virtual IDCFieldDefinition{
+    ~IDCField() = default;
 };
 
 enum FieldLock{ AlwaysLocked, AlwaysUnlocked, Locked, Unlocked };
 
-struct IDCConfigFieldDefintiion: public IDCFieldDefinition{
-
+struct IDCConfigFieldDefintiion: public virtual IDCFieldDefinition{
+    ~IDCConfigFieldDefintiion() = default;
 };
 
-struct IDCConfigField: public IDCField, public IDCConfigFieldDefintiion{
-    
+struct IDCConfigField: public virtual IDCField, public virtual IDCConfigFieldDefintiion{
+    ~IDCConfigField() = default;
 };
 
-struct IDCConfigFieldTemplate: public IDCConfigFieldDefintiion, 
-    public IDCTemplate<IDCConfigField>{
-
+struct IDCConfigFieldTemplate: public virtual IDCConfigFieldDefintiion, 
+    public virtual IDCTemplate<IDCConfigField>{
+    ~IDCConfigFieldTemplate() = default;
 };
 
 #pragma endregion IDC_Field
@@ -86,77 +94,97 @@ struct IDCConfigFieldTemplate: public IDCConfigFieldDefintiion,
 
     template<
         typename TInput, typename TOutput,
-        typename TView, typename TField
-    >
+        typename TView, typename TField>
     struct IDCComponentDefition{
-
+        ~IDCComponentDefition() = default;
     };
 
     template<typename T>
     struct IDCComponentTemplate: IDCComponentDefition<
         IDCInputTemplate, IDCOutputTemplate,
         IDCViewTemplate, IDCFieldTemplate>{
-            static_assert(std::is_base_of(T, IDCComponent));
+        ~IDCComponentTemplate() = default;
     };
 
     struct IDCComponent: IDCObject,
     IDCComponentDefition<IDCInput, IDCOutput, IDCView, IDCField>{
-
+        ~IDCComponent() = default;
     };
 
 #pragma endregion
 
 #pragma region IDC_Monitor
 
-struct IDCMonitorDefinition: IDCObject{
-
+struct IDCMonitorDefinition: public virtual IDCObject{
+    ~IDCMonitorDefinition() = default;
 };
 
-struct IDCMonitor: IDCComponent, IDCMonitorDefinition{
-
+struct IDCMonitor: public virtual IDCComponent, public virtual IDCMonitorDefinition{
+    ~IDCMonitor() = default;
 };
 
-struct IDCMonitorTemplate: IDCComponentTemplate<IDCMonitor>, 
-    IDCMonitorDefinition{
-
+struct IDCMonitorTemplate: public virtual IDCComponentTemplate<IDCMonitor>, 
+    public virtual IDCMonitorDefinition{
+    ~IDCMonitorTemplate() = default;
 };
 
 #pragma endregion
 
 #pragma region IDC_Provider
 
-    struct IDCProviderDefinition: IDCObject{
-
+    struct IDCProviderDefinition: public virtual IDCObject{
+        ~IDCProviderDefinition() = default;
     };
 
-    struct IDCProvider: IDCComponent, IDCProviderDefinition{
-
+    struct IDCProvider: public virtual IDCComponent, public virtual IDCProviderDefinition{
+        ~IDCProvider() = default;
     };
 
-    struct IDCProviderTemplate: IDCComponentTemplate<IDCProvider>,
-        IDCProviderDefinition{};
+    struct IDCProviderTemplate: public virtual IDCComponentTemplate<IDCProvider>,
+        public virtual IDCProviderDefinition{
+        ~IDCProviderTemplate() = default;
+    };
 
 #pragma endregion
 
 #pragma region IDC_Nodes
 
-    struct IDCIONodeDefinition: IDCObject{
-
+    struct IDCIONodeDefinition: public virtual IDCObject{
+        ~IDCIONodeDefinition() = default;
     };
 
-    struct IDCInputDefinition: IDCIONodeDefinition{};
-    struct IDCInput: IDCInputDefinition{};
-    struct IDCInputTemplate: IDCTemplate<IDCInput>, IDCInputDefinition{};
+    struct IDCInputDefinition: public virtual IDCIONodeDefinition{
+        ~IDCInputDefinition() = default;
+    };
+    struct IDCInput: public virtual IDCInputDefinition{
+        ~IDCInput() = default;
+    };
+    struct IDCInputTemplate: 
+        public virtual IDCTemplate<IDCInput>, public virtual IDCInputDefinition{
+        ~IDCInputTemplate() = default;
+    };
 
-    struct IDCViewDefinition: IDCInputDefinition{};
-    struct IDCView: IDCViewDefinition{};
-    struct IDCViewTemplate: IDCTemplate<IDCView>, IDCViewDefinition{};
+    struct IDCViewDefinition: public virtual IDCInputDefinition{
+        ~IDCViewDefinition() = default;
+    };
+    struct IDCView: public virtual IDCViewDefinition{
+        ~IDCView() = default;
+    };
+    struct IDCViewTemplate: 
+        public virtual IDCTemplate<IDCView>, public virtual IDCViewDefinition{
+        ~IDCViewTemplate() = default;
+    };
 
-    struct IDCOutputDefinition: IDCIONodeDefinition{};
-    struct IDCOutput: IDCOutputDefinition{};
-    struct IDCOutputTemplate: IDCTemplate<IDCOutput>, IDCOutputDefinition{};
-
-
+    struct IDCOutputDefinition: public virtual IDCIONodeDefinition{
+        ~IDCOutputDefinition() = default;
+    };
+    struct IDCOutput: public virtual IDCOutputDefinition{
+        ~IDCOutput() = default;
+    };
+    struct IDCOutputTemplate: 
+        public virtual IDCTemplate<IDCOutput>, public virtual IDCOutputDefinition{
+        ~IDCOutputTemplate() = default;
+    };
 
 #pragma endregion
 

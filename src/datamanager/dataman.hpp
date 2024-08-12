@@ -4,26 +4,6 @@
 
 namespace dataman
 {
-    struct DCBoolean: dumisdk::DCLiteral<bool>{ DCBoolean(); };
-    struct DCInteger: dumisdk::DCLiteral<int32_t>{ DCInteger(); };
-    struct DCDecimal: dumisdk::DCLiteral<double>{ DCDecimal(); };
-    struct DCString: dumisdk::DCLiteral<std::string>{ DCString(); };
-
-    struct DCMap: dumisdk::DCCollection<std::map<APPSID, dumisdk::DCMemObj*>, APPSID>{ 
-        DCMap();
-        DCMemObj* operator[](APPSID id);
-        bool remove(APPSID id);
-        bool remove(DCMemObj* item);
-    };
-
-    struct DCList: dumisdk::DCCollection<std::vector<dumisdk::DCMemObj*>, size_t>{ 
-        DCList(); 
-        DCMemObj* operator[](size_t index);
-        void push_back(DCMemObj* item);
-        bool remove(size_t index);
-        bool remove(dumisdk::DCMemObj* item);
-    };
-
     typedef dumisdk::DCMemObj* (__type_builder)();
 
     struct TypeTemplate: dumisdk::DCMemObj{
@@ -64,4 +44,3 @@ namespace dataman
     };
 }
 
-#define __InitDumiData__ auto DataManager = new dumisdk::DCDataManager(true);

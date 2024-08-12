@@ -15,12 +15,6 @@ typedef uint32_t UNIQUEID;
 #define rscdId(name) std::hash<std::string>{}(std::string(name))
 #define hashId(name) FNV1A(name)
 
-#define DC_BOOL "__DC_IT_BOOL"
-#define DC_INTEGER "__DC_IT_INTEGER"
-#define DC_DECIMAL "__DC_IT_DECIMAL"
-#define DC_STRING "__DC_IT_STRING"
-#define DC_MAP "__DC_IT_MAP"
-#define DC_LIST "__DC_IT_LIST"
 
 
 

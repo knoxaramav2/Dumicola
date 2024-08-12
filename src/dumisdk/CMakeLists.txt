@@ -22,6 +22,7 @@ PUBLIC
     dumisdk.cpp
     dtypes.cpp
     service_interfaces.cpp
+    component.cpp
 PRIVATE
 
 )

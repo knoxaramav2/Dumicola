@@ -1,93 +1,6 @@
 #include "dataman.hpp"
 #include "maputil.hpp"
 
-/** 
- * Type definitions 
- **/
-dataman::DCBoolean::DCBoolean()
-    :dumisdk::DCLiteral<bool>(DC_BOOL, false)
-    {}
-
-dataman::DCInteger::DCInteger()
-    :dumisdk::DCLiteral<int32_t>(DC_INTEGER, 0)
-    {}
-
-dataman::DCDecimal::DCDecimal()
-    :dumisdk::DCLiteral<double>(DC_DECIMAL, 0.0f)
-    {}
-
-dataman::DCString::DCString()
-    :dumisdk::DCLiteral<std::string>(DC_STRING, "")
-    {}
-
-/* DC Map */
-dataman::DCMap::DCMap()
-   : dumisdk::DCCollection<std::map<APPSID, dumisdk::DCMemObj*>, APPSID>(DC_MAP, {}) {}
-
-dumisdk::DCMemObj *dataman::DCMap::operator[](APPSID id)
-{
-    for(auto i = __value->begin(); i != __value->end(); ++i){
-        if(i->second->id == id){
-            return i->second;
-        }
-    }
-
-    return nullptr;
-}
-
-bool dataman::DCMap::remove(APPSID id)
-{
-    return __value->erase(id) > 0;
-}
-
-bool dataman::DCMap::remove(dumisdk::DCMemObj *item)
-{
-    size_t idx = -1;
-    for(auto i = __value->begin(); i != __value->end(); ++i){
-        if(i->second == item){
-            __value->erase(i);
-            return true;
-        }
-    }
-
-    return false;
-}
-
-
-/* DC List */
-dataman::DCList::DCList()
-    : dumisdk::DCCollection<std::vector<dumisdk::DCMemObj*>, size_t>(DC_LIST, {}) {}
-
-dumisdk::DCMemObj *dataman::DCList::operator[](size_t index)
-{
-    if(index < 0 || index >= __value->size()) { return nullptr; }
-    return (*__value)[index];
-}
-
-void dataman::DCList::push_back(dumisdk::DCMemObj *item)
-{
-    __value->push_back(item);
-}
-
-bool dataman::DCList::remove(size_t index)
-{
-    if(index < 0 || index >= __value->size()){ return false; }
-    __value->erase(__value->begin()+index);
-    return true;
-}
-
-bool dataman::DCList::remove(dumisdk::DCMemObj *item)
-{
-    for(auto i = __value->begin(); i != __value->end(); ++i){
-        if(*i == item){
-            __value->erase(i);
-            return true;
-        }
-    }
-    return false;
-}
-
-
 /* Type Management */
 dataman::TypeTemplate::TypeTemplate(std::string name, __type_builder builder)
     :dumisdk::DCMemObj(name)
@@ -204,12 +117,12 @@ bool dataman::DCDataManager::deleteVar(APPSID id)
 }
 
 void dataman::DCDataManager::loadDefaultTypes(){
-    auto mk_bool = [](){return (dumisdk::DCMemObj*)(new DCBoolean());};
-    auto mk_integer = [](){return (dumisdk::DCMemObj*)(new DCInteger());};
-    auto mk_decimal = [](){return (dumisdk::DCMemObj*)(new DCDecimal());};
-    auto mk_string = [](){return (dumisdk::DCMemObj*)(new DCString());};
-    auto mk_list = [](){return (dumisdk::DCMemObj*)(new DCList());};
-    auto mk_map = [](){return (dumisdk::DCMemObj*)(new DCMap());};
+    auto mk_bool = [](){return (dumisdk::DCMemObj*)(new dumisdk::DCBoolean());};
+    auto mk_integer = [](){return (dumisdk::DCMemObj*)(new dumisdk::DCInteger());};
+    auto mk_decimal = [](){return (dumisdk::DCMemObj*)(new dumisdk::DCDecimal());};
+    auto mk_string = [](){return (dumisdk::DCMemObj*)(new dumisdk::DCString());};
+    auto mk_list = [](){return (dumisdk::DCMemObj*)(new dumisdk::DCList());};
+    auto mk_map = [](){return (dumisdk::DCMemObj*)(new dumisdk::DCMap());};
 
     __factory->registerTemplate(DC_BOOL, mk_bool);
     __factory->registerTemplate(DC_INTEGER, mk_integer);

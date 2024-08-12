@@ -3,7 +3,16 @@
 
 void buildProvider(){
 
-    
+    struct Provider: IDCProvider{
+        public:
+        Provider(){
+
+        }
+    };
+
+    struct IProvider: DCProviderTemplate<Provider>{
+
+    };
     
 }
 

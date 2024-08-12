@@ -4,58 +4,58 @@
 
 #pragma region DC_Basic
 
-struct DCBase: IDCBase{
-
+struct DCBase: public virtual IDCBase{
+    virtual ~DCBase() = default;
 };
 
-struct DCTemplateBase: DCBase{
-
+struct DCTemplateBase: public virtual DCBase{
+    virtual ~DCTemplateBase() = default;
 };
 
-struct DCObjectBase: DCBase, IDCObject{
-
+struct DCObjectBase: public virtual DCBase, public virtual IDCObject{
+    virtual ~DCObjectBase() = default;
 };
 
 #pragma endregion
 
 #pragma DC_Nodes
 
-struct DCIOBase: DCBase, IDCIONodeDefinition{
-
+struct DCIOBase: public virtual DCBase, public virtual IDCIONodeDefinition{
+    virtual ~DCIOBase() = default;
 };
 
-struct DCViewBase: DCIOBase, IDCViewDefinition{
-
+struct DCViewBase: public virtual DCIOBase, public virtual IDCViewDefinition{
+    virtual ~DCViewBase() = default;
 };
 
-struct DCView: DCViewBase, IDCView{
-
+struct DCView: public virtual DCViewBase, public virtual IDCView{
+    virtual ~DCView() = default;
 };
 
-struct DCInputBase: DCIOBase, IDCInputDefinition{
-
+struct DCInputBase: public virtual DCIOBase, public virtual IDCInputDefinition{
+    virtual ~DCInputBase() = default;
 };
 
-struct DCInput: DCInputBase, IDCInput{
-
+struct DCInput: public virtual DCInputBase, public virtual IDCInput{
+    virtual ~DCInput() = default;
 };
 
 struct DCInputTemplate: 
-    DCInputBase, IDCTemplate<IDCInput>, IDCInputTemplate{
-
+    public virtual DCInputBase, public virtual IDCTemplate<IDCInput>, public virtual IDCInputTemplate{
+    virtual ~DCInputTemplate() = default;
 };
 
-struct DCOutputBase: DCIOBase, IDCOutputDefinition{
-
+struct DCOutputBase: public virtual DCIOBase, public virtual IDCOutputDefinition{
+    virtual ~DCOutputBase() = default;
 };
 
-struct DCOutput: DCOutputBase, IDCOutput{
-
+struct DCOutput: public virtual DCOutputBase, public virtual IDCOutput{
+    virtual ~DCOutput() = default;
 };
 
 struct DCOutputTemplate:
-    DCOutputBase, IDCTemplate<IDCOutput>, IDCOutputTemplate{
-
+    public virtual DCOutputBase, public virtual IDCTemplate<IDCOutput>, public virtual IDCOutputTemplate{
+    virtual ~DCOutputTemplate() = default;
 };
 
 #pragma endregion
@@ -65,21 +65,21 @@ struct DCOutputTemplate:
 template<
     typename TInput, typename TOutput,
     typename TView, typename TField>
-struct DCComponentBase: DCBase, IDCComponentDefition<TInput, TOutput, TView, TField>{
-
+struct DCComponentBase: public virtual DCBase, public virtual IDCComponentDefition<TInput, TOutput, TView, TField>{
+    virtual ~DCComponentBase() = default;
 };
 
 template<typename T>
 struct DCComponentTemplate:
-    DCComponentBase<IDCInputTemplate, IDCOutputTemplate, IDCViewTemplate, IDCFieldTemplate>,
-    IDCComponentTemplate<T>{
-
+    public virtual DCComponentBase<IDCInputTemplate, IDCOutputTemplate, IDCViewTemplate, IDCFieldTemplate>,
+    public virtual IDCComponentTemplate<T>{
+    virtual ~DCComponentTemplate() = default;
 };
 
 struct DCComponent: 
-    DCComponentBase<IDCInput, IDCOutput, IDCView, IDCField>,
-    IDCComponent{
-
+    public virtual DCComponentBase<IDCInput, IDCOutput, IDCView, IDCField>,
+    public virtual IDCComponent{
+    virtual ~DCComponent() = default;
 };
 
 #pragma endregion
@@ -87,13 +87,13 @@ struct DCComponent:
 #pragma region DC_Monitor
 
 template<typename T>
-struct DCMonitorTemplate: DCComponentTemplate<IDCMonitor>,
-    IDCMonitorTemplate{
-
+struct DCMonitorTemplate: public virtual DCComponentTemplate<IDCMonitor>,
+    public virtual IDCMonitorTemplate{
+    virtual ~DCMonitorTemplate() = default;
 };
 
-struct DCMonitor: DCComponent, IDCMonitor{
-
+struct DCMonitor: public virtual DCComponent, public virtual IDCMonitor{
+    virtual ~DCMonitor() = default;
 };
 
 #pragma endregion
@@ -101,43 +101,42 @@ struct DCMonitor: DCComponent, IDCMonitor{
 #pragma region Provider
 
 template<typename T>
-struct DCProviderTemplate: DCComponentTemplate<IDCProvider>,
-    IDCProviderTemplate{
-
+struct DCProviderTemplate: public virtual DCComponentTemplate<IDCProvider>,
+    public virtual IDCProviderTemplate{
+    virtual ~DCProviderTemplate() = default;
 };
 
-struct DCProvider: DCComponent, IDCProvider{
-
+struct DCProvider: public virtual DCComponent, public virtual IDCProvider{
+    virtual ~DCProvider() = default;
 };
 
 #pragma endregion
 
 #pragma region DC_Aux
 
-struct DCFieldBase: DCBase, IDCFieldDefinition{
-
+struct DCFieldBase: public virtual DCBase, public virtual IDCFieldDefinition{
+    virtual ~DCFieldBase() = default;
 };
 
-struct DCFieldTemplate: DCFieldBase, IDCTemplate<IDCField>, IDCFieldTemplate{
-
+struct DCFieldTemplate: public virtual DCFieldBase, virtual IDCTemplate<IDCField>, public virtual IDCFieldTemplate{
+    virtual ~DCFieldTemplate() = default;
 };
 
-struct DCField: DCFieldBase, IDCField{
-
+struct DCField: public virtual DCFieldBase, public virtual IDCField{
+    virtual ~DCField() = default;
 };
 
 
-struct DCConfigFieldBase: DCBase, IDCConfigFieldDefintiion{
-
+struct DCConfigFieldBase: public virtual DCBase, public virtual IDCConfigFieldDefintiion{
+    virtual ~DCConfigFieldBase() = default;
 };
 
-struct DCConfigFieldTemplate: DCConfigFieldBase, IDCTemplate<IDCConfigField>, IDCConfigFieldTemplate{
-
+struct DCConfigFieldTemplate: public virtual DCConfigFieldBase, virtual IDCTemplate<IDCConfigField>, public virtual IDCConfigFieldTemplate{
+    virtual ~DCConfigFieldTemplate() = default;
 };
 
-struct DCConfigField: DCConfigFieldBase, IDCConfigField{
-
+struct DCConfigField: public virtual DCConfigFieldBase, public virtual IDCConfigField{
+    virtual ~DCConfigField() = default;
 };
 
 #pragma endregion
-
