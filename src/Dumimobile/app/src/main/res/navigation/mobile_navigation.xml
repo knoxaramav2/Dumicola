@@ -3,23 +3,41 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_home">
+    app:startDestination="@+id/nav_dash">
 
     <fragment
-        android:id="@+id/nav_home"
-        android:name="com.knx.dumimobile.ui.home.HomeFragment"
-        android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
+        android:id="@+id/nav_dash"
+        android:name="com.knx.dumimobile.ui.dashboard.DashboardFragment"
+        android:label="@string/menu_dashboard"
+        tools:layout="@layout/fragment_dashboard" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.knx.dumimobile.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:id="@+id/nav_settings"
+        android:name="com.knx.dumimobile.ui.settings.SettingsFragment"
+        android:label="@string/menu_settings"
+        tools:layout="@layout/fragment_settings" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.knx.dumimobile.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/nav_library"
+        android:name="com.knx.dumimobile.ui.comLibrary.ComLibraryFragment"
+        android:label="@string/menu_library"
+        tools:layout="@layout/fragment_library" />
+
+    <fragment
+        android:id="@+id/nav_designer"
+        android:name="com.knx.dumimobile.ui.designer.DesignerFragment"
+        android:label="@string/menu_designer"
+        tools:layout="@layout/fragment_designer" />
+
+    <fragment
+        android:id="@+id/nav_network"
+        android:name="com.knx.dumimobile.ui.network.NetworkFragment"
+        android:label="@string/menu_network"
+        tools:layout="@layout/fragment_library" />
+
+    <fragment
+        android:id="@+id/nav_apps"
+        android:name="com.knx.dumimobile.ui.apps.AppsFragment"
+        android:label="@string/menu_apps"
+        tools:layout="@layout/fragment_apps" />
 </navigation>

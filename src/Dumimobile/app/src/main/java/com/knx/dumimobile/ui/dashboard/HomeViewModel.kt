@@ -1,4 +1,4 @@
-package com.knx.dumimobile.ui.home
+package com.knx.dumimobile.ui.dashboard
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
