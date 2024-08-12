@@ -28,6 +28,7 @@ namespace serviceman{
 
     struct _smTypeSlot{
         public:
+        virtual ~_smTypeSlot() = default;
         [[nodiscard]] virtual std::unique_ptr<_smTypeSlot> clone() const = 0;
     };
 
@@ -40,7 +41,7 @@ namespace serviceman{
         _serviceLifetime_ getLifetime(){return _lifetime;}
         protected:
         _serviceLifetime_ _lifetime;
-        explicit _smTypeContainer(_serviceLifetime_ _lifetime) : _smTypeSlot(), _lifetime(_lifetime){}
+        explicit _smTypeContainer(_serviceLifetime_ _lifetime) : _smTypeSlot(){this->_lifetime = _lifetime;}
         virtual std::shared_ptr<T> getInstance(){throw dumiexception("Invalid type container");};
     };
 
@@ -54,6 +55,7 @@ namespace serviceman{
             _builder = []() -> void* {return new T();};
             _cType = typeid(T).name();
         }
+        ~_smSingeltonContainer() override= default;
         std::shared_ptr<T> getInstance() override{
             if(_inst == nullptr){
                 _inst = (T*)_builder();
@@ -76,6 +78,7 @@ namespace serviceman{
             static_assert(!std::is_void<U>::value, "Factory type cannot be null");
             auto sid = idFromTU(T,U);
             if(lifetime == _serviceLifetime_::DCSM_SINGELTON_){
+                _singeltons.erase(sid);
                 _singeltons[sid] = std::make_unique<_smSingeltonContainer<U>>();
                 if(std::is_base_of<dumisdk::ILogger, U>::value){
                     auto* inst = static_cast<_smSingeltonContainer<T>*>(_singeltons[sid].get());

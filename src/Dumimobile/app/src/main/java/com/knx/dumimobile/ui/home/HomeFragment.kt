@@ -10,6 +10,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.knx.dumimobile.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
+    external fun InitDumicore(): Int
+    external fun LogStatic(): Int
 
     private var _binding: FragmentHomeBinding? = null
 
@@ -32,7 +34,18 @@ class HomeFragment : Fragment() {
         homeViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
+
+        val btn = binding.button;
+        btn.setOnClickListener{
+            LogStatic()
+        };
+
         return root
+    }
+
+    override fun onStart() {
+        super.onStart()
+        InitDumicore()
     }
 
     override fun onDestroyView() {
