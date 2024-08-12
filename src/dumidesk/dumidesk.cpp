@@ -8,7 +8,7 @@ int main(){
     InitDumiCore
 
     try{
-        RegisterServices(([](serviceman::ServiceManager& sm){
+        RegisterServices(([](serviceman::ServiceBuilder sm){
             sm.registerLogger<DesktopLogger>();
     }));
 

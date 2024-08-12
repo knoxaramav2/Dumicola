@@ -68,6 +68,8 @@ namespace serviceman{
 
     class ServiceManager{
 
+        friend class ServiceBuilder;
+
         std::map<std::type_index, std::unique_ptr<__smTypeSlot>> __singeltons;
         std::map<std::type_index, __ITypeBuilder> __typeFactories;
 
@@ -174,5 +176,32 @@ namespace serviceman{
         std::shared_ptr<dumisdk::ILogger> getLogger(){
             return resolveSingelton<dumisdk::ILogger>();
         }
+    };
+
+    class ServiceBuilder{
+        
+        ServiceManager* _sm;
+
+        public:
+
+
+        ServiceBuilder(ServiceManager& sm){ _sm = &sm; }
+
+        template<typename T>
+        void registerTransient(){_sm->registerTransient<T>();}
+        template<typename T, typename U>
+        void registerTransient(){_sm->registerTransient<T, U>();}
+
+        template<typename T>
+        void registerSingelton(){_sm->registerSingelton<T>();}
+        template<typename T, typename U>
+        void registerSingelton(){_sm->registerSingelton<T, U>();}
+
+        template<typename T>
+        void registerLogger(){_sm->registerLogger<T>();}
+        template<typename T, typename U>
+        void registerLogger(){_sm->registerLogger<T, U>();}
+
+
     };
 }

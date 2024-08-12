@@ -34,7 +34,7 @@ namespace dumicore{
         void shutdown();
         int checkStatus();
 
-        void registerServices(std::function<void(serviceman::ServiceManager&)> func);
+        void registerServices(std::function<void(serviceman::ServiceBuilder)> func);
         serviceman::ServiceManager& serviceManager();
         
         std::shared_ptr<dumisdk::ILogger> getLogger();

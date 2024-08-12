@@ -1,10 +1,11 @@
 #include "dataman.hpp"
 #include "kassert.hpp"
 #include "stdio.h"
+#include "tests.hpp"
 
 dataman::DCDataManager __dcDm;
 
-void test_default_types(){
+bool test_default_types(){
 
     auto intVarId = __dcDm.createVar(DC_INTEGER);
     auto deciVarId = __dcDm.createVar(DC_DECIMAL);
@@ -40,12 +41,6 @@ void test_default_types(){
     assertLater(__dcDm.requestVar(stringVarId) == nullptr);
     assertLater(__dcDm.requestVar(listVarId) == nullptr);
     assertLater(__dcDm.requestVar(mapVarId) == nullptr);
-}
 
-int main(){
-    test_default_types();
-
-    applyAsserts();
-
-    return 0;
+    return true;
 }

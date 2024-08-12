@@ -47,9 +47,9 @@ int dumicore::DumiCore::checkStatus()
     return 0;
 }
 
-void dumicore::DumiCore::registerServices(std::function<void(serviceman::ServiceManager &)> func)
+void dumicore::DumiCore::registerServices(std::function<void(serviceman::ServiceBuilder)> func)
 {
-    func(__serviceManager);
+    func(serviceman::ServiceBuilder(__serviceManager));
 }
 
 serviceman::ServiceManager &dumicore::DumiCore::serviceManager()

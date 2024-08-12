@@ -14,43 +14,42 @@
         "cwd": "${workspaceFolder}",
         "environment": [],
         "MIMode": "gdb",
-        "miDebuggerPath": "/usr/bin/gdb"
+        "miDebuggerPath": "/usr/bin/gdb",
+        "setupCommands": [
+            {
+                "description": "Enable pretty-printing for gdb",
+                "text": "-enable-pretty-printing",
+                "ignoreFailures": true
+            }
+        ],
       },
       {
-        "name": "Service Test",
+        "name": "Test Groups",
         "type": "cppdbg",
         "request": "launch",
-        "program": "${workspaceFolder}/build/test/test_services",
+        "program": "${workspaceFolder}/build/test/dumi_tests",
         "args": [],
         "stopAtEntry": false,
         "cwd": "${workspaceFolder}",
         "environment": [],
         "MIMode": "gdb",
-        "miDebuggerPath": "/usr/bin/gdb"
+        "miDebuggerPath": "/usr/bin/gdb",
+        "setupCommands": [
+            {
+                "description": "Enable pretty-printing for gdb",
+                "text": "-enable-pretty-printing",
+                "ignoreFailures": true
+            }
+        ],
       },
-      {
-        "name": "Type Test",
-        "type": "cppdbg",
-        "request": "launch",
-        "program": "${workspaceFolder}/build/test/test_sdk_types",
-        "args": [],
-        "stopAtEntry": false,
-        "cwd": "${workspaceFolder}",
-        "environment": [],
-        "MIMode": "gdb",
-        "miDebuggerPath": "/usr/bin/gdb"
-      },
-      {
-        "name": "Misc Test",
-        "type": "cppdbg",
-        "request": "launch",
-        "program": "${workspaceFolder}/build/test/test_msc",
-        "args": [],
-        "stopAtEntry": false,
-        "cwd": "${workspaceFolder}",
-        "environment": [],
-        "MIMode": "gdb",
-        "miDebuggerPath": "/usr/bin/gdb"
-      }
-    ]
+    ],
+    "tasks":{
+      "version": "2.0.0",
+      "tasks":{
+        "label": "Run pre-launch script",
+        "type": "shell",
+        "command": "${workspaceFolder}/make.sh -b",
+        "problemMatcher": []
+    }
+    }
   }

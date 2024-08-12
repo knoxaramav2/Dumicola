@@ -1,5 +1,6 @@
 #include "serviceman.hpp"
 #include "kassert.hpp"
+#include "tests.hpp"
 
 #include <stdio.h>
 
@@ -16,7 +17,7 @@ void initFixtures(){
     
 }
 
-int main(){
+bool test_services(){
 
     initFixtures();
 
