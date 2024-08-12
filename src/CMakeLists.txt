@@ -34,7 +34,7 @@ set(SERVICEMAN_DIR ${CMAKE_CURRENT_SOURCE_DIR}/servicemanager)
 set(APPRUNNER_DIR ${CMAKE_CURRENT_SOURCE_DIR}/apprunner)
 set(DUMICORE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/dumicore)
 set(DUMIDESK_DIR ${CMAKE_CURRENT_SOURCE_DIR}/dumidesk)
-set(DUMIMOBILE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/android/app/src/main/cpp)
+set(DUMIMOBILE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/Dumimobile/app/src/main/cpp)
 
 message(${CMAKE_BINARY_DIR})
 
@@ -46,7 +46,7 @@ add_subdirectory(servicemanager)
 add_subdirectory(apprunner)
 add_subdirectory(dumicore)
 add_subdirectory(dumidesk)
-add_subdirectory(android/app/src/main/cpp)
+add_subdirectory(Dumimobile/app/src/main/cpp)
 
 #Testing
 enable_testing()
