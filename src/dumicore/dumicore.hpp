@@ -42,7 +42,7 @@ namespace dumicore{
         static void __init_core();
     };
 
-    DumiCore* __core_inst;
+    static DumiCore* __core_inst;
 }
 
 #define InitDumiCore dumicore::DumiCore::__init_core();

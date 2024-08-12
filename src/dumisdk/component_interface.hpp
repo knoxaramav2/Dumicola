@@ -9,6 +9,12 @@ struct IDCBase{
     HASHID parentId;
 };
 
+/* Forward declares */
+struct IDCInputTemplate;
+struct IDCOutputTemplate;
+struct IDCFieldTemplate;
+struct IDCViewTemplate;
+
 struct IDCObject: public IDCBase{};
 
 /// @brief Base template interface
@@ -61,6 +67,11 @@ struct IDCConfigFieldDefintiion: public IDCFieldDefinition{
 
 struct IDCConfigField: public IDCField, public IDCConfigFieldDefintiion{
     
+};
+
+struct IDCConfigFieldTemplate: public IDCConfigFieldDefintiion, 
+    public IDCTemplate<IDCConfigField>{
+
 };
 
 #pragma endregion IDC_Field

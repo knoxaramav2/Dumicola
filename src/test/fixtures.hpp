@@ -1,5 +1,7 @@
 #include "dumicore.hpp"
 
+void resetFixtures();
+
 class FixtureControl{
 
     dumicore::DumiCore* __core;
@@ -9,5 +11,3 @@ class FixtureControl{
     ~FixtureControl();
 
 };
-
-void resetFixtures();

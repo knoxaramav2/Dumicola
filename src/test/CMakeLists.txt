@@ -16,9 +16,9 @@ elseif(DEFINED _DESKTOP)
     target_include_directories(dumi_tests 
     PRIVATE 
         ${DUMISDK_DIR} ${DCUTILS_DIR} ${SERVICEMAN_DIR}
-        ${DATAMAN_DIR}
+        ${DATAMAN_DIR} ${DUMICORE_DIR}
         )
-    target_link_libraries(dumi_tests PRIVATE kassert dcutils dumisdk serviceman dataman)
+    target_link_libraries(dumi_tests PRIVATE kassert dcutils dumisdk serviceman dataman dumicore)
     add_test(NAME TestGroup COMMAND dumi_tests)
 
     target_sources(dumi_tests
@@ -27,6 +27,8 @@ elseif(DEFINED _DESKTOP)
         msc_test.cpp
         service_tests.cpp
         component_test.cpp
+        dtypes_test.cpp
+        fixtures.cpp
     )
 
 endif()

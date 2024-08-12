@@ -199,9 +199,6 @@ namespace serviceman{
 
         template<typename T>
         void registerLogger(){_sm->registerLogger<T>();}
-        template<typename T, typename U>
-        void registerLogger(){_sm->registerLogger<T, U>();}
-
 
     };
 }
