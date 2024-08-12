@@ -1,4 +1,4 @@
-package com.example.dumimobile
+package com.knx.dumimobile
 
 import org.junit.Test
 

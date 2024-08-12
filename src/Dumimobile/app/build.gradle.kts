@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.dumimobile"
+    namespace = "com.knx.dumimobile"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.dumimobile"
+        applicationId = "com.knx.dumimobile"
         minSdk = 31
         targetSdk = 34
         versionCode = 1
