@@ -1,4 +1,5 @@
 #pragma once
+#include "kassert.hpp"
 
 bool test_default_types();
 bool test_misc();

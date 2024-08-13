@@ -1,24 +1,27 @@
 #include "tests.hpp"
 #include "dumisdk.hpp"
 
-void buildProvider(){
+class TestImp: public virtual dumisdk::IDCComp{
 
-    // struct Provider: IDCProvider{
-    //     Provider(){
+    public:
+    TestImp(HASHID id, HASHID parentId):IDCCompDef(id, parentId){}
+    int value = 1234;
+};
 
-    //     }
-    // };
+class TestTempl: public virtual dumisdk::IDCCompTemplate<TestImp>{
 
-    // struct IProvider: DCProviderTemplate<Provider>{
-    //     IProvider(){
-
-    //     }
-    // };
-
-    IDCField f("Test field", hashId(""));
-    DCConfigField("Config field", hashId(""));
-    printf("No exception for IDCField\n");
+    public:
+    TestTempl(HASHID id, HASHID parentId, dumisdk::ComponentFactory<TestImp> factory):
+        IDCCompTemplate(id, parentId, factory),IDCCompDef(id, parentId){}
     
+};
+
+void buildProvider(){
+    TestTempl temp(0, 0, []()-> TestImp* {
+        return new TestImp(0, 0);
+    });
+    auto inst = temp.create();
+    assert(inst->value == 1234);
 }
 
 bool test_components(){

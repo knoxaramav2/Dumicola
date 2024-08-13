@@ -1,18 +1,14 @@
 #include "component.hpp"
 
-DCDefinition::DCDefinition(const char* name, HASHID parentId){
-    this->name = name;
-    this->parentId = parentId;
-    this->id = FNV1A(name);
-}
+dumisdk::IDCCompDef::IDCCompDef(HASHID id , HASHID parentId):
+    id(id),parentId(parentId)
+{}
 
-void IDCField::set(std::shared_ptr<dumisdk::DCVar> value)
+dumisdk::IDCComp::IDCComp(HASHID id, HASHID parentId)
+    :IDCCompDef(id, parentId)
 {
-    _value = value;
 }
 
-std::shared_ptr<dumisdk::DCVar> IDCField::get()
+dumisdk::IDCComp::IDCComp(): IDCCompDef(0,0)
 {
-    return _value;
 }
-
