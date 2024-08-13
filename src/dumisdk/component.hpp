@@ -9,40 +9,100 @@
 
 namespace dumisdk{
 
-    class IDCCompDef{
+    #define extend public virtual
+
+    #pragma region DC_INTERFACES
+
+    class IDCDefinition{
     public:
-        IDCCompDef(HASHID id , HASHID parentId);
+        IDCDefinition(HASHID id , HASHID parentId);
 
         const HASHID id;
         const HASHID parentId;
     };
 
-    class IDCComp: public virtual IDCCompDef{
+    class IDCImplementation: extend IDCDefinition{
 
-        public:
-        IDCComp(HASHID id, HASHID parentId);
+    public:
+        IDCImplementation(HASHID id, HASHID parentId);
 
-        protected:
-        IDCComp();
+    protected:
+        IDCImplementation();
 
     };
-
-    //typedef IDCComp* (*__ComponentFactory)();
     template<typename T>
     using ComponentFactory = T* (*)();
 
     template<typename T>
-    class IDCCompTemplate: public virtual IDCCompDef{
+    class IDCTemplate: extend IDCDefinition{
 
         ComponentFactory<T> _factory;
-        public:
-        IDCCompTemplate(HASHID id, HASHID parentId, ComponentFactory<T> factory):
-            IDCCompDef(id, parentId), _factory(factory){}
+    public:
+        IDCTemplate(HASHID id, HASHID parentId, ComponentFactory<T> factory):
+            IDCDefinition(id, parentId),_factory(factory){}
         virtual T* create(){
             return (T*)_factory();
         }
 
+    protected:
+        IDCTemplate(ComponentFactory<T>factory):IDCDefinition(0,0),_factory(factory){};
     };
+
+    #pragma endregion
+
+    #pragma region DC_NodeIO
+
+    class IONodeDefinition: extend IDCDefinition{
+
+    public:
+        //IONodeDefinition(HASHID id, HASHID parentId, dumisdk::DCVar value);
+
+    protected:
+        //IONodeDefinition(dumisdk::DCVar value);
+        //const dumisdk::DCVar _value;
+    };
+
+    class DCInputDefinition: extend IONodeDefinition{
+    public:
+        DCInputDefinition(HASHID id, HASHID parentId);
+
+    protected:
+        DCInputDefinition();
+    };
+
+    class DCInput: extend DCInputDefinition{
+
+    public:
+        DCInput(HASHID id, HASHID parentId);
+
+    protected:
+        DCInput();
+    };
+
+    class DCInputTemplate: extend DCInputDefinition, extend IDCTemplate<DCInput>{
+    
+    public:
+
+    protected:
+    
+    };
+
+    #pragma endregion
+
+    #pragma region DC_BASE_CLASSES
+
+
+    class DCComponentDefinition: extend IDCDefinition{
+
+    public:
+        DCComponentDefinition(HASHID id, HASHID parentId);
+
+    protected:
+        DCComponentDefinition();
+
+    };
+
+    #pragma endregion
 
 }
 
