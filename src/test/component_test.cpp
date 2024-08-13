@@ -3,16 +3,21 @@
 
 void buildProvider(){
 
-    struct Provider: IDCProvider{
-        public:
-        Provider(){
+    // struct Provider: IDCProvider{
+    //     Provider(){
 
-        }
-    };
+    //     }
+    // };
 
-    struct IProvider: DCProviderTemplate<Provider>{
+    // struct IProvider: DCProviderTemplate<Provider>{
+    //     IProvider(){
 
-    };
+    //     }
+    // };
+
+    IDCField f("Test field", hashId(""));
+    DCConfigField("Config field", hashId(""));
+    printf("No exception for IDCField\n");
     
 }
 
