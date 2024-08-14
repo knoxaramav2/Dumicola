@@ -12,6 +12,7 @@ dumisdk::DCMemObj::DCMemObj(DCTypes type):id(appId(this)),type(type)
     _value = initTypeDefault(type);
 }
 
+
 void *dumisdk::initTypeDefault(DCTypes type)
 {
     switch (type)

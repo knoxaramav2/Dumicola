@@ -9,6 +9,7 @@
 #include <iostream>
 #include "dumiexcept.hpp"
 #include "service_interfaces.hpp"
+#include "utils.hpp"
 
 namespace serviceman{    
 
@@ -18,11 +19,6 @@ namespace serviceman{
         __DCSM_SINGELTON__ = 2,
         __DCSM_SCOPED__ = 4,
     };
-
-    #define idFromTU(T, U) std::is_void<T>::value ? \
-            std::type_index(typeid(U)) : std::type_index(typeid(T))
-    #define idFromT(T) std::type_index(typeid(T))
-    #define TFactory(T) []() -> std::unique_ptr<void>{ return std::make_unique<U>(); }
 
     typedef void* (*__ITypeBuilder)();
 

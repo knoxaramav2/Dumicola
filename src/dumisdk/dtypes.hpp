@@ -18,6 +18,7 @@ namespace dumisdk
     template<typename T>
     T defaultTypeValue();
 
+    class DCOps;
     struct DCMemObj{
         const APPSID id;
         const DCTypes type;
@@ -26,6 +27,20 @@ namespace dumisdk
 
         protected:
         void* _value;
+
+        friend DCOps;
+    };
+
+    class DCLiteral{
+
+    };
+
+    class DCCollection{
+
+    };
+
+    class DCClass{
+
     };
 
     typedef bool DCBOOL_TYPE;
@@ -35,21 +50,31 @@ namespace dumisdk
     typedef std::vector<DCMemObj*> DCLIST_TYPE;
     typedef std::map<APPSID, DCMemObj*> DCMAP_TYPE;
 
+    #define assertStdDCType(T)\
+        static_assert(\
+            std::is_same<T, DCBOOL_TYPE>::value ||\
+            std::is_same<T, DCINT_TYPE>::value ||\
+            std::is_same<T, DCDECI_TYPE>::value ||\
+            std::is_same<T, DCSTRING_TYPE>::value ||\
+            std::is_same<T, DCMAP_TYPE>::value || \
+            std::is_same<T, DCLIST_TYPE>::value \
+            ,"Non DCType default requested")
+
     template<typename T>
     T getTypeDefault(){
-        static_assert(
-            std::is_same<T, DCBOOL_TYPE>::value ||
-            std::is_same<T, DCINT_TYPE>::value ||
-            std::is_same<T, DCDECI_TYPE>::value ||
-            std::is_same<T, DCSTRING_TYPE>::value ||
-            std::is_same<T, DCMAP_TYPE>::value ||
-            std::is_same<T, DCLIST_TYPE>::value  
-            ,"Non DCType default requested"
-        );
+        assertStdDCType(T);
         return T();
     };
 
     void* initTypeDefault(DCTypes type);
     
+    class DCOps{
+    public:
+        template<typename T>
+
+
+        static void add(DCMemObj*lp, DCMemObj* rp);
+        static void subtract(DCMemObj*lp, DCMemObj* rp);
+    };
 
 };

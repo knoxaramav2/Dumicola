@@ -5,10 +5,10 @@
     "version": "0.2.0",
     "configurations": [
       {
-        "name": "Dumidesk",
+        "name": "Test Groups",
         "type": "cppdbg",
         "request": "launch",
-        "program": "${workspaceFolder}/build/dumidesk/dumidesk",
+        "program": "${workspaceFolder}/build/test/dumi_tests",
         "args": [],
         "stopAtEntry": false,
         "cwd": "${workspaceFolder}",
@@ -24,10 +24,10 @@
         ],
       },
       {
-        "name": "Test Groups",
+        "name": "Dumidesk",
         "type": "cppdbg",
         "request": "launch",
-        "program": "${workspaceFolder}/build/test/dumi_tests",
+        "program": "${workspaceFolder}/build/dumidesk/dumidesk",
         "args": [],
         "stopAtEntry": false,
         "cwd": "${workspaceFolder}",

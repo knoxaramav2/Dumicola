@@ -21,4 +21,4 @@ namespace KTEST
 #define assertMultipleLater(funcs) KTEST::__assertMultipleLater(funcs, __FILE__, __LINE__)
 #define testsFailed KTEST::__hasFailure()
 #define assertThrows(expr) try { (expr); KTEST::__assert(false, __FILE__, __LINE__); } catch (...) {}
-#define assertNotThrows(expr) try{ (expr); } catch (...) {KTEST::__assert(false, __FILE__, __LINE__); }
+#define assertNotThrows(expr) try{ expr; } catch (...) {KTEST::__assert(false, __FILE__, __LINE__); }

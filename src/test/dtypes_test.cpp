@@ -3,44 +3,45 @@
 #include "stdio.h"
 #include "tests.hpp"
 
-//dataman::DCDataManager __dcDm;
+dataman::DataManager __dcDm;
+
+class T1: dumisdk::DCLiteral{
+    public:
+    T1(int v):value(v){}
+    int value;
+};
+
+class T2: dumisdk::DCLiteral{
+    public:
+    T2(float v):value(v){}
+    float value;
+};
+
+void test_converters(){
+
+    auto converter = __dcDm.getConverter();
+
+    assertNotThrows(([&converter](){
+        converter.addConverter<T1, T2>([](T2 val)->T1{
+            return T1((int)val.value);
+        });
+
+        T2 t2(8.4);
+        T1 ti = converter.convertAs<T1>(t2);
+
+        assert(ti.value == 8);
+    }));
+
+    assertThrows(([&converter](){
+        converter.convertAs<T1>(5.7);
+    }));
+
+    
+}
 
 bool test_default_types(){
 
-    // auto intVarId = __dcDm.createVar(DC_INTEGER);
-    // auto deciVarId = __dcDm.createVar(DC_DECIMAL);
-    // auto boolVarId = __dcDm.createVar(DC_BOOL);
-    // auto stringVarId = __dcDm.createVar(DC_STRING);
-    // auto listVarId = __dcDm.createVar(DC_LIST);
-    // auto mapVarId = __dcDm.createVar(DC_MAP);
-
-    // assertLater(intVarId != 0);
-    // assertLater(deciVarId != 0);
-    // assertLater(boolVarId != 0);
-    // assertLater(stringVarId != 0);
-    // assertLater(listVarId != 0);
-    // assertLater(mapVarId != 0);
-
-    // assertLater(__dcDm.requestVar(intVarId) != nullptr);
-    // assertLater(__dcDm.requestVar(deciVarId) != nullptr);
-    // assertLater(__dcDm.requestVar(boolVarId) != nullptr);
-    // assertLater(__dcDm.requestVar(stringVarId) != nullptr);
-    // assertLater(__dcDm.requestVar(listVarId) != nullptr);
-    // assertLater(__dcDm.requestVar(mapVarId) != nullptr);
-
-    // assertLater(__dcDm.deleteVar(intVarId));
-    // assertLater(__dcDm.deleteVar(deciVarId));
-    // assertLater(__dcDm.deleteVar(boolVarId));
-    // assertLater(__dcDm.deleteVar(stringVarId));
-    // assertLater(__dcDm.deleteVar(listVarId));
-    // assertLater(__dcDm.deleteVar(mapVarId));
-
-    // assertLater(__dcDm.requestVar(intVarId) == nullptr);
-    // assertLater(__dcDm.requestVar(deciVarId) == nullptr);
-    // assertLater(__dcDm.requestVar(boolVarId) == nullptr);
-    // assertLater(__dcDm.requestVar(stringVarId) == nullptr);
-    // assertLater(__dcDm.requestVar(listVarId) == nullptr);
-    // assertLater(__dcDm.requestVar(mapVarId) == nullptr);
+    test_converters();
 
     return true;
 }
