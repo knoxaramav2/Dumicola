@@ -82,8 +82,10 @@
         "ios": "cpp",
         "locale": "cpp",
         "queue": "cpp",
-        "stack": "cpp"
+        "stack": "cpp",
+        "__memory": "cpp"
     },
     "makefile.makefilePath": "./src/cpp",
-    "makefile.buildLog": "."
+    "makefile.buildLog": ".",
+    "cmake.sourceDirectory": "/media/knox/ExtDrive/Dev/Dumicola/src"
 }

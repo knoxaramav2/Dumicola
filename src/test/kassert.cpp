@@ -46,6 +46,23 @@ bool KTEST::__hasFailure()
     return __hasFail;
 }
 
+void KTEST::__assertThrows(std::function<void()> func, const char* file, int line)
+{
+    try{
+        func();
+        __assert(false, file, line);
+    }catch(...){}
+}
+
+void KTEST::__assertNotThrows(std::function<void()> func, const char* file, int line)
+{
+    try{
+        func();
+    }catch(...){
+        __assert(false, file, line);
+    }
+}
+
 void KTEST::__assertMultiple(
     const std::vector<std::function<bool()>> funcs, 
     const char * file, int line)

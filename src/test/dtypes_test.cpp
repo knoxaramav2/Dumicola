@@ -17,6 +17,16 @@ class T2: dumisdk::DCLiteral{
     float value;
 };
 
+class T3: dumisdk::DCClass{
+
+    std::string _name;
+
+    public:
+    T3(std::string name){ _name = name; }
+    std::string getName(){return _name;}
+
+};
+
 void test_converters(){
 
     auto converter = __dcDm.getConverter();
@@ -31,16 +41,37 @@ void test_converters(){
 
         assert(ti.value == 8);
     }));
+    
+    assertThrows([&converter]()->void{
+        auto res = converter.convertAs<T1>(5.7);
+    });
 
-    assertThrows(([&converter](){
-        converter.convertAs<T1>(5.7);
-    }));
+    printf("MARK");
+}
+
+void register_types(){
+
+    std::string t3Name = "T3NameString";
+
+    assertNotThrows([&](){
+        dataman::__TypeManager tMan;
+        // tMan.registerType<T3>([&t3Name](){
+        //     return new T3(t3Name);
+        // });
+        tMan.registerType<T3>([&t3Name]() -> T3*{
+            return new T3(t3Name);
+        });
+        auto t3 = tMan.create<T3>();
+        assert(t3->getName() == t3Name);
+    });
 
     
 }
 
 bool test_default_types(){
 
+
+    register_types();
     test_converters();
 
     return true;
