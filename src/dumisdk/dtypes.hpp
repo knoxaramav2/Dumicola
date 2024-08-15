@@ -6,6 +6,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <memory>
 #include <functional>
 
 namespace dumisdk
@@ -21,26 +22,34 @@ namespace dumisdk
     class DCOps;
     struct DCMemObj{
         const APPSID id;
-        const DCTypes type;
+         const TypeId type;
+        //const DCTypes type;
         
-        DCMemObj(DCTypes type);
+        DCMemObj(TypeId id, void* value);
+        virtual ~DCMemObj() = default;
 
         protected:
-        void* _value;
+        std::shared_ptr<void*> _value;
 
         friend DCOps;
     };
 
-    class DCLiteral{
-
+    template<typename T>
+    class DCLiteral: public DCMemObj{
+        protected:
+        DCLiteral(TypeId id, T* value);
     };
 
-    class DCCollection{
-
+    template<typename T>
+    class DCCollection: public DCMemObj{
+        protected:
+        DCCollection(TypeId id, void* value);
     };
 
-    class DCClass{
-
+    template<typename T>
+    class DCClass: public DCMemObj{
+        protected:
+        DCClass(TypeId id, void* value);
     };
 
     typedef bool DCBOOL_TYPE;

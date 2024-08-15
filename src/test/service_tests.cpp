@@ -8,7 +8,7 @@ void testInstance();
 void testSingelton();
 void testCrossResolves();
 
-serviceman::ServiceManager __servMan;
+//serviceman::ServiceManager __servMan;
 
 struct NoRegister{};
 

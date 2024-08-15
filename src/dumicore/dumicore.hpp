@@ -19,7 +19,7 @@ namespace dumicore{
 
         __dcSysState __state;
 
-        serviceman::ServiceManager __serviceManager;
+        //serviceman::ServiceManager __serviceManager;
 
         void __runAsCncModeAuto();
 
@@ -34,10 +34,10 @@ namespace dumicore{
         void shutdown();
         int checkStatus();
 
-        void registerServices(std::function<void(serviceman::ServiceBuilder)> func);
-        serviceman::ServiceManager& serviceManager();
+        //void registerServices(std::function<void(serviceman::ServiceBuilder)> func);
+        //serviceman::ServiceManager& serviceManager();
         
-        std::shared_ptr<dumisdk::ILogger> getLogger();
+        //std::shared_ptr<dumisdk::ILogger> getLogger();
 
         static void __init_core();
     };
@@ -47,6 +47,6 @@ namespace dumicore{
 
 #define InitDumiCore dumicore::DumiCore::__init_core();
 #define Shutdown dumicore::__core_inst->shutdown();
-#define RegisterServices(fnc) dumicore::__core_inst->registerServices(fnc);
-#define GetLogger() dumicore::__core_inst->getLogger()
+//#define RegisterServices(fnc) dumicore::__core_inst->registerServices(fnc);
+//#define GetLogger() dumicore::__core_inst->getLogger()
 
