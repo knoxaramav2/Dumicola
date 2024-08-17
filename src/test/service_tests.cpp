@@ -52,15 +52,6 @@ bool test_services(){
     return testsFailed;
 }
 
-
-// void testInstance(){
-//     __servMan.addTransient<StructBase, Struct1, const char*>(
-//         [](const char* name) -> Struct1* {
-//             return new Struct1(name);
-//         }
-//     );
-// }
-
 void testInstance() {
     std::function<Struct1*(const char*)> fnc = [](const char* name) -> Struct1* {
             return new Struct1(name);
