@@ -31,5 +31,10 @@ namespace serviceman{
         void addTransient(std::function<U*(Args...)> fnc) {
             registerFactory<T, U, Args...>(__DCSM_INSTANCE__, fnc);
         }
+
+        template<typename U, typename... Args>
+        void addTransient(std::function<U*(Args...)> fnc) {
+            addTransient<void, U>(fnc);
+        }
     };
 }

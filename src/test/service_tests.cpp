@@ -21,7 +21,7 @@ struct Struct1: public StructBase {
     const char* msg;
 
     const char* speak() override {
-        printf("%s\n", msg);
+        //printf("%s\n", msg);
         return msg;
     }
 };
@@ -45,8 +45,6 @@ bool test_services(){
         testCrossResolves();
     });
 
-    
-
     printf("\n\nEND TESTS\n");
 
     return testsFailed;
@@ -57,10 +55,14 @@ void testInstance() {
             return new Struct1(name);
     };
     const char* sname1 = "TestNameA1";
+    const char* sname2 = "TestNameA2";
     __servMan.addTransient<StructBase, Struct1, const char*>(fnc);
+    __servMan.addTransient<Struct1, const char*>(fnc);
     auto s1 = __servMan.resolveTransientAs<StructBase>(sname1);
+    auto s2 = __servMan.resolveTransientAs<StructBase>(sname2);
     assert(s1 != nullptr);
     assert(strlen(s1->speak()) == strlen(sname1));
+    assert(strlen(s2->speak()) == strlen(sname2));
 }
 
 
