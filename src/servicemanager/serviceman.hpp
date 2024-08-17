@@ -1,4 +1,54 @@
-// #pragma once
+#pragma once
+
+#include "dcProvider.hpp"
+#include "dtypes.hpp"
+
+namespace serviceman{
+
+    enum __serviceLifetime__{
+        __DCSM_UNREGISTERED__ = 0,
+        __DCSM_INSTANCE__ = 1,
+        __DCSM_SINGLETON__ = 2,
+        __DCSM_SCOPED__ = 4,
+    };
+    
+    class ServiceManager : public dumisdk::IDCFactoryStore {
+    public:
+        enum __serviceLifetime__ {
+            __DCSM_UNREGISTERED__ = 0,
+            __DCSM_INSTANCE__ = 1,
+            __DCSM_SINGLETON__ = 2,
+            __DCSM_SCOPED__ = 4,
+        };
+
+        template<typename T>
+        T* resolveTransientAs(void* args) {
+            return createNew<T>(__DCSM_INSTANCE__, false, args);
+        }
+
+        template<typename T, typename U, typename... Args>
+        void addTransient(std::function<U*(Args...)> fnc) {
+            registerFactory<T, U, Args...>(__DCSM_INSTANCE__, fnc);
+        }
+    };
+
+
+    // class ServiceManager: public dumisdk::IDCFactoryStore{
+    //     public:
+
+    //     template<typename T, typename... Args>
+    //     T* resolveTransientAs(Args... args){
+    //         return resolveAs<T>(__DCSM_INSTANCE__, false, args...);
+    //     }
+
+    //     template<typename T, typename U, typename... Args>
+    //     void addTransient(dumisdk::_factoryBuilder<U*, Args...> fnc){
+    //         registerFactory<T,U, Args...>(__DCSM_INSTANCE__, fnc);
+    //     }
+    // };
+}
+
+
 
 // #include <map>
 // #include <typeindex>

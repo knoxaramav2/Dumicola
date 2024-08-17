@@ -17,9 +17,10 @@ namespace dumicore{
 
     class DumiCore{
 
-        __dcSysState __state;
+        __dcSysState _state;
 
-        //serviceman::ServiceManager __serviceManager;
+        //dataman::DataManager _dataManager;
+        serviceman::ServiceManager _serviceManager;
 
         void __runAsCncModeAuto();
 

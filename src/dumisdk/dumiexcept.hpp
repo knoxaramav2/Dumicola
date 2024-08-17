@@ -1,16 +1,19 @@
 #pragma once
 
-#include <exception>
+#include <stdexcept>
 #include <cstring>
 
-class dumiexception: public std::exception{
-    const char* msg;
+namespace dumisdk{
+    class dumiexception: public std::runtime_error{
     public:
 
-    dumiexception(): msg("Dumi runtime exception"){}
-    dumiexception(char*message): msg(message){}
-    dumiexception(const char*message): msg(message){}
+        explicit dumiexception();
+        explicit dumiexception(char*message);
+        explicit dumiexception(const char*message);
+        ~dumiexception() = default;
+    }; 
+}
 
-    const char* what(){ return msg; }
-};
+
+
 

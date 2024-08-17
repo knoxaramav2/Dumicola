@@ -1,11 +1,9 @@
 #include "dc_string.hpp"
 
-#include <string>
 #include <memory>
 #include <cstdarg>
-#include <vector>
 
-std::string frmstr(const char* f_str, ...){
+std::string dumisdk::frmstr(const char* f_str, ...){
     va_list args;
     va_start(args, f_str);
     va_list args_copy;
@@ -16,8 +14,4 @@ std::string frmstr(const char* f_str, ...){
     std::vsnprintf(buffer.get(), size+1, f_str, args);
     va_end(args);
     return std::string(buffer.get(), size);
-}
-
-const char* testStr(){
-    return "Hello";
 }

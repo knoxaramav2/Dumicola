@@ -38,7 +38,7 @@ void dumicore::DumiCore::start()
 
 void dumicore::DumiCore::shutdown()
 {
-    __state.active = false;
+    _state.active = false;
 }
 
 int dumicore::DumiCore::checkStatus()

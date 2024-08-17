@@ -14,7 +14,7 @@ namespace serviceman{
     enum __serviceLifetime__{
         __DCSM_UNREGISTERED__ = 0,
         __DCSM_INSTANCE__ = 1,
-        __DCSM_SINGELTON__ = 2,
+        __DCSM_SINGLETON__ = 2,
         __DCSM_SCOPED__ = 4,
     };
 
@@ -41,7 +41,7 @@ namespace serviceman{
 
     template<typename T>
     struct __smSingeltonContainer: public __smTypeContainer<T>{
-        __smSingeltonContainer():__smTypeContainer<T>(__serviceLifetime__::__DCSM_SINGELTON__){
+        __smSingeltonContainer():__smTypeContainer<T>(__serviceLifetime__::__DCSM_SINGLETON__){
             printf("Singelton Registered (%s)\n", typeid(T).name());
         }
         std::shared_ptr<T> getInstance(){
@@ -119,7 +119,7 @@ namespace serviceman{
                     if(!mapcontains(__instanceServices, sid)) { throw dumiexception("Unregistered instance service"); }
                     __smInstanceContainer<T> * inst = static_cast<__smInstanceContainer<T> *>(__instanceServices[sid].get());
                     return inst->getInstance();
-                } else if (lifetime == __serviceLifetime__::__DCSM_SINGELTON__) {
+                } else if (lifetime == __serviceLifetime__::__DCSM_SINGLETON__) {
                     if(!mapcontains(__singeltonServices, sid)) { throw dumiexception("Unregistered singelton service"); }
                     __smSingeltonContainer<T> * inst = static_cast<__smSingeltonContainer<T> *>(__singeltonServices[sid].get());
                     return inst->getInstance();
@@ -136,7 +136,7 @@ namespace serviceman{
             std::type_index sid(typeid(T));
             if(lifetime == __serviceLifetime__::__DCSM_INSTANCE__ && isInstanceRegistered<T>()){
                 __instanceServices.erase(sid);
-            } else if (lifetime == __serviceLifetime__::__DCSM_SINGELTON__ && isSingeltonRegistered<T>()){
+            } else if (lifetime == __serviceLifetime__::__DCSM_SINGLETON__ && isSingeltonRegistered<T>()){
                 __singeltonServices.erase(sid);
             }
         }
@@ -155,11 +155,11 @@ namespace serviceman{
         //Registration
         template<typename T, typename U>
         bool registerSingelton(){
-            return __registerType<T,U>(__serviceLifetime__::__DCSM_SINGELTON__);
+            return __registerType<T,U>(__serviceLifetime__::__DCSM_SINGLETON__);
         }
         template<typename U>
         bool registerSingelton(){
-            return __registerType<void, U>(__serviceLifetime__::__DCSM_SINGELTON__);
+            return __registerType<void, U>(__serviceLifetime__::__DCSM_SINGLETON__);
         }
 
         template<typename T, typename U>
@@ -190,7 +190,7 @@ namespace serviceman{
 
         template<typename T>
         std::shared_ptr<T> resolveServiceSingelton(){
-            return __resolveType<T>(__serviceLifetime__::__DCSM_SINGELTON__);
+            return __resolveType<T>(__serviceLifetime__::__DCSM_SINGLETON__);
         }
 
         // template<typename T>
@@ -202,12 +202,12 @@ namespace serviceman{
         template<typename T>
         bool registerLogger(){
             static_assert(std::is_base_of<dumisdk::ILogger, T>::value, "Logger must be derived from ILogger");
-            __removeRegistration<dumisdk::ILogger>(__serviceLifetime__::__DCSM_SINGELTON__);
-            return __registerType<dumisdk::ILogger, T>(__serviceLifetime__::__DCSM_SINGELTON__);
+            __removeRegistration<dumisdk::ILogger>(__serviceLifetime__::__DCSM_SINGLETON__);
+            return __registerType<dumisdk::ILogger, T>(__serviceLifetime__::__DCSM_SINGLETON__);
         }
 
         std::shared_ptr<dumisdk::ILogger> resolveLogger(){
-            return __resolveType<dumisdk::ILogger>(__serviceLifetime__::__DCSM_SINGELTON__);
+            return __resolveType<dumisdk::ILogger>(__serviceLifetime__::__DCSM_SINGLETON__);
         }
     };
 

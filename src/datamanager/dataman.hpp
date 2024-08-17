@@ -1,4 +1,4 @@
-// #pragma once
+#pragma once
 
 // #include <type_traits>
 // #include <map>
@@ -8,6 +8,15 @@
 
 // #include "dtypes.hpp"
 // #include "utils.hpp"
+
+#include "dcProvider.hpp"
+#include "dtypes.hpp"
+
+namespace dataman{
+    class DataManager: public dumisdk::IDCFactoryStore{
+
+    };
+}
 
 // namespace dataman{
 

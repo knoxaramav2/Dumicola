@@ -21,6 +21,7 @@ target_sources(
 PUBLIC 
     dumisdk.cpp
     dtypes.cpp
+    dumiexcept.cpp
     service_interfaces.cpp
     component.cpp
 PRIVATE

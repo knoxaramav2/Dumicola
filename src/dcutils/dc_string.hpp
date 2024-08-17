@@ -2,5 +2,6 @@
 
 #include <string>
 
-std::string frmstr(const char* f_str, ...);
-const char* testStr();
+namespace dumisdk{
+    std::string frmstr(const char* f_str, ...);
+}

@@ -5,6 +5,7 @@
 #include <type_traits>
 #include "id.hpp"
 #include "platform.hpp"
+#include "optiondefs.hpp"
 
 typedef std::uintptr_t APPSID;
 typedef size_t RSCID;
