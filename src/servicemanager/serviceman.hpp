@@ -21,9 +21,10 @@ namespace serviceman{
             __DCSM_SCOPED__ = 4,
         };
 
-        template<typename T>
-        T* resolveTransientAs(void* args) {
-            return createNew<T>(__DCSM_INSTANCE__, false, args);
+        template<typename T, typename... Args>
+        T* resolveTransientAs(Args... args) {
+            auto pArgs = std::make_tuple(args...);
+            return createNew<T>(__DCSM_INSTANCE__, false, &pArgs);
         }
 
         template<typename T, typename U, typename... Args>

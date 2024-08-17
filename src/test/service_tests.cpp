@@ -66,10 +66,8 @@ void testInstance() {
             return new Struct1(name);
     };
     const char* sname1 = "TestNameA1";
-    auto args = std::make_tuple(sname1);
-    void* args_p = &args;
     __servMan.addTransient<StructBase, Struct1, const char*>(fnc);
-    auto s1 = __servMan.resolveTransientAs<StructBase>(args_p);
+    auto s1 = __servMan.resolveTransientAs<StructBase>(sname1);
     assert(s1 != nullptr);
     assert(strlen(s1->speak()) == strlen(sname1));
 }
