@@ -9,8 +9,6 @@
 
 namespace dumisdk{
 
-    #define extend public virtual
-
     #pragma region DC_INTERFACES
 
     class IDCDefinition{

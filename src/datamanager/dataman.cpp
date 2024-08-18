@@ -1,11 +1,12 @@
 #include "dataman.h"
 #include "maputil.h"
 
-// void dataman::DataManager::_loadDefaultTypes()
-// {
-// }
+dataman::AppMemHandle::~AppMemHandle()
+{
+    _dm->freeAppMemory(this);
+}
 
-// dataman::TypeConverter &dataman::DataManager::getConverter()
-// {
-//     return _converters;
-// }
+dataman::AppMemHandle::AppMemHandle(int appId, DataManager &dataManager):dcAppId(appId)
+{
+    _dm = &dataManager;
+}

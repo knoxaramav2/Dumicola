@@ -4,6 +4,7 @@
 #include <vector>
 #include <functional>
 #include <stdexcept>
+#include <mutex>
 
 #include "defs.h"
 #include "dtypes.h"
@@ -26,9 +27,7 @@ namespace dumisdk
     template<typename T>
     class TypeErased: public BaseTypeErased{
         public:
-        TypeErased(T* inst):_inst(inst){
-            printf("INST:: %p\n", _inst->_msg);
-        }
+        TypeErased(T* inst):_inst(inst){}
         ~TypeErased(){delete _inst;}
         T* get(){return _inst;}
 
@@ -41,8 +40,11 @@ namespace dumisdk
         virtual ~IDCFactoryStore() = default;
 
         protected:
+
         template<typename T, typename U, typename... Args>
         void registerFactory(int tag, std::function<U*(Args...)> builder){
+            std::lock_guard<std::mutex> guard(_mx_factory);
+
             static_assert(std::is_same<void, T>::value || std::is_base_of<T, U>::value, 
                 "Parameter U must derive from T");
             static_assert(!std::is_same<void, U>::value, "Parameter U must not be void");
@@ -58,7 +60,10 @@ namespace dumisdk
         }
 
         template<typename T, typename... Args>
-        T* createNew(int tag, bool save, void* args){
+        T* createNew(int tag, bool save, void* args, int saveAsTag=-1){
+            std::lock_guard<std::mutex> guard_factory(_mx_factory);
+            std::lock_guard<std::mutex> guard_store(_mx_store);
+
             auto factIt = _factories.find(tag);
             if(factIt == _factories.end()){
                 throw dumisdk::dumiexception(dumisdk::frmstr("Unable to instantiate factory: %d", tag).c_str());
@@ -79,7 +84,8 @@ namespace dumisdk
 
             if(save){
                 auto aid = appId(inst);
-                _storage[tag][aid] = std::make_unique<TypeErased<T>>(inst);
+                int bucket = saveAsTag == -1 ? tag : saveAsTag;
+                _storage[bucket][aid] = std::make_unique<TypeErased<T>>(inst);
             }
 
             return inst;
@@ -87,6 +93,8 @@ namespace dumisdk
 
         template<typename T>
         T* resolveAs(int tag, APPSID id){
+            std::lock_guard<std::mutex> guard(_mx_store);
+
             auto storeIt = _storage.find(tag);
             if(storeIt == _storage.end()){
                 throw dumisdk::dumiexception(dumisdk::frmstr("Unable to resolve store tag %d", tag).c_str());
@@ -106,8 +114,16 @@ namespace dumisdk
             return inst;
         }
 
+        void clearStoredByTag(int tag){
+            auto it = _storage.find(tag);
+            if(it == _storage.end()){ return; }
+            _storage.erase(tag);
+        }
+
         private:
         std::map<int, std::map<TypeId, std::function<std::unique_ptr<BaseTypeErased>(void*)>>> _factories;
         std::map<int, std::map<APPSID, std::unique_ptr<BaseTypeErased>>> _storage; 
+        std::mutex _mx_factory;
+        std::mutex _mx_store;
     };
 }

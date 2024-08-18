@@ -13,21 +13,23 @@ namespace dumicore{
         bool active;
 
         __dcSysState();
+        ~__dcSysState();
     };
 
     class DumiCore{
 
         __dcSysState _state;
 
-        //dataman::DataManager _dataManager;
+        dataman::DataManager _dataManager;
         serviceman::ServiceManager _serviceManager;
 
-        void __runAsCncModeAuto();
+        void _runAsCncModeAuto();
 
         DumiCore();
         ~DumiCore();
 
-        void __loadServiceDefaults();
+        void _loadServiceDefaults();
+        void _loadCoreTypes();
 
         public:
 
@@ -41,13 +43,14 @@ namespace dumicore{
         //std::shared_ptr<dumisdk::ILogger> getLogger();
 
         static void __init_core();
+        static void __destroy_core();
     };
 
     static DumiCore* __core_inst;
 }
 
 #define InitDumiCore dumicore::DumiCore::__init_core();
-#define Shutdown dumicore::__core_inst->shutdown();
+#define Shutdown dumicore::DumiCore::__destroy_core();
 //#define RegisterServices(fnc) dumicore::__core_inst->registerServices(fnc);
 //#define GetLogger() dumicore::__core_inst->getLogger()
 

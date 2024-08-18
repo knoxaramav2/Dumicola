@@ -6,11 +6,16 @@ dumicore::DumiCore* __core_inst = nullptr;
 
 dumicore::__dcSysState::__dcSysState()
 {
-    active = true;
+    active = false;
 }
 
-void dumicore::DumiCore::__runAsCncModeAuto()
+dumicore::__dcSysState::~__dcSysState()
 {
+}
+
+void dumicore::DumiCore::_runAsCncModeAuto()
+{
+    _state.active = true;
     // while(__inst__->__state.active){
 
     // }
@@ -26,14 +31,24 @@ dumicore::DumiCore::~DumiCore()
     
 }
 
-void dumicore::DumiCore::__loadServiceDefaults()
+void dumicore::DumiCore::_loadServiceDefaults()
 {
     //__serviceManager.registerLogger<dumisdk::DefaultLogger>();
 }
 
+void dumicore::DumiCore::_loadCoreTypes()
+{
+    _dataManager.registerType<dumisdk::DCBoolean>(0);
+    _dataManager.registerType<dumisdk::DCInteger>(0);
+    _dataManager.registerType<dumisdk::DCDecimal>(0);
+    _dataManager.registerType<dumisdk::DCString>(0);
+    _dataManager.registerType<dumisdk::DCList>(0);
+    _dataManager.registerType<dumisdk::DCMap>(0);
+}
+
 void dumicore::DumiCore::start()
 {
-    __runAsCncModeAuto();
+    _runAsCncModeAuto();
 }
 
 void dumicore::DumiCore::shutdown()
@@ -70,7 +85,14 @@ void dumicore::DumiCore::__init_core()
     }
 
     __core_inst = new DumiCore();
-    __core_inst->__loadServiceDefaults();
+    __core_inst->_loadServiceDefaults();
+    __core_inst->_loadCoreTypes();
     __core_inst->start();
 }
 
+void dumicore::DumiCore::__destroy_core()
+{
+    if(!__core_inst){return;}
+    __core_inst->shutdown();
+    delete __core_inst;
+}

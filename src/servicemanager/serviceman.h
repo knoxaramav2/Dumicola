@@ -14,12 +14,6 @@ namespace serviceman{
     
     class ServiceManager : public dumisdk::IDCFactoryStore {
     public:
-        enum __serviceLifetime__ {
-            __DCSM_UNREGISTERED__ = 0,
-            __DCSM_INSTANCE__ = 1,
-            __DCSM_SINGLETON__ = 2,
-            __DCSM_SCOPED__ = 4,
-        };
 
         template<typename T, typename... Args>
         T* resolveTransientAs(Args... args) {

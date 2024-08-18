@@ -18,5 +18,5 @@ typedef std::type_index TYPEID;
 #define rscdId(name) std::hash<std::string>{}(std::string(name))
 #define hashId(name) FNV1A(name)
 
-
+#define extend public virtual
 

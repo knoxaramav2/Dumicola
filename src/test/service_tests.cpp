@@ -53,7 +53,7 @@ bool test_services(){
 
     assertNotThrows([](){
         testSingelton();
-        //testInstance();
+        testInstance();
         testCrossResolves();
     });
 
