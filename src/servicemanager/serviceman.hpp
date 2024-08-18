@@ -28,13 +28,38 @@ namespace serviceman{
         }
 
         template<typename T, typename U, typename... Args>
-        void addTransient(std::function<U*(Args...)> fnc) {
+        void registerTransient(std::function<U*(Args...)> fnc) {
             registerFactory<T, U, Args...>(__DCSM_INSTANCE__, fnc);
         }
 
         template<typename U, typename... Args>
-        void addTransient(std::function<U*(Args...)> fnc) {
-            addTransient<void, U>(fnc);
+        void registerTransient(std::function<U*(Args...)> fnc) {
+            registerTransient<void, U>(fnc);
         }
+        
+        template<typename T, typename... Args>
+        APPSID createSingletonAs(Args... args) {
+            auto pArgs = std::make_tuple(args...);
+            auto pt = createNew<T>(__DCSM_SINGLETON__, true, &pArgs);
+            return appId(pt);
+        }
+
+        template<typename T>
+        T* resolveSingletonAs(APPSID id) {
+            return resolveAs<T>(__DCSM_SINGLETON__, id);
+        }
+
+        template<typename T, typename U, typename... Args>
+        void registerSingleton(std::function<U*(Args...)> fnc) {
+            registerFactory<T, U, Args...>(__DCSM_SINGLETON__, fnc);
+        }
+
+        template<typename U, typename... Args>
+        void registerSingleton(std::function<U*(Args...)> fnc) {
+            registerSingleton<void, U>(fnc);
+        }
+    
+    
+    
     };
 }

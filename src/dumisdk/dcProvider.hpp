@@ -26,7 +26,9 @@ namespace dumisdk
     template<typename T>
     class TypeErased: public BaseTypeErased{
         public:
-        TypeErased(T* inst):_inst(inst){}
+        TypeErased(T* inst):_inst(inst){
+            printf("INST:: %p\n", _inst->_msg);
+        }
         ~TypeErased(){delete _inst;}
         T* get(){return _inst;}
 
