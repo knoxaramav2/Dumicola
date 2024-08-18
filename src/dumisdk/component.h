@@ -9,6 +9,8 @@
 
 namespace dumisdk{
 
+    class IDCLibrary;
+
     #pragma region DC_INTERFACES
 
     class IDCDefinition{
@@ -38,6 +40,8 @@ namespace dumisdk{
     public:
         IDCTemplate(HASHID id, HASHID parentId, ComponentFactory<T> factory):
             IDCDefinition(id, parentId),_factory(factory){}
+    protected:
+        friend IDCLibrary;
         virtual T* create(){
             return (T*)_factory();
         }
@@ -98,6 +102,32 @@ namespace dumisdk{
     protected:
         DCComponentDefinition();
 
+    };
+
+    class DCComponent: extend IDCDefinition{
+
+    };
+
+    #pragma endregion
+
+    #pragma region DC_LIBRARY
+
+    class IDCLibrary{
+        public:
+        const char* name;
+        const char* version;
+        const char* author;
+        const char* repository;
+        const char* description;
+        const APPSID libraryId;
+
+        virtual const std::vector<DCComponentDefinition>& manifest() = 0;
+        virtual const DCComponent* create(const char* ) = 0;
+        virtual const DCComponent* create(HASHID id) = 0;
+
+        protected:
+        IDCLibrary(const char* name, const char* version, const char* author, const char* repository);
+        virtual ~IDCLibrary() = default;
     };
 
     #pragma endregion

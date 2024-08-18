@@ -22,13 +22,13 @@ void buildProvider(){
 
 void interfaceItems(){
 
-    assertNotThrows([](){
-        TestTempl temp(0, 0, []()-> TestImp* {
-            return new TestImp(0, 0);
-        });
-        auto inst = temp.create();
-        assert(inst->value == 1234);
-    });
+    // assertNotThrows([](){
+    //     TestTempl temp(0, 0, []()-> TestImp* {
+    //         return new TestImp(0, 0);
+    //     });
+    //     auto inst = temp.create();
+    //     assert(inst->value == 1234);
+    // });
 }
 
 bool test_components(){

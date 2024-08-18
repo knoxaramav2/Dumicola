@@ -23,11 +23,10 @@ dumisdk::DCComponentDefinition::DCComponentDefinition()
 {
 }
 
-// dumisdk::IONodeDefinition::IONodeDefinition(HASHID id, HASHID parentId, dumisdk::DCVar value)
-//     :IDCDefinition(id, parentId),_value(value)
-// {}
-
-// dumisdk::IONodeDefinition::IONodeDefinition(dumisdk::DCVar value)
-//     :IDCDefinition(0,0),_value(value)
-// {
-// }
+dumisdk::IDCLibrary::IDCLibrary(
+    const char* name, const char* version, const char* author, 
+    const char* repository):
+    libraryId(appId(this)),name(name),version(version),author(author),repository(repository)
+{
+    
+}

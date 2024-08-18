@@ -68,9 +68,9 @@ Project | Status  | Active
 # Standard Libraries
 Plugin | Status | Progress | Active
 ------ | ------ | -------- | ------
-| Vulkan (STL) | Not Started | ![](https://geps.dev/progress/0/) | No 
-| Hypatia (STL) | Not Started | ![](https://geps.dev/progress/0/) | No 
-| Porus (STL) | Not Started | ![](https://geps.dev/progress/0/) | No 
+| Vulkan (STL) | Started | ![](https://geps.dev/progress/0/) | Yes 
+| Hypatia (STL) | Not Started | ![](https://geps.dev/progress/0/) | Yes 
+| Porus (STL) | Not Started | ![](https://geps.dev/progress/0/) | Yes 
 
 # User Interfaces
 GUI | Platform | Status | Progress | Active

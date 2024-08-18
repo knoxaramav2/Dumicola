@@ -16,9 +16,13 @@ elseif(DEFINED _DESKTOP)
     target_include_directories(dumi_tests 
     PRIVATE 
         ${DUMISDK_DIR} ${DCUTILS_DIR} ${SERVICEMAN_DIR}
-        ${DATAMAN_DIR} ${DUMICORE_DIR}
+        ${DATAMAN_DIR} ${DUMICORE_DIR} 
+        ${SDL_VULKAN_DIR} ${SDL_HYPATIA_DIR} ${SDL_PORUS_DIR}
         )
-    target_link_libraries(dumi_tests PRIVATE kassert dcutils dumisdk serviceman dataman dumicore)
+    target_link_libraries(dumi_tests 
+PRIVATE 
+    kassert dcutils dumisdk serviceman dataman dumicore 
+    vulkan hypatia porus)
     add_test(NAME TestGroup COMMAND dumi_tests)
 
     target_sources(dumi_tests
