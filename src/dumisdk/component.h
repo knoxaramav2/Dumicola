@@ -1,6 +1,6 @@
-#include "dtypes.hpp"
-#include "defs.hpp"
-#include "dumiexcept.hpp"
+#include "dtypes.h"
+#include "defs.h"
+#include "dumiexcept.h"
 
 #include <memory>
 #include <exception>

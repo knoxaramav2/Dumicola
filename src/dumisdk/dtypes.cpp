@@ -1,5 +1,5 @@
-#include "dtypes.hpp"
-#include "defs.hpp"
+#include "dtypes.h"
+#include "defs.h"
 
 #include <type_traits>
 #include <stdexcept>

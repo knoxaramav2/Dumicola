@@ -1,4 +1,4 @@
-#include "dumicore.hpp"
+#include "dumicore.h"
 
 void resetFixtures();
 

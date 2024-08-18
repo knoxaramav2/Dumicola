@@ -12,7 +12,7 @@ PUBLIC
     ${CONFIG_DIR}
 )
 
-configure_file(dumisdk_version.hpp.in ${CMAKE_CURRENT_SOURCE_DIR}/dumisdk_version.hpp)
+configure_file(dumisdk_version.h.in ${CMAKE_CURRENT_SOURCE_DIR}/dumisdk_version.h)
 
 target_link_libraries(dumisdk PUBLIC dcutils)
 

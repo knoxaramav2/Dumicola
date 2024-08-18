@@ -1,8 +1,8 @@
 #pragma once
 
-#include "service_interfaces.hpp"
-#include "serviceman.hpp"
-#include "dataman.hpp"
+#include "service_interfaces.h"
+#include "serviceman.h"
+#include "dataman.h"
 #include <functional>
 
 namespace dumicore{

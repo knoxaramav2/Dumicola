@@ -1,6 +1,6 @@
-#include "dumicore.hpp"
-#include "dumiexcept.hpp"
-#include "logging.hpp"
+#include "dumicore.h"
+#include "dumiexcept.h"
+#include "logging.h"
 
 dumicore::DumiCore* __core_inst = nullptr;
 

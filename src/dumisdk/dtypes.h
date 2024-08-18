@@ -1,7 +1,7 @@
 #pragma once
 
-#include "defs.hpp"
-#include "dumiexcept.hpp"
+#include "defs.h"
+#include "dumiexcept.h"
 
 #include <string>
 #include <vector>

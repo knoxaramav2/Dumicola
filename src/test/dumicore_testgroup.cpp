@@ -1,6 +1,6 @@
-#include "tests.hpp"
-#include "fixtures.hpp"
-#include "kassert.hpp"
+#include "tests.h"
+#include "fixtures.h"
+#include "kassert.h"
 #include <cstdio>
 
 int main(){

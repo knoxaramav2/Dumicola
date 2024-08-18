@@ -1,5 +1,5 @@
-#include "kassert.hpp"
-#include "utils.hpp"
+#include "kassert.h"
+#include "utils.h"
 #include <stdio.h>
 #include <string>
 

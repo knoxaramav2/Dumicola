@@ -1,9 +1,9 @@
 #pragma once
 
-#include "service_interfaces.hpp"
-#include "defs.hpp"
-#include "maputil.hpp"
-#include "dumiexcept.hpp"
+#include "service_interfaces.h"
+#include "defs.h"
+#include "maputil.h"
+#include "dumiexcept.h"
 #include <map>
 #include <typeindex>
 #include <typeinfo>

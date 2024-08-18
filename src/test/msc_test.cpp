@@ -1,6 +1,6 @@
 #include <stdio.h>
-#include "utils.hpp"
-#include "tests.hpp"
+#include "utils.h"
+#include "tests.h"
 
 bool test_misc(){
     return true;

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "dcProvider.hpp"
-#include "dtypes.hpp"
+#include "dcProvider.h"
+#include "dtypes.h"
 
 namespace serviceman{
 

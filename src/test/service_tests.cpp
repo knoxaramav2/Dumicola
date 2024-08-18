@@ -1,6 +1,6 @@
-#include "serviceman.hpp"
-#include "kassert.hpp"
-#include "tests.hpp"
+#include "serviceman.h"
+#include "kassert.h"
+#include "tests.h"
 
 #include <cstdio>
 

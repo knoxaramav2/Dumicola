@@ -1,5 +1,5 @@
-#include "dumicore.hpp"
-#include "logger.hpp"
+#include "dumicore.h"
+#include "logger.h"
 #include <cstdio>
 #include <exception>
 

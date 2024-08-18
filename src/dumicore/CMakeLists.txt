@@ -25,7 +25,7 @@ PRIVATE
 target_sources(
     dumicore
 PUBLIC
-    #dumicore.hpp
+    #dumicore.h
 PRIVATE
     dumicore.cpp
 INTERFACE

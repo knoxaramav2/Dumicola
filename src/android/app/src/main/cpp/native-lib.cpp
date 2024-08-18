@@ -1,8 +1,8 @@
 #include <jni.h>
 #include <string>
 
-#include "dumicore.hpp"
-#include "utils.hpp"
+#include "dumicore.h"
+#include "utils.h"
 #include "mobileLogger.h"
 #include "jInterop.h"
 

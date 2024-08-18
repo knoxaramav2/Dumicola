@@ -1,6 +1,6 @@
 #pragma once
-#include "utils.hpp"
-#include "service_interfaces.hpp"
+#include "utils.h"
+#include "service_interfaces.h"
 
 class DesktopLogger: dumisdk::ILogger{
     

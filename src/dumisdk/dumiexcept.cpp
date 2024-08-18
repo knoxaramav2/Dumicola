@@ -1,4 +1,4 @@
-#include "dumiexcept.hpp"
+#include "dumiexcept.h"
 
 dumisdk::dumiexception::dumiexception():std::runtime_error("Dumi runtime exception"){}
 dumisdk::dumiexception::dumiexception(char*message):std::runtime_error(message){}

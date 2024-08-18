@@ -1,5 +1,5 @@
-#include "tests.hpp"
-#include "dumisdk.hpp"
+#include "tests.h"
+#include "dumisdk.h"
 
 class TestImp: public virtual dumisdk::IDCImplementation{
 

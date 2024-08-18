@@ -1,4 +1,4 @@
-#include "component.hpp"
+#include "component.h"
 
 dumisdk::IDCDefinition::IDCDefinition(HASHID id , HASHID parentId):
     id(id),parentId(parentId)

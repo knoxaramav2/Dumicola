@@ -2,7 +2,7 @@
 
 #include <type_traits>
 #include <math.h>
-#include "dtypes.hpp"
+#include "dtypes.h"
 
 namespace dumisdk{
     template<typename RType, typename LV, typename RV>

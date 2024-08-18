@@ -1,4 +1,4 @@
-#include "dc_string.hpp"
+#include "dc_string.h"
 
 #include <memory>
 #include <cstdarg>

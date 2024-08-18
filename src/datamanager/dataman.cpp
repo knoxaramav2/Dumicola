@@ -1,5 +1,5 @@
-#include "dataman.hpp"
-#include "maputil.hpp"
+#include "dataman.h"
+#include "maputil.h"
 
 // void dataman::DataManager::_loadDefaultTypes()
 // {

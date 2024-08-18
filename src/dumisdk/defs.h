@@ -3,9 +3,9 @@
 #include <string>
 #include <cstdint>
 #include <type_traits>
-#include "id.hpp"
-#include "platform.hpp"
-#include "optiondefs.hpp"
+#include "id.h"
+#include "platform.h"
+#include "optiondefs.h"
 
 typedef std::uintptr_t APPSID;
 typedef size_t RSCID;

@@ -1,7 +1,7 @@
-#include "dataman.hpp"
-#include "kassert.hpp"
+#include "dataman.h"
+#include "kassert.h"
 #include "stdio.h"
-#include "tests.hpp"
+#include "tests.h"
 
 //dataman::DataManager __dcDm;
 
