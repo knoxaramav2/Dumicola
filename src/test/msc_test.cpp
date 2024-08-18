@@ -1,10 +1,7 @@
 #include <stdio.h>
-#include "utils.hpp"
+#include "utils.h"
+#include "tests.h"
 
-int main(int argc, char** argv){
-
-    auto nstr = frmstr("TEST:: %s (%d)\n", __FILE__, __LINE__).c_str();
-    printf("MISC. TESTS | %s\n", nstr);
-
-    return 0;
+bool test_misc(){
+    return true;
 }

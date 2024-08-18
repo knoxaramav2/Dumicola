@@ -1,6 +1,6 @@
-#include "dumicore.hpp"
-#include "dumiexcept.hpp"
-#include "logging.hpp"
+#include "dumicore.h"
+#include "dumiexcept.h"
+#include "logging.h"
 
 dumicore::DumiCore* __core_inst = nullptr;
 
@@ -28,7 +28,7 @@ dumicore::DumiCore::~DumiCore()
 
 void dumicore::DumiCore::__loadServiceDefaults()
 {
-    __serviceManager.registerLogger<dumisdk::DefaultLogger>();
+    //__serviceManager.registerLogger<dumisdk::DefaultLogger>();
 }
 
 void dumicore::DumiCore::start()
@@ -38,7 +38,7 @@ void dumicore::DumiCore::start()
 
 void dumicore::DumiCore::shutdown()
 {
-    __state.active = false;
+    _state.active = false;
 }
 
 int dumicore::DumiCore::checkStatus()
@@ -47,25 +47,25 @@ int dumicore::DumiCore::checkStatus()
     return 0;
 }
 
-void dumicore::DumiCore::registerServices(std::function<void(serviceman::ServiceManager &)> func)
-{
-    func(__serviceManager);
-}
+// void dumicore::DumiCore::registerServices(std::function<void(serviceman::ServiceBuilder)> func)
+// {
+//     func(serviceman::ServiceBuilder(__serviceManager));
+// }
 
-serviceman::ServiceManager &dumicore::DumiCore::serviceManager()
-{
-    return __serviceManager;
-}
+// serviceman::ServiceManager &dumicore::DumiCore::serviceManager()
+// {
+//     return __serviceManager;
+// }
 
-std::shared_ptr<dumisdk::ILogger> dumicore::DumiCore::getLogger()
-{
-    return __serviceManager.getLogger();
-}
+// std::shared_ptr<dumisdk::ILogger> dumicore::DumiCore::getLogger()
+// {
+//     return __serviceManager.getLogger();
+// }
 
 void dumicore::DumiCore::__init_core()
 {
     if(__core_inst){ 
-        __core_inst->getLogger()->log_warn("Dumicore already initialized");
+        //__core_inst->getLogger()->log_warn("Dumicore already initialized");
         return; 
     }
 

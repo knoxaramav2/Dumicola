@@ -1,4 +1,4 @@
-#include "dumisdk.hpp"
+#include "dumisdk.h"
 
 #include <stdio.h>
 

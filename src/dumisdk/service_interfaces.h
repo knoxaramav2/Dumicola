@@ -1,8 +1,8 @@
 #pragma once
 
 #include <string>
-#include "utils.hpp"
-#include "config.hpp"
+#include "utils.h"
+#include "config.h"
 
 namespace dumisdk{
 

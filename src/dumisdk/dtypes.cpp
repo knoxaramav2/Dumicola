@@ -1,13 +1,19 @@
-#include "dtypes.hpp"
+#include "dtypes.h"
+#include "defs.h"
 
 #include <type_traits>
 #include <stdexcept>
 #include <concepts>
 #include <vector>
 #include <map>
+#include <memory>
 
-dumisdk::DCMemObj::DCMemObj(std::string name)
+dumisdk::DCMemObj::DCMemObj(TypeId type, void* value):id(appId(this)),type(type)
 {
-    this->id = addrId(*this);
-    this->hashId = FNV1A(name);
+    
 }
+
+// dumisdk::DCMemObj::~DCMemObj()
+// {
+    
+// }

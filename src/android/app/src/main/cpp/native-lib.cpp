@@ -1,8 +1,8 @@
 #include <jni.h>
 #include <string>
 
-#include "dumicore.hpp"
-#include "utils.hpp"
+#include "dumicore.h"
+#include "utils.h"
 #include "mobileLogger.h"
 #include "jInterop.h"
 
@@ -12,12 +12,23 @@ Java_com_example_dumimobile_MainActivity_stringFromJNI(
         jobject /* this */) {
 
     InitDumiCore
-    dumicore::DumiCore::registerServices([](serviceman::ServiceManager& sm){
-        sm.registerSingelton<dumisdk::ILogger, AndroidLogger>();
-    });
+    try{
+        RegisterServices(([](serviceman::ServiceManager& sm){
+            sm.registerLogger<AndroidLogger>();
+        }));
 
-    auto logger = dumicore::DumiCore::getLogger();
-    logger->log_debug("Debug line: %s", __FILE_NAME__);
+        auto logger = GetLogger();
+        logger->log("!!!");
+        logger->log_debug("DEBUG");
+        logger->log_info("INFO");
+        logger->log_warn("WARNING");
+        logger->log_error("ERROR");
+
+    } catch(std::exception& e){
+        printf("%s\n", e.what());
+        fflush(stdout);
+        return env->NewStringUTF("Ouch.");
+    }
 
     return env->NewStringUTF("Static test");
 }

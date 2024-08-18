@@ -1,12 +1,12 @@
-#include "kassert.hpp"
-#include "utils.hpp"
+#include "kassert.h"
+#include "utils.h"
 #include <stdio.h>
 #include <string>
 
 static std::vector<std::string> __errMsgs;
 static bool __hasFail = false;
 
-#define assertFailMsg(file, line) frmstr("Assert fail: %s @ line: %d\n", file, line);
+#define assertFailMsg(file, line) dumisdk::frmstr("Assert fail: %s @ line: %d\n", file, line);
 
 inline void __prntDbgAssert(const char* file, int line) { 
     #ifndef KASSERT_SILENT
@@ -44,6 +44,23 @@ bool KTEST::__hasFailure()
 {
     __applyAsserts();
     return __hasFail;
+}
+
+void KTEST::__assertThrows(std::function<void()> func, const char* file, int line)
+{
+    try{
+        func();
+        __assert(false, file, line);
+    }catch(...){}
+}
+
+void KTEST::__assertNotThrows(std::function<void()> func, const char* file, int line)
+{
+    try{
+        func();
+    }catch(...){
+        __assert(false, file, line);
+    }
 }
 
 void KTEST::__assertMultiple(

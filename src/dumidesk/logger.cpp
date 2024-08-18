@@ -1,4 +1,4 @@
-#include "logger.hpp"
+#include "logger.h"
 
 void DesktopLogger::__logAs(dumisdk::ILoggerAction action, dumisdk::ILoggerMsgType msgType, std::string& msg) {
 

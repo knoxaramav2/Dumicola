@@ -19,7 +19,7 @@ else()
     message( FATAL_ERROR "Unsupported platform: ${CMAKE_SYSTEM_NAME}")
 endif()
 
-configure_file(platform.hpp.in ${CMAKE_CURRENT_SOURCE_DIR}/platform.hpp)
+configure_file(platform.h.in ${CMAKE_CURRENT_SOURCE_DIR}/platform.h)
 
 message("OPT_PERF >> ${OPT_PERF}")
 if(DEFINED OPT_PERF)
@@ -28,7 +28,7 @@ elseif()
     set(ONLINE TEST)
 endif()
 
-configure_file(optimize.hpp.in ${CMAKE_CURRENT_SOURCE_DIR}/optimize.hpp @ONLY)
+configure_file(optimize.h.in ${CMAKE_CURRENT_SOURCE_DIR}/optimize.h @ONLY)
 
 
 
