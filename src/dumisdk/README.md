@@ -124,3 +124,25 @@ The program then runs, and may be paused, stopped, or restarted.
 ![](./dumisdk_arch.png)
 ###### Current SDK Architecture
 
+
+
+## Managed Memory
+
+#### IDCFactoryStore
+The IDCFactoryStore acts as the base memory organization and lifetime manager for Dumicola. Here, data instances and factories are stored by tag and id pairs. Tags are supplied by the implementation. Ids are TypeId's of the resulting object instance's address.
+
+| Method | Type | Templates | Arguments
+| ------ | ---- | --------- | ---------
+| registerFactory | void | T, U, ... Args | int tag, std::function<U*(Args...)> builder
+| createNew | T* | T, ... Args | int tag, bool save, void* args
+| resolveAs | T* | T | int tag, APPSID id
+
+* RegisterFactory: Accepts template parameters T (Base class (optional)), U (Derived class (or concrete if T is void)), and Args (variadic). Accepts arguments tag and builder. Tag is used to specify a group to store the factory in. Factory id's are TypeId's of T, or U if void. As such, factories are indexed as _factories[int][TypeId], allowing one TypeId per group. If U is specified through a base type T, only resolution through type T will instantiate U. If U is registered both alone and with T, two stored instance of U factories may exist; one invocable through T, and the other through U.
+
+* CreateNew: Accepts templates T and Args. T must reflect the type T or U used as the TypeId with RegisterFactory. Values to Args are passed the registered factory. The tag parameter selects both a factory group to invoke from in conjunction with TypeId(T) to invoke a stored factory. Bool save determines whether the created instance is stored. In either case, a new unmanaged pointer is returned. If save is true, a copy of the pointer is also stored.
+
+* ResolveAs: Accepts template T. Accepts parameters tag and id. Id may be determined after calling createNew by invoking appId(result), where result is the value returned by createNew. Returns stored instance.
+
+When DCFactoryStore is destroyed, all allocated memory is freed.
+
+Used by DataManager and ServiceManager.
