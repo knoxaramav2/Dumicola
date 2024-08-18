@@ -39,7 +39,7 @@ void dumicore::DumiCore::start()
 void dumicore::DumiCore::shutdown()
 {
     //Segfault on desk
-    //_state.active = false;
+    _state.active = false;
 }
 
 int dumicore::DumiCore::checkStatus()

@@ -9,15 +9,15 @@ namespace dumicore{
 
     
 
-    // struct __dcSysState{
-    //     bool active;
+    struct __dcSysState{
+        bool active;
 
-    //     __dcSysState();
-    // };
+        __dcSysState();
+    };
 
     class DumiCore{
 
-        //__dcSysState _state;
+        __dcSysState _state;
 
         //dataman::DataManager _dataManager;
         serviceman::ServiceManager _serviceManager;
