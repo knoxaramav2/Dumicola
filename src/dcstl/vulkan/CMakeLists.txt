@@ -7,6 +7,7 @@ target_include_directories(vulkan
 PUBLIC
     ${DUMISDK_DIR}
     ${DCUTILS_DIR}
+    ${CONFIG_DIR}
 )
 
 target_sources(vulkan

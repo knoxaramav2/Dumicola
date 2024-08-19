@@ -1,20 +1,20 @@
 #include "tests.h"
 #include "dumisdk.h"
 
-class TestImp: public virtual dumisdk::IDCImplementation{
+// class TestImp: public virtual dumisdk::IDCImplementation{
 
-    public:
-    TestImp(HASHID id, HASHID parentId):IDCDefinition(id, parentId){}
-    int value = 1234;
-};
+//     public:
+//     TestImp(HASHID id, HASHID parentId):IDCDefinition(id, parentId){}
+//     int value = 1234;
+// };
 
-class TestTempl: public virtual dumisdk::IDCTemplate<TestImp>{
+// class TestTempl: public virtual dumisdk::IDCTemplate<TestImp>{
 
-    public:
-    TestTempl(HASHID id, HASHID parentId, dumisdk::ComponentFactory<TestImp> factory):
-        IDCTemplate(id, parentId, factory),IDCDefinition(id, parentId){}
+//     public:
+//     TestTempl(HASHID id, HASHID parentId, dumisdk::ComponentFactory<TestImp> factory):
+//         IDCTemplate(id, parentId, factory),IDCDefinition(id, parentId){}
     
-};
+// };
 
 void buildProvider(){
     

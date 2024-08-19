@@ -58,6 +58,7 @@ namespace dumisdk
 
     template<typename T>
     struct DCLiteral: extend DCType<T>{
+        virtual ~DCLiteral() = default;
         protected:
         DCLiteral(){}
     };
@@ -94,10 +95,12 @@ namespace dumisdk
 
     struct DCMap: extend DCCollection<DCMAP_TYPE>{
         DCMap();
+        virtual ~DCMap() = default;
     };
 
     struct DCList: extend DCCollection<DCLIST_TYPE>{
         DCList();
+        virtual ~DCList() = default;;
     };
 
     #define assertStdDCType(T)\

@@ -9,106 +9,68 @@
 
 namespace dumisdk{
 
-    class IDCLibrary;
-
-    #pragma region DC_INTERFACES
-
-    class IDCDefinition{
-    public:
-        IDCDefinition(HASHID id , HASHID parentId);
-
+    class DCDefinition{
+        protected:
+        DCDefinition(HASHID id, HASHID parentId);
+        public:
+        virtual ~DCDefinition() = default;
         const HASHID id;
         const HASHID parentId;
     };
 
-    class IDCImplementation: extend IDCDefinition{
-
-    public:
-        IDCImplementation(HASHID id, HASHID parentId);
-
-    protected:
-        IDCImplementation();
-
+    class DCImplementation: extend DCDefinition{
+        protected:
+        DCImplementation(HASHID id, HASHID parentId);
+        public:
+        virtual ~DCImplementation() = default;
     };
-    template<typename T>
-    using ComponentFactory = T* (*)();
 
     template<typename T>
-    class IDCTemplate: extend IDCDefinition{
-
-        ComponentFactory<T> _factory;
-    public:
-        IDCTemplate(HASHID id, HASHID parentId, ComponentFactory<T> factory):
-            IDCDefinition(id, parentId),_factory(factory){}
-    protected:
-        friend IDCLibrary;
-        virtual T* create(){
-            return (T*)_factory();
-        }
-
-    protected:
-        IDCTemplate(ComponentFactory<T>factory):IDCDefinition(0,0),_factory(factory){};
+    class DCInterface: extend DCDefinition{
+        static_assert(std::is_base_of<DCImplementation, T>::value, "T must extend DCImplementation");
+        protected:
+        DCInterface(HASHID id, HASHID parentId): DCDefinition(id, parentId) {}
+        public:
+        virtual ~DCInterface() = default;
+        virtual T* create() = 0;
     };
 
-    #pragma endregion
-
-    #pragma region DC_NodeIO
-
-    class IONodeDefinition: extend IDCDefinition{
-
-    public:
-        //IONodeDefinition(HASHID id, HASHID parentId, dumisdk::DCVar value);
-
-    protected:
-        //IONodeDefinition(dumisdk::DCVar value);
-        //const dumisdk::DCVar _value;
+    struct ComponentInfo{
+        const char* name;
+        const HASHID componentId;
+        const char* description;
+        public:
+        ComponentInfo(const char* name, const char* description);
     };
 
-    class DCInputDefinition: extend IONodeDefinition{
-    public:
-        DCInputDefinition(HASHID id, HASHID parentId);
-
-    protected:
-        DCInputDefinition();
-    };
-
-    class DCInput: extend DCInputDefinition{
-
-    public:
-        DCInput(HASHID id, HASHID parentId);
-
-    protected:
-        DCInput();
-    };
-
-    class DCInputTemplate: extend DCInputDefinition, extend IDCTemplate<DCInput>{
-    
-    public:
-
-    protected:
-    
-    };
-
-    #pragma endregion
-
-    #pragma region DC_BASE_CLASSES
-
-
-    class DCComponentDefinition: extend IDCDefinition{
-
-    public:
+    class DCComponentDefinition: extend DCDefinition{
+        protected:
         DCComponentDefinition(HASHID id, HASHID parentId);
-
-    protected:
-        DCComponentDefinition();
-
+        public:
+        virtual ~DCComponentDefinition() = default;
     };
 
-    class DCComponent: extend IDCDefinition{
+    template<typename T>
+    class DCComponentTemplate;
 
+    class DCComponentImplementation: extend DCImplementation, extend DCComponentDefinition{
+        protected:
+        using DCImplementation::DCImplementation;
+        using DCComponentDefinition::DCComponentDefinition;
+        public:
+        DCComponentImplementation(DCComponentDefinition&);
+        virtual ~DCComponentImplementation() = default;
     };
 
-    #pragma endregion
+    template<typename T>
+    class DCComponentTemplate: extend DCInterface<T>, extend DCComponentDefinition{
+        static_assert(std::is_base_of<DCComponentImplementation, T>::value, "T must extend DCComponentImplementation");
+        protected:
+        using DCInterface<T>::DCInterface;
+        using DCComponentDefinition::DCComponentDefinition;
+        public:
+        virtual ~DCComponentTemplate() = default;
+    };
 
     #pragma region DC_LIBRARY
 
@@ -121,12 +83,17 @@ namespace dumisdk{
         const char* description;
         const APPSID libraryId;
 
-        virtual const std::vector<DCComponentDefinition>& manifest() = 0;
-        virtual const DCComponent* create(const char* ) = 0;
-        virtual const DCComponent* create(HASHID id) = 0;
-
         protected:
-        IDCLibrary(const char* name, const char* version, const char* author, const char* repository);
+        IDCLibrary(const char* name, const char* version, const char* author, 
+            const char* repository, const char* description);
+        virtual const std::vector<ComponentInfo> manifest() = 0;
+        virtual const DCComponentImplementation* create(const char* name) = 0;
+        virtual const DCComponentImplementation* create(HASHID id) = 0;
+        bool registerTemplate(DCComponentTemplate<DCComponentImplementation>
+            componentTemplate);
+
+        optmap<HASHID, std::shared_ptr<DCComponentTemplate<DCComponentImplementation>>> _templates;
+        public:
         virtual ~IDCLibrary() = default;
     };
 
