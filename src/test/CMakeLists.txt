@@ -33,6 +33,7 @@ PRIVATE
         component_test.cpp
         dtypes_test.cpp
         fixtures.cpp
+        plugin_test.cpp
     )
 
 endif()

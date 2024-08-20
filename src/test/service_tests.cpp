@@ -40,14 +40,12 @@ std::function<Struct1*(const char*)> fnc = [](const char* name) -> Struct1* {
 
 struct NoRegister{};
 
-void initFixtures(){
+// void initFixtures(){
 
     
-}
+// }
 
 bool test_services(){
-
-    initFixtures();
 
     printf("START TESTS\n\n");
 

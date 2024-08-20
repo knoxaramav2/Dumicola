@@ -12,6 +12,7 @@ int main(){
     test_misc();
     test_services();
     test_components();
+    test_plugins();
 
     applyAsserts();
 

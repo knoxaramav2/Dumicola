@@ -11,7 +11,9 @@ namespace dumisdk{
 
     class DCDefinition{
         protected:
+        DCDefinition(DCDefinition& definition);
         DCDefinition(HASHID id, HASHID parentId);
+        DCDefinition();
         public:
         virtual ~DCDefinition() = default;
         const HASHID id;
@@ -21,8 +23,10 @@ namespace dumisdk{
     class DCImplementation: extend DCDefinition{
         protected:
         DCImplementation(HASHID id, HASHID parentId);
+        DCImplementation();
         public:
         virtual ~DCImplementation() = default;
+        virtual void update() = 0;
     };
 
     template<typename T>
@@ -46,6 +50,7 @@ namespace dumisdk{
     class DCComponentDefinition: extend DCDefinition{
         protected:
         DCComponentDefinition(HASHID id, HASHID parentId);
+        DCComponentDefinition();
         public:
         virtual ~DCComponentDefinition() = default;
     };
@@ -57,8 +62,9 @@ namespace dumisdk{
         protected:
         using DCImplementation::DCImplementation;
         using DCComponentDefinition::DCComponentDefinition;
+        DCComponentImplementation();
         public:
-        DCComponentImplementation(DCComponentDefinition&);
+        DCComponentImplementation(DCComponentDefinition& definition);
         virtual ~DCComponentImplementation() = default;
     };
 

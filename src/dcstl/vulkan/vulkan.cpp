@@ -2,7 +2,7 @@
 
 
 VulkanLibrary::VulkanLibrary():dumisdk::IDCLibrary(
-    "Vulkan", version, "KnoxaramaV2", "https://github.com/knoxaramav2/Dumicola.git", 
+    "Vulkan", "0.0.1", "KnoxaramaV2", "https://github.com/knoxaramav2/Dumicola.git", 
     "STL Dumicola logic component library" 
 )
 {
@@ -11,3 +11,12 @@ VulkanLibrary::VulkanLibrary():dumisdk::IDCLibrary(
     //registerTemplate(_lgAndTmpl);
 
 }
+
+VulkanBaseDefinition::VulkanBaseDefinition(VulkanBaseDefinition &def): 
+    DCDefinition(def) {}
+
+VulkanBaseComponent::VulkanBaseComponent(VulkanBaseDefinition &def, _updateFnc update):
+    VulkanBaseDefinition(def) { _update = update; }
+
+void VulkanBaseComponent::update() { _update(); }
+
