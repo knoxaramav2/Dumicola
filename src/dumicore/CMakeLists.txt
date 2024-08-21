@@ -1,6 +1,6 @@
 message(">> DUMICORE @ ${CMAKE_CURRENT_SOURCE_DIR}")
 
-add_library(dumicore SHARED)
+add_library(dumicore STATIC)
 
 target_include_directories(
     dumicore 
