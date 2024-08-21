@@ -4,7 +4,6 @@
 #include <cstdint>
 #include <type_traits>
 #include "id.h"
-#include "platform.h"
 #include "optiondefs.h"
 
 typedef std::uintptr_t APPSID;

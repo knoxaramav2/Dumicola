@@ -1,16 +1,23 @@
 #include "dc_file.h"
+#include "environment.h"
 
 #include <algorithm>
-#include <filesystem>
+#include <sys/stat.h>
+
+namespace fs = std::filesystem;
 
 #ifdef PLATFORM_WINDOWS
 #include <windows.h>
-const char *execPath()
+fs::path execPath()
 {
     char buff[256];
     size_t len = sizeof(buff);
     int bytes = GetModuleFileName(NULL, buff, len);
-    return bytes ? buff : nullptr;
+    if(bytes >= 0){
+        return std::filesystem::path(buff).parent_path();
+    } else {
+        return "";
+    }
 }
 
 #elif defined(PLATFORM_ANDROID)
@@ -38,21 +45,48 @@ const char* execPath(){
 }
 #endif
 
-const char *absPath(const char *path)
+struct stat sb;
+
+fs::path rootDir()
 {
-    std::filesystem::path fsPath = path;
-
-
-
-    return nullptr;
+    fs::path path(execPath());
+    path = path.parent_path().parent_path();
+    return path;
 }
 
-bool fileExists()
+fs::path sdlDir()
 {
-    return false;
+    auto path = rootDir()/"dcstl";
+    return path;
 }
-bool dirExists()
+
+bool fileExists(std::string path)
 {
-    return false;
+    return (stat(path.c_str(), &sb) == 0 && !(sb.st_mode & S_IFDIR));
+}
+
+bool fileExists(std::filesystem::path path)
+{
+    return fileExists(path.string());
+}
+
+bool dirExists(std::string path)
+{
+    return (stat(path.c_str(), &sb) == 0 && (sb.st_mode & S_IFDIR));
+}
+
+bool dirExists(std::filesystem::path path)
+{
+    return dirExists(path.string());
+}
+
+bool pathExists(std::string path)
+{
+    return (stat(path.c_str(), &sb) == 0);
+}
+
+bool pathExists(std::filesystem::path path)
+{
+    return pathExists(path.string());
 }
 

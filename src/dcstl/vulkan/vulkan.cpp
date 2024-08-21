@@ -12,6 +12,26 @@ VulkanLibrary::VulkanLibrary():dumisdk::IDCLibrary(
 
 }
 
+const std::vector<dumisdk::ComponentInfo> VulkanLibrary::manifest()
+{
+    return std::vector<dumisdk::ComponentInfo>();
+}
+
+const dumisdk::DCComponentImplementation* VulkanLibrary::create(const char* name)
+{
+    return nullptr;
+}
+
+const dumisdk::DCComponentImplementation* VulkanLibrary::create(HASHID id)
+{
+    return nullptr;
+}
+
+bool VulkanLibrary::registerTemplate(dumisdk::DCComponentTemplate<dumisdk::DCComponentImplementation>& componentTemplate)
+{
+    return false;
+}
+
 VulkanBaseDefinition::VulkanBaseDefinition(VulkanBaseDefinition &def): 
     DCDefinition(def) {}
 
@@ -20,3 +40,7 @@ VulkanBaseComponent::VulkanBaseComponent(VulkanBaseDefinition &def, _updateFnc u
 
 void VulkanBaseComponent::update() { _update(); }
 
+VulkanBaseComponent* VulkanBaseTemplate::create()
+{
+    return nullptr;
+}

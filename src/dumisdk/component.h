@@ -95,8 +95,8 @@ namespace dumisdk{
         virtual const std::vector<ComponentInfo> manifest() = 0;
         virtual const DCComponentImplementation* create(const char* name) = 0;
         virtual const DCComponentImplementation* create(HASHID id) = 0;
-        bool registerTemplate(DCComponentTemplate<DCComponentImplementation>
-            componentTemplate);
+        virtual bool registerTemplate(DCComponentTemplate<DCComponentImplementation>&
+            componentTemplate) = 0;
 
         optmap<HASHID, std::shared_ptr<DCComponentTemplate<DCComponentImplementation>>> _templates;
         public:

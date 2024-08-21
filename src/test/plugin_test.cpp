@@ -6,6 +6,7 @@ dumisdk::LibraryManager* _libman;
 
 void initFixtures(){
     _libman = new dumisdk::LibraryManager();
+    _libman->load();
 }
 
 bool test_plugins(){

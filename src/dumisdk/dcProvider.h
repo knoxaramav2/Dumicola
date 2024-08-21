@@ -66,20 +66,20 @@ namespace dumisdk
 
             auto factIt = _factories.find(tag);
             if(factIt == _factories.end()){
-                throw dumisdk::dumiexception(dumisdk::frmstr("Unable to instantiate factory: %d", tag).c_str());
+                throw dumisdk::dumiexception(dcutil::frmstr("Unable to instantiate factory: %d", tag).c_str());
             }
             
             auto sid = typeId(T);
             auto& typeMap = factIt->second;
             auto typeIt = typeMap.find(sid);
             if(typeIt == typeMap.end()){
-                throw dumisdk::dumiexception(dumisdk::frmstr("Unable to instantiate type: %d::%s", tag, typeid(T).name()).c_str());
+                throw dumisdk::dumiexception(dcutil::frmstr("Unable to instantiate type: %d::%s", tag, typeid(T).name()).c_str());
             }
 
             std::unique_ptr<BaseTypeErased> item = typeIt->second(args);
             T* inst = static_cast<TypeErased<T>*>(item.release())->get();
             if(!inst){
-                throw dumisdk::dumiexception(dumisdk::frmstr("Failed to instantiate type: %d::%s", tag, typeid(T).name()).c_str());
+                throw dumisdk::dumiexception(dcutil::frmstr("Failed to instantiate type: %d::%s", tag, typeid(T).name()).c_str());
             }
 
             if(save){
@@ -97,18 +97,18 @@ namespace dumisdk
 
             auto storeIt = _storage.find(tag);
             if(storeIt == _storage.end()){
-                throw dumisdk::dumiexception(dumisdk::frmstr("Unable to resolve store tag %d", tag).c_str());
+                throw dumisdk::dumiexception(dcutil::frmstr("Unable to resolve store tag %d", tag).c_str());
             }
 
             auto& idMap = storeIt->second;
             auto idIt = idMap.find(id);
             if(idIt == idMap.end()){
-                throw dumisdk::dumiexception(dumisdk::frmstr("Unable to resolve type: %d::%lx", tag, id).c_str());
+                throw dumisdk::dumiexception(dcutil::frmstr("Unable to resolve type: %d::%lx", tag, id).c_str());
             }
 
             T* inst = static_cast<TypeErased<T>*>(idIt->second.get())->get();
             if(!inst){
-                throw dumisdk::dumiexception(dumisdk::frmstr("Failed to resolve type: %d::%lx", tag, id).c_str());
+                throw dumisdk::dumiexception(dcutil::frmstr("Failed to resolve type: %d::%lx", tag, id).c_str());
             }
 
             return inst;

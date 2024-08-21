@@ -19,7 +19,9 @@ else()
     message( FATAL_ERROR "Unsupported platform: ${CMAKE_SYSTEM_NAME}")
 endif()
 
-configure_file(platform.h.in ${CMAKE_CURRENT_SOURCE_DIR}/platform.h)
+#add_compile_definitions(BUILD_CONFIG ${CMAKE_BUILD_TYPE})
+set(BUILD_CONFIG ${CMAKE_BUILD_TYPE})
+configure_file(environment.h.in ${CMAKE_CURRENT_SOURCE_DIR}/environment.h)
 
 message("OPT_PERF >> ${OPT_PERF}")
 if(DEFINED OPT_PERF)
@@ -29,7 +31,7 @@ elseif()
 endif()
 
 configure_file(optimize.h.in ${CMAKE_CURRENT_SOURCE_DIR}/optimize.h @ONLY)
-
+#configure_file(filedef.h.in ${CMAKE_CURRENT_SOURCE_DIR}/filedef.h)
 
 
 

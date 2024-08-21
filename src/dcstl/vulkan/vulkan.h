@@ -27,14 +27,23 @@ class VulkanBaseTemplate: extend dumisdk::DCComponentDefinition, extend dumisdk:
     protected:
     public:
 
-
+    VulkanBaseComponent* create() override;
 };
 
 class VulkanLibrary: extend dumisdk::IDCLibrary{
 
     public:
     VulkanLibrary();
+    const std::vector<dumisdk::ComponentInfo> manifest() override;
+    const dumisdk::DCComponentImplementation* create(const char* name) override;
+    const dumisdk::DCComponentImplementation* create(HASHID id) override;
+    bool registerTemplate(dumisdk::DCComponentTemplate<dumisdk::DCComponentImplementation>& componentTemplate) override;
 
 };
+
+__declspec (dllexport) dumisdk::IDCLibrary* LoadLibrary(){
+    dumisdk::IDCLibrary* library = new VulkanLibrary();
+    return library;
+}
 
 

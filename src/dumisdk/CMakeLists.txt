@@ -24,7 +24,6 @@ PUBLIC
     dumiexcept.cpp
     service_interfaces.cpp
     component.cpp
-    libManager.cpp
 PRIVATE
 
 )

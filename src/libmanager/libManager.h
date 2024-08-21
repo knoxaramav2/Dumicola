@@ -6,16 +6,20 @@
 
 #include "defs.h"
 #include "dc_file.h"
+#include "component.h"
 
 namespace dumisdk{
     struct Plugin{
-
+        std::filesystem::path path;
+        std::string name;
+        dumisdk::IDCLibrary* library;
     };
 
     class LibraryManager{
 
         optmap<HASHID, Plugin> _plugins;
         std::vector<std::filesystem::path> _paths;
+        std::vector<std::filesystem::path> _dllPaths();
 
         public:
 
@@ -23,7 +27,7 @@ namespace dumisdk{
 
         const std::vector<Plugin> listPlugins();
         bool refresh();
-        bool reload();
+        bool load();
         bool addPath(const char* path);
 
     };
