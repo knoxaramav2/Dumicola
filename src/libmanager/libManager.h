@@ -19,7 +19,9 @@ namespace dumisdk{
 
         optmap<HASHID, Plugin> _plugins;
         std::vector<std::filesystem::path> _paths;
-        std::vector<std::filesystem::path> _dllPaths();
+        std::vector<std::filesystem::path> _findSharedLibs();
+        dumisdk::IDCLibrary* _tryLoadLibrary(std::string path);
+        void _filterSharedLibs(std::vector<std::filesystem::path>& paths);
 
         public:
 

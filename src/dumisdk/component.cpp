@@ -20,9 +20,6 @@ dumisdk::DCComponentDefinition::DCComponentDefinition(HASHID id, HASHID parentId
 
 dumisdk::DCComponentDefinition::DCComponentDefinition(){}
 
-dumisdk::ComponentInfo::ComponentInfo(const char *name, const char *description):
-    name(name),componentId(componentId),description(description) {}
-
 // dumisdk::IDCLibrary::IDCLibrary(const char *name, const char *version, const char *author, 
 //     const char *repository, const char *description):
 //     name(name),version(version),author(author),repository(repository),
@@ -41,8 +38,8 @@ const dumisdk::DCComponentImplementation *dumisdk::IDCLibrary::create(HASHID id)
 }
 
 dumisdk::IDCLibrary::IDCLibrary(const char *name, const char *version, const char *author,
-                                const char *repository, const char *description) : name(name), version(version), author(author), repository(repository),
-                                                                                   description(description), libraryId(appId(this)) {}
+                                const char *repository, const char *description) : 
+    ComponentInfo(name, version, author, repository, description, appId(this)) {}
 
 dumisdk::DCComponentImplementation::DCComponentImplementation() {}
 
@@ -50,3 +47,8 @@ dumisdk::DCComponentImplementation::DCComponentImplementation(DCComponentDefinit
     DCComponentDefinition(definition), DCDefinition(definition), DCImplementation(definition.id, definition.parentId)
 {
 }
+
+dumisdk::ComponentInfo::ComponentInfo(const char* name, const char* version, const char* author, 
+    const char* repository, const char* description, APPSID libraryId):
+    name(name), version(version), author(author), repository(repository), description(description),
+    libraryId(libraryId) {}

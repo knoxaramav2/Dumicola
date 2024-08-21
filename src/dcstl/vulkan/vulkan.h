@@ -4,6 +4,12 @@
 
 typedef std::function<void()> _updateFnc;
 
+#ifdef VULKAN_EXPORT
+#define VULKAN_API DUMIEXPORT
+#else
+#define VULKAN_API DUMIIMPORT
+#endif
+
 class VulkanBaseDefinition: extend dumisdk::DCComponentDefinition{
     protected:
     using DCComponentDefinition::DCComponentDefinition;
@@ -41,9 +47,9 @@ class VulkanLibrary: extend dumisdk::IDCLibrary{
 
 };
 
-__declspec (dllexport) dumisdk::IDCLibrary* LoadLibrary(){
-    dumisdk::IDCLibrary* library = new VulkanLibrary();
-    return library;
+
+extern "C"{
+    __declspec (dllexport) dumisdk::IDCLibrary* LoadLibrary();
 }
 
 

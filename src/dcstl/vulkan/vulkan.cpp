@@ -44,3 +44,8 @@ VulkanBaseComponent* VulkanBaseTemplate::create()
 {
     return nullptr;
 }
+
+dumisdk::IDCLibrary* LoadLibrary()
+{
+    return new VulkanLibrary();;
+}

@@ -9,6 +9,8 @@
 
 namespace dumisdk{
 
+    class IDCLibrary;
+
     class DCDefinition{
         protected:
         DCDefinition(DCDefinition& definition);
@@ -41,10 +43,14 @@ namespace dumisdk{
 
     struct ComponentInfo{
         const char* name;
-        const HASHID componentId;
+        const char* version;
+        const char* author;
+        const char* repository;
         const char* description;
+        const APPSID libraryId;
         public:
-        ComponentInfo(const char* name, const char* description);
+        ComponentInfo(const char* name, const char* version, const char* author, 
+            const char* repository, const char* description, APPSID libraryId);
     };
 
     class DCComponentDefinition: extend DCDefinition{
@@ -80,14 +86,8 @@ namespace dumisdk{
 
     #pragma region DC_LIBRARY
 
-    class IDCLibrary{
+    class IDCLibrary: public ComponentInfo{
         public:
-        const char* name;
-        const char* version;
-        const char* author;
-        const char* repository;
-        const char* description;
-        const APPSID libraryId;
 
         protected:
         IDCLibrary(const char* name, const char* version, const char* author, 
@@ -107,4 +107,5 @@ namespace dumisdk{
 
 }
 
-
+typedef __declspec (dllexport) dumisdk::IDCLibrary* DUMIEXPORT;
+typedef __declspec (dllimport) dumisdk::IDCLibrary* DUMIIMPORT;

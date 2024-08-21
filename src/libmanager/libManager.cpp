@@ -1,10 +1,20 @@
 #include "libManager.h"
 #include "dc_string.h"
 #include "dc_file.h"
+#include "environment.h"
 
 #include <cstdio>
+#include <type_traits>
 
-std::vector<std::filesystem::path> dumisdk::LibraryManager::_dllPaths()
+#ifdef PLATFORM_WINDOWS
+#include<Windows.h>
+#elif(defined(PLATFORM_GNU))
+#include <dlfcn.h>
+#elif(defined(PLATFORM_ANDROID))
+#error Android component support not implemented
+#endif
+
+std::vector<std::filesystem::path> dumisdk::LibraryManager::_findSharedLibs()
 {
     std::vector<std::filesystem::path> ret;
     for(auto& path: _paths){
@@ -21,11 +31,66 @@ std::vector<std::filesystem::path> dumisdk::LibraryManager::_dllPaths()
             if(isDll){
                 ret.push_back(file);
             }
-            //file.path().extension();
         }
     }
 
     return ret;
+}
+
+dumisdk::IDCLibrary* dumisdk::LibraryManager::_tryLoadLibrary(std::string path)
+{
+    dumisdk::IDCLibrary* ret = nullptr;
+    using LLF = dumisdk::IDCLibrary* (*)();
+
+#ifdef PLATFORM_WINDOWS
+    HMODULE hmdl = LoadLibrary(path.c_str());
+    if(!hmdl){ return nullptr; }
+    LLF libload = (LLF)GetProcAddress(hmdl, "LoadLibrary");
+    if(!libload){
+        printf("Candidate %s not loaded%s", path.c_str(), NL);
+        FreeLibrary(hmdl);
+        return nullptr;
+    }
+    ret = libload();
+    if(!ret){ 
+        printf("Candidate %s lacks load method %s", path.c_str(), NL);
+        FreeLibrary(hmdl); 
+    }
+#elif(defined(PLATFORM_GNU))
+    void* hndl = dlopen(libPath.c_str(), RTLD_LAZY);
+    if(!hndl){return nullptr;}
+    LLF libload = (LLF)dlsym(hndl, "LoadLibrary");
+    if(!libload){
+        dlclose(hndl);
+        return nullptr;
+    }
+    ret = libload();
+    if(!ret){ dlclose(hndl); }
+#elif(defined(PLATFORM_ANDROID))
+
+#endif
+
+    if(ret){
+        printf("Load library: %s%s", ret->name, NL);
+    } else {
+        printf("Skip: Library %s not component or corrupt%s", path.c_str(), NL);
+    }
+
+    return ret;
+}
+
+void dumisdk::LibraryManager::_filterSharedLibs(std::vector<std::filesystem::path>& paths)
+{
+    for(auto it = paths.begin(); it != paths.end(); ++it){
+        for(auto& plugin: _plugins){
+            if(plugin.second.path == *it)
+            { 
+                paths.erase(it);
+                --it;
+                break; 
+            }
+        }
+    }
 }
 
 dumisdk::LibraryManager::LibraryManager()
@@ -48,13 +113,20 @@ const std::vector<dumisdk::Plugin> dumisdk::LibraryManager::listPlugins()
 
 bool dumisdk::LibraryManager::refresh()
 {
+    _paths.clear();
     return false;
 }
 
 bool dumisdk::LibraryManager::load()
 {
-    auto dllPaths = _dllPaths();
-    return false;
+    auto cmpPaths = _findSharedLibs();
+    _filterSharedLibs(cmpPaths);
+
+    for(auto& path:cmpPaths){
+        _tryLoadLibrary(path.string());
+    }
+
+    return true;
 }
 
 bool dumisdk::LibraryManager::addPath(const char *path)
