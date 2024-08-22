@@ -71,7 +71,7 @@ namespace dumisdk {
 	static_assert(std::is_base_of<DCFieldImplementation, T>::value, "T must extend DCFieldImplementation");
 	protected:
 	using DCInterface<T>::DCInterface;
-	using DCComponentDefinition::DCComponentDefinition;
+	using DCFieldDefinition::DCFieldDefinition;
 	public:
 	DCFieldTemplate(){
 
