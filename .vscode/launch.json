@@ -8,14 +8,14 @@
         "name": "Test Groups",
         "type": "cppdbg",
         "request": "launch",
-        "program": "${workspaceFolder}/build/bin/debug/dumi_tests",
+        "program": "${workspaceFolder}/build/bin/${env:DEBUG_PATH}/dumi_tests",
         "args": [],
         "stopAtEntry": false,
         "cwd": "${workspaceFolder}",
         "environment": [],
         "MIMode": "gdb",
-        //"miDebuggerPath": "/usr/bin/gdb",
-        "miDebuggerPath": "C:/cygwin64/bin/gdb.exe",
+        "miDebuggerPath": "${env:MMI_PATH}",
+        
         "setupCommands": [
             {
                 "description": "Enable pretty-printing for gdb",
@@ -28,15 +28,14 @@
         "name": "Dumidesk",
         "type": "cppdbg",
         "request": "launch",
-        "program": "${workspaceFolder}/build/bin/debug/dumidesk",
+        "program": "${workspaceFolder}/build/bin/${env:DEBUG_PATH}/dumidesk",
         "args": [],
         "stopAtEntry": true,
         "cwd": "${workspaceFolder}",
         "environment": [],
         "externalConsole": false,
         "MIMode": "gdb",
-        "miDebuggerPath": "C:/cygwin64/bin/gdb.exe",
-        //"miDebuggerPath": "/usr/bin/gdb",
+        "miDebuggerPath": "${env:MMI_PATH}",
         "setupCommands": [
             {
                 "description": "Enable pretty-printing for gdb",

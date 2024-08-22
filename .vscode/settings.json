@@ -106,5 +106,13 @@
     },
     "makefile.makefilePath": "./src/cpp",
     "makefile.buildLog": ".",
-    "cmake.sourceDirectory": "/media/knox/ExtDrive/Dev/Dumicola/src"
+    "cmake.sourceDirectory": "/media/knox/ExtDrive/Dev/Dumicola/src",
+    "terminal.integrated.env.linux": {
+        "DEBUG_PATH": "",
+        "MMI_PATH": "/usr/bin/gdb"
+    },
+    "terminal.integrated.env.windows": {
+        "DEBUG_PATH": "debug",
+        "MMI_PATH": "gdb.exe"
+    }
 }

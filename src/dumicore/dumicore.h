@@ -2,7 +2,6 @@
 
 #include "service_interfaces.h"
 #include "serviceman.h"
-#include "dataman.h"
 #include <functional>
 
 namespace dumicore{
@@ -20,7 +19,6 @@ namespace dumicore{
 
         __dcSysState _state;
 
-        dataman::DataManager _dataManager;
         serviceman::ServiceManager _serviceManager;
 
         void _runAsCncModeAuto();

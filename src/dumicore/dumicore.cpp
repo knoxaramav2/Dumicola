@@ -38,12 +38,12 @@ void dumicore::DumiCore::_loadServiceDefaults()
 
 void dumicore::DumiCore::_loadCoreTypes()
 {
-    _dataManager.registerType<dumisdk::DCBoolean>(0);
-    _dataManager.registerType<dumisdk::DCInteger>(0);
-    _dataManager.registerType<dumisdk::DCDecimal>(0);
-    _dataManager.registerType<dumisdk::DCString>(0);
-    _dataManager.registerType<dumisdk::DCList>(0);
-    _dataManager.registerType<dumisdk::DCMap>(0);
+    // _dataManager.registerType<dumisdk::DCBoolean>(0);
+    // _dataManager.registerType<dumisdk::DCInteger>(0);
+    // _dataManager.registerType<dumisdk::DCDecimal>(0);
+    // _dataManager.registerType<dumisdk::DCString>(0);
+    // _dataManager.registerType<dumisdk::DCList>(0);
+    // _dataManager.registerType<dumisdk::DCMap>(0);
 }
 
 void dumicore::DumiCore::start()

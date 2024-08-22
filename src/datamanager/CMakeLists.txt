@@ -6,8 +6,8 @@ target_include_directories(
 dataman 
     PRIVATE 
 ${DCUTILS_DIR} 
-${DUMISDK_DIR}
     PUBLIC
+${DUMISDK_DIR}
 ${CONFIG_DIR} 
 )
 

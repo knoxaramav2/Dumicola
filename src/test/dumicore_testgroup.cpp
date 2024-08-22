@@ -13,6 +13,7 @@ int main(){
     test_services();
     test_components();
     test_plugins();
+    test_dumilang();
 
     applyAsserts();
 

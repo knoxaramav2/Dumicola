@@ -59,6 +59,8 @@ Project | Status | Progress | Active
 | DumiMobile | Started | ![](https://geps.dev/progress/1/) | Yes 
 | DumiMicro | Not Started | ![](https://geps.dev/progress/0/) | No 
 | DumiDesktop | Pause | ![](https://geps.dev/progress/2/) | Yes 
+| DumiLang | Started | ![](https://geps.dev/progress/0/) | Yes 
+
 
 # Auxiliary Projects
 Project | Status  | Active

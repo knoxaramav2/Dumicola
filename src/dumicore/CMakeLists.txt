@@ -7,10 +7,11 @@ target_include_directories(
 PUBLIC 
     ${DCUTILS_DIR}
     ${DUMISDK_DIR} 
-    ${DATAMAN_DIR} 
     ${SERVICEMAN_DIR} 
     ${APPRUNNER_DIR}
     ${DUMICORE_DIR}
+PRIVATE
+    ${DUMILANG_DIR}
     )
     
 target_link_libraries(
@@ -18,8 +19,8 @@ target_link_libraries(
 PRIVATE 
     dcutils 
     dumisdk 
-    serviceman 
-    dataman 
+    serviceman
+    dumilang 
     apprunner)
 
 target_sources(

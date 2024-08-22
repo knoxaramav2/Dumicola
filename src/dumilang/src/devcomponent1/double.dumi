@@ -1,0 +1,10 @@
+@name "Double"
+@description "Double all inputs and output their sum"
+@views true
+
+Output("Out1", deci)
+
+Update(){
+    Out1.value = sum(Inputs)*2
+}
+

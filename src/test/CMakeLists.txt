@@ -15,12 +15,14 @@ elseif(DEFINED _DESKTOP)
         ${DUMISDK_DIR} ${DCUTILS_DIR} ${SERVICEMAN_DIR} ${LIBMAN_DIR}
         ${DATAMAN_DIR} ${DUMICORE_DIR} 
         ${SDL_VULKAN_DIR} ${SDL_HYPATIA_DIR} ${SDL_PORUS_DIR}
+        ${DUMILANG_DIR}
         )
     target_link_libraries(dumi_tests 
-PRIVATE 
-    kassert dcutils dumisdk serviceman dataman dumicore libman
+    PRIVATE 
+        kassert dcutils dumisdk serviceman dataman dumicore libman dumilang
     )
     add_test(NAME TestGroup COMMAND dumi_tests)
+    add_compile_definitions(DUMILANG_SRC="${DUMILANG_DIR}/src")
 
     target_sources(dumi_tests
     PRIVATE
@@ -31,6 +33,7 @@ PRIVATE
         dtypes_test.cpp
         fixtures.cpp
         plugin_test.cpp
+        dumilang_test.cpp
     )
 
 endif()
