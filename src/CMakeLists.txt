@@ -18,12 +18,7 @@ else()
     set(AUX_BUILD AUX_AS)
 endif()
 
-#if(MSVC)
-#    add_compile_options("/MDd /ZI /Ob0 /Od /RTC1")
-#    add_link_options("/debug /INCREMENTAL /LTCG:OFF")
-#endif()
-
-#add_compile_definitions("-g3")
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/cpp.hint COPYONLY)
 
 # Set the output directories for different types of targets
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
@@ -43,6 +38,7 @@ set(CONFIG_DIR ${CMAKE_CURRENT_SOURCE_DIR}/config)
 
 set(DCUTILS_DIR ${CMAKE_CURRENT_SOURCE_DIR}/dcutils)
 set(DUMISDK_DIR ${CMAKE_CURRENT_SOURCE_DIR}/dumisdk)
+set(DUMILANG_DIR ${CMAKE_CURRENT_SOURCE_DIR}/dumilang)
 set(DUMISDL_DIR ${CMAKE_CURRENT_SOURCE_DIR}/dcstl)
 set(LIBMAN_DIR ${CMAKE_CURRENT_SOURCE_DIR}/libmanager)
 set(DATAMAN_DIR ${CMAKE_CURRENT_SOURCE_DIR}/datamanager)
@@ -54,8 +50,9 @@ set(DUMIMOBILE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/android/app/src/main/cpp)
 
 add_subdirectory(config)
 add_subdirectory(dcutils)
-add_subdirectory(dcstl)
 add_subdirectory(dumisdk)
+add_subdirectory(dumilang)
+add_subdirectory(dcstl)
 add_subdirectory(libmanager)
 add_subdirectory(datamanager)
 add_subdirectory(servicemanager)

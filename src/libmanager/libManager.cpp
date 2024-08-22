@@ -14,6 +14,9 @@
 #error Android component support not implemented
 #endif
 
+dumisdk::Plugin::Plugin(std::filesystem::path path, dumisdk::IDCLibrary *library):
+    path{path}, name{library->name}, library{library}, id{hashId(name)} {}
+
 std::vector<std::filesystem::path> dumisdk::LibraryManager::_findSharedLibs()
 {
     std::vector<std::filesystem::path> ret;
@@ -25,10 +28,9 @@ std::vector<std::filesystem::path> dumisdk::LibraryManager::_findSharedLibs()
             continue;
         }
         for(const auto& file : std::filesystem::directory_iterator(path)){
-            printf("Found %s:    DLL? ", file.path().string().c_str());
-            bool isDll = dcutil::strEquals(file.path().extension().string(), ".dll", true);
-            printf("%d\r\n", isDll);
-            if(isDll){
+            auto ext = file.path().extension().string();
+            bool isLib = dcutil::strEquals(ext, ".dll", true) || dcutil::strEquals(ext, ".so", true);
+            if(isLib){
                 ret.push_back(file);
             }
         }
@@ -47,13 +49,13 @@ dumisdk::IDCLibrary* dumisdk::LibraryManager::_tryLoadLibrary(std::string path)
     if(!hmdl){ return nullptr; }
     LLF libload = (LLF)GetProcAddress(hmdl, "LoadLibrary");
     if(!libload){
-        printf("Candidate %s not loaded%s", path.c_str(), NL);
+        printf("\tCandidate %s not loaded%s", path.c_str(), NL);
         FreeLibrary(hmdl);
         return nullptr;
     }
     ret = libload();
     if(!ret){ 
-        printf("Candidate %s lacks load method %s", path.c_str(), NL);
+        printf("\tCandidate %s lacks load method %s", path.c_str(), NL);
         FreeLibrary(hmdl); 
     }
 #elif(defined(PLATFORM_GNU))
@@ -69,12 +71,6 @@ dumisdk::IDCLibrary* dumisdk::LibraryManager::_tryLoadLibrary(std::string path)
 #elif(defined(PLATFORM_ANDROID))
 
 #endif
-
-    if(ret){
-        printf("Load library: %s%s", ret->name, NL);
-    } else {
-        printf("Skip: Library %s not component or corrupt%s", path.c_str(), NL);
-    }
 
     return ret;
 }
@@ -123,7 +119,12 @@ bool dumisdk::LibraryManager::load()
     _filterSharedLibs(cmpPaths);
 
     for(auto& path:cmpPaths){
-        _tryLoadLibrary(path.string());
+        auto library = _tryLoadLibrary(path.string());
+        if(library){
+            Plugin p{path, library};
+            _plugins.emplace(p.id, std::move(p));
+            printf(">> Imported library %s%s", p.name, NL);
+        }
     }
 
     return true;

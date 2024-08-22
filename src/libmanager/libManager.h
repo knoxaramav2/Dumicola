@@ -10,9 +10,11 @@
 
 namespace dumisdk{
     struct Plugin{
-        std::filesystem::path path;
-        std::string name;
-        dumisdk::IDCLibrary* library;
+        const std::filesystem::path path;
+        const char* name;
+        const HASHID id;
+        const dumisdk::IDCLibrary* library;
+        Plugin(std::filesystem::path path, dumisdk::IDCLibrary* library);
     };
 
     class LibraryManager{

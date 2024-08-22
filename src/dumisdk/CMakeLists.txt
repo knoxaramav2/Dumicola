@@ -3,8 +3,6 @@ message(">> DUMISDK @ ${CMAKE_CURRENT_SOURCE_DIR}")
 #Setup library
 add_library(dumisdk STATIC)
 
-message("!!DUMISDK INCLUDE ${CONFIG_DIR}")
-
 target_include_directories(dumisdk 
 PRIVATE 
     ${DCUTILS_DIR} 
