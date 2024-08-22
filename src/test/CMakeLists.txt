@@ -5,9 +5,6 @@ set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -DNDEBUG")
 if(DEFINED _ANDROID)
 
 elseif(DEFINED _DESKTOP)
-
-
-
     add_library(kassert kassert.cpp)
     target_include_directories(kassert PUBLIC ${DCUTILS_DIR})
     target_link_libraries(kassert PUBLIC dcutils )
@@ -15,10 +12,14 @@ elseif(DEFINED _DESKTOP)
     add_executable(dumi_tests)
     target_include_directories(dumi_tests 
     PRIVATE 
-        ${DUMISDK_DIR} ${DCUTILS_DIR} ${SERVICEMAN_DIR}
-        ${DATAMAN_DIR} ${DUMICORE_DIR}
+        ${DUMISDK_DIR} ${DCUTILS_DIR} ${SERVICEMAN_DIR} ${LIBMAN_DIR}
+        ${DATAMAN_DIR} ${DUMICORE_DIR} 
+        ${SDL_VULKAN_DIR} ${SDL_HYPATIA_DIR} ${SDL_PORUS_DIR}
         )
-    target_link_libraries(dumi_tests PRIVATE kassert dcutils dumisdk serviceman dataman dumicore)
+    target_link_libraries(dumi_tests 
+PRIVATE 
+    kassert dcutils dumisdk serviceman dataman dumicore libman
+    )
     add_test(NAME TestGroup COMMAND dumi_tests)
 
     target_sources(dumi_tests
@@ -29,6 +30,7 @@ elseif(DEFINED _DESKTOP)
         component_test.cpp
         dtypes_test.cpp
         fixtures.cpp
+        plugin_test.cpp
     )
 
 endif()

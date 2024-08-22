@@ -6,7 +6,7 @@
 static std::vector<std::string> __errMsgs;
 static bool __hasFail = false;
 
-#define assertFailMsg(file, line) dumisdk::frmstr("Assert fail: %s @ line: %d\n", file, line);
+#define assertFailMsg(file, line) dcutil::frmstr("Assert fail: %s @ line: %d\n", file, line);
 
 inline void __prntDbgAssert(const char* file, int line) { 
     #ifndef KASSERT_SILENT

@@ -7,6 +7,8 @@ int main(){
 
     InitDumiCore
 
+    printf("TEST MSG\n");
+
     // try{
     //     RegisterServices(([](serviceman::ServiceBuilder sm){
     //         sm.registerLogger<DesktopLogger>();

@@ -50,9 +50,10 @@ Dumidesktop is the fully configured environment for running Dumicola on PC. This
 
 Project | Status | Progress | Active
 --------|--------|----------|-------
-| DumiSdk | Started | ![](https://geps.dev/progress/22/) | Yes 
+| DumiSdk | Started | ![](https://geps.dev/progress/23/) | Yes 
 | Data Manager | Started | ![](https://geps.dev/progress/20/) | Yes 
 | Service Manager | Paused | ![](https://geps.dev/progress/40/) | Yes 
+| Library Manager | Started | ![](https://geps.dev/progress/20/) | Yes 
 | App Runner | Paused | ![](https://geps.dev/progress/0/) | Yes 
 | DumiCore | Started | ![](https://geps.dev/progress/6/) | Yes 
 | DumiMobile | Started | ![](https://geps.dev/progress/1/) | Yes 
@@ -68,13 +69,14 @@ Project | Status  | Active
 # Standard Libraries
 Plugin | Status | Progress | Active
 ------ | ------ | -------- | ------
-| Vulkan (STL) | Not Started | ![](https://geps.dev/progress/0/) | No 
-| Hypatia (STL) | Not Started | ![](https://geps.dev/progress/0/) | No 
-| Porus (STL) | Not Started | ![](https://geps.dev/progress/0/) | No 
+| Vulkan (STL) | Started | ![](https://geps.dev/progress/5/) | Yes 
+| Hypatia (STL) | Not Started | ![](https://geps.dev/progress/0/) | Yes 
+| Porus (STL) | Not Started | ![](https://geps.dev/progress/0/) | Yes 
 
 # User Interfaces
 GUI | Platform | Status | Progress | Active
 --- | -------- | ------ | -------- | ------
+| Terminal | Windows/Linux | Not Started | ![](https://geps.dev/progress/0/) | Yes
 | WinUI | Windows | Not Started | ![](https://geps.dev/progress/0/) | No
 | GNUI | Linux | Not Started | ![](https://geps.dev/progress/0/) | No
 

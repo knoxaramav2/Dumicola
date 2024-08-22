@@ -7,103 +7,162 @@
 
 #pragma region IDC_Basic
 
-namespace dumisdk{
+namespace dumisdk {
 
-    #define extend public virtual
+	class IDCLibrary;
 
-    #pragma region DC_INTERFACES
+#pragma region Basic
+	class DCDefinition {
+	protected:
+		DCDefinition(DCDefinition& definition);
+		DCDefinition(HASHID id, HASHID parentId);
+		DCDefinition();
+	public:
+		virtual ~DCDefinition() = default;
+		const HASHID id;
+		const HASHID parentId;
+	};
 
-    class IDCDefinition{
-    public:
-        IDCDefinition(HASHID id , HASHID parentId);
+	class DCImplementation : extend DCDefinition {
+	protected:
+		DCImplementation(HASHID id, HASHID parentId);
+		DCImplementation();
+	public:
+		virtual ~DCImplementation() = default;
+		virtual void update() = 0;
+	};
 
-        const HASHID id;
-        const HASHID parentId;
-    };
+	template<typename T>
+	class DCInterface : extend DCDefinition {
+		static_assert(std::is_base_of<DCImplementation, T>::value, "T must extend DCImplementation");
+	protected:
+		DCInterface(HASHID id, HASHID parentId) : DCDefinition(id, parentId) {}
+	public:
+		virtual ~DCInterface() = default;
+		virtual T* create() = 0;
+	};
 
-    class IDCImplementation: extend IDCDefinition{
+#pragma endregion
 
-    public:
-        IDCImplementation(HASHID id, HASHID parentId);
+#pragma region fields
 
-    protected:
-        IDCImplementation();
+	class DCFieldDefinition : extend DCDefinition {
+	protected:
+	public:
+	};
 
-    };
-    template<typename T>
-    using ComponentFactory = T* (*)();
+	//template<typename T>
+	class DCFieldImplementation : extend DCImplementation, extend DCFieldDefinition {
+	protected:
+		//DCType<T> _value;
+	public:
+		//virtual void set(DCType<T>& value){
+		//	
+		//}
+		//virtual DCType<T>& get(){
+		//	return _value;
+		//}
+	};
 
-    template<typename T>
-    class IDCTemplate: extend IDCDefinition{
+	template<typename T>
+	class DCFieldTemplate : extend DCInterface<T>, extend DCComponentDefinition, ComponentInfo {
+	protected:
+	public:
+	};
 
-        ComponentFactory<T> _factory;
-    public:
-        IDCTemplate(HASHID id, HASHID parentId, ComponentFactory<T> factory):
-            IDCDefinition(id, parentId),_factory(factory){}
-        virtual T* create(){
-            return (T*)_factory();
-        }
-
-    protected:
-        IDCTemplate(ComponentFactory<T>factory):IDCDefinition(0,0),_factory(factory){};
-    };
-
-    #pragma endregion
-
-    #pragma region DC_NodeIO
-
-    class IONodeDefinition: extend IDCDefinition{
-
-    public:
-        //IONodeDefinition(HASHID id, HASHID parentId, dumisdk::DCVar value);
-
-    protected:
-        //IONodeDefinition(dumisdk::DCVar value);
-        //const dumisdk::DCVar _value;
-    };
-
-    class DCInputDefinition: extend IONodeDefinition{
-    public:
-        DCInputDefinition(HASHID id, HASHID parentId);
-
-    protected:
-        DCInputDefinition();
-    };
-
-    class DCInput: extend DCInputDefinition{
-
-    public:
-        DCInput(HASHID id, HASHID parentId);
-
-    protected:
-        DCInput();
-    };
-
-    class DCInputTemplate: extend DCInputDefinition, extend IDCTemplate<DCInput>{
-    
-    public:
-
-    protected:
-    
-    };
-
-    #pragma endregion
-
-    #pragma region DC_BASE_CLASSES
+#pragma region ConfigField
 
 
-    class DCComponentDefinition: extend IDCDefinition{
+#pragma endregion
 
-    public:
-        DCComponentDefinition(HASHID id, HASHID parentId);
+#pragma endregion
 
-    protected:
-        DCComponentDefinition();
+#pragma region Component
+	class DCComponentDefinition : extend DCDefinition {
+	protected:
+		DCComponentDefinition(HASHID id, HASHID parentId,
+			DCFieldDefinition* fields
+			);
+		DCComponentDefinition();
+	public:
+		virtual ~DCComponentDefinition() = default;
+		const DCFieldDefinition* fields;
+	};
 
-    };
+	template<typename T>
+	class DCComponentTemplate;
 
-    #pragma endregion
+	class DCComponentImplementation : extend DCImplementation, extend DCComponentDefinition {
+	protected:
+		using DCImplementation::DCImplementation;
+		using DCComponentDefinition::DCComponentDefinition;
+		DCComponentImplementation();
+	public:
+		DCComponentImplementation(DCComponentDefinition& definition);
+		virtual ~DCComponentImplementation() = default;
+	};
+
+	struct ComponentInfo {
+		const char* name;
+		const char* description;
+		APPSID libraryId;
+		ComponentInfo(const char* name, const char* description, APPSID libraryId);
+
+	};
+
+	template<typename T>
+	class DCComponentTemplate : extend DCInterface<T>, extend DCComponentDefinition, public ComponentInfo {
+		static_assert(std::is_base_of<DCComponentImplementation, T>::value, "T must extend DCComponentImplementation");
+	protected:
+		using DCInterface<T>::DCInterface;
+		using DCComponentDefinition::DCComponentDefinition;
+	public:
+		DCComponentTemplate(const DCFieldTemplate<DCFieldImplementation>* fields):
+			fields(fields)
+		{
+		
+		}
+		virtual ~DCComponentTemplate() = default;
+		
+		const DCFieldTemplate<DCFieldImplementation>* fields; 
+	};
+
+#pragma endregion
+
+#pragma region DC_LIBRARY
+
+	struct LibraryInfo {
+		const char* name;
+		const char* version;
+		const char* author;
+		const char* repository;
+		const char* description;
+		const APPSID libraryId;
+	public:
+		LibraryInfo(const char* name, const char* version, const char* author,
+			const char* repository, const char* description, APPSID libraryId);
+	};
+
+	class IDCLibrary : public LibraryInfo {
+	public:
+
+	protected:
+		IDCLibrary(const char* name, const char* version, const char* author,
+			const char* repository, const char* description);
+		virtual const std::vector<ComponentInfo> manifest() = 0;
+		virtual const DCComponentImplementation* create(const char* name) = 0;
+		virtual const DCComponentImplementation* create(HASHID id) = 0;
+		virtual bool registerTemplate(std::shared_ptr<DCComponentTemplate<DCComponentImplementation>>
+			componentTemplate) = 0;
+
+		optmap<HASHID, std::shared_ptr<DCComponentTemplate<DCComponentImplementation>>> _templates;
+	public:
+		virtual ~IDCLibrary() = default;
+	};
+
+#pragma endregion
 
 }
 
-
+typedef __declspec (dllexport) dumisdk::IDCLibrary* DUMIEXPORT;
+typedef __declspec (dllimport) dumisdk::IDCLibrary* DUMIIMPORT;

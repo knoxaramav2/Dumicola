@@ -24,9 +24,9 @@ do
         d) dumpFile=${OPTARG};;
         R) releaseType="Release";;
         x) 
-            if [ ${OPTARG} = "gcc" ]; then 
-                echo ">> GCC | ${OPTARG}"
-                c_compiler="gcc"
+            if [ ${OPTARG} = "g++" ]; then 
+                echo ">> G++"
+                c_compiler="g++"
                 cpp_compiler="g++"
             elif [ ${OPTARG} = "clang" ]; then
                 echo ">> CLANG"

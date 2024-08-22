@@ -16,41 +16,7 @@ namespace dumisdk
         DCSTR, DCMAP, DCLIST
     };
 
-    template<typename T>
-    T defaultTypeValue();
-
-    class DCOps;
-    struct DCMemObj{
-        const APPSID id;
-         const TypeId type;
-        //const DCTypes type;
-        
-        DCMemObj(TypeId id, void* value);
-        virtual ~DCMemObj() = default;
-
-        protected:
-        std::shared_ptr<void*> _value;
-
-        friend DCOps;
-    };
-
-    template<typename T>
-    class DCLiteral: public DCMemObj{
-        protected:
-        DCLiteral(TypeId id, T* value);
-    };
-
-    template<typename T>
-    class DCCollection: public DCMemObj{
-        protected:
-        DCCollection(TypeId id, void* value);
-    };
-
-    template<typename T>
-    class DCClass: public DCMemObj{
-        protected:
-        DCClass(TypeId id, void* value);
-    };
+    struct DCMemObj;
 
     typedef bool DCBOOL_TYPE;
     typedef long DCINT_TYPE;
@@ -58,6 +24,84 @@ namespace dumisdk
     typedef std::string DCSTRING_TYPE;
     typedef std::vector<DCMemObj*> DCLIST_TYPE;
     typedef std::map<APPSID, DCMemObj*> DCMAP_TYPE;
+
+    class DCOps;
+    struct DCMemObj{
+        const APPSID id;
+        const TypeId type;
+        
+        DCMemObj(TypeId id);
+        virtual ~DCMemObj() = default;
+
+        protected:
+        DCMemObj();
+
+        friend DCOps;
+    };
+
+    template<typename T>
+    struct DCType: extend DCMemObj{
+        ~DCType(){
+            delete _value;
+        }
+        T& get(){ 
+            return *_value;
+        }
+        void set(T value){ 
+            *_value = value;
+        }
+        protected:
+        DCType(T* value):DCMemObj(typeId(T)),_value(value){}
+        DCType(){}
+        T* _value;
+    };
+
+    template<typename T>
+    struct DCLiteral: extend DCType<T>{
+        virtual ~DCLiteral() = default;
+        protected:
+        DCLiteral(){}
+    };
+
+    template<typename T>
+    struct DCCollection: extend DCType<T>{
+        protected:
+        DCCollection(T* value):DCType<T>(value){}
+        DCCollection(){}
+    };
+
+    template<typename T>
+    struct DCClass: extend DCType<T>{
+        protected:
+        DCClass(T* value):DCType<T>(value){}
+        DCClass(){}
+    };
+
+    struct DCBoolean: extend DCLiteral<DCBOOL_TYPE>{
+        DCBoolean();
+    };
+
+    struct DCInteger: extend DCLiteral<DCINT_TYPE>{
+        DCInteger();
+    };
+
+    struct DCDecimal: extend DCLiteral<DCDECI_TYPE>{
+        DCDecimal();
+    };
+
+    struct DCString: extend DCLiteral<DCSTRING_TYPE>{
+        DCString();
+    };
+
+    struct DCMap: extend DCCollection<DCMAP_TYPE>{
+        DCMap();
+        virtual ~DCMap() = default;
+    };
+
+    struct DCList: extend DCCollection<DCLIST_TYPE>{
+        DCList();
+        virtual ~DCList() = default;;
+    };
 
     #define assertStdDCType(T)\
         static_assert(\

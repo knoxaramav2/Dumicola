@@ -10,13 +10,22 @@ if(NOT DEFINED MINOR_VRS)
 endif()
 if(NOT DEFINED BUILD_VRS) 
     set(BUILD_VRS 0) 
-endif()
+endif() 
 
 if(NOT DEFINED AUX_AS)
     set(AUX_BUILD SHARED)
 else()
     set(AUX_BUILD AUX_AS)
 endif()
+
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/cpp.hint COPYONLY)
+
+# Set the output directories for different types of targets
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/lib)
+
+set(ROOTDIR ${CMAKE_CURRENT_SOURCE_DIR}/build)
 
 message("Build Version: ${MAJOR_VRS}.${MINOR_VRS}.${BUILD_VRS}")
 
@@ -29,6 +38,9 @@ set(CONFIG_DIR ${CMAKE_CURRENT_SOURCE_DIR}/config)
 
 set(DCUTILS_DIR ${CMAKE_CURRENT_SOURCE_DIR}/dcutils)
 set(DUMISDK_DIR ${CMAKE_CURRENT_SOURCE_DIR}/dumisdk)
+set(DUMILANG_DIR ${CMAKE_CURRENT_SOURCE_DIR}/dumilang)
+set(DUMISDL_DIR ${CMAKE_CURRENT_SOURCE_DIR}/dcstl)
+set(LIBMAN_DIR ${CMAKE_CURRENT_SOURCE_DIR}/libmanager)
 set(DATAMAN_DIR ${CMAKE_CURRENT_SOURCE_DIR}/datamanager)
 set(SERVICEMAN_DIR ${CMAKE_CURRENT_SOURCE_DIR}/servicemanager)
 set(APPRUNNER_DIR ${CMAKE_CURRENT_SOURCE_DIR}/apprunner)
@@ -36,11 +48,12 @@ set(DUMICORE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/dumicore)
 set(DUMIDESK_DIR ${CMAKE_CURRENT_SOURCE_DIR}/dumidesk)
 set(DUMIMOBILE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/Dumimobile/app/src/main/cpp)
 
-message(${CMAKE_BINARY_DIR})
-
 add_subdirectory(config)
 add_subdirectory(dcutils)
 add_subdirectory(dumisdk)
+add_subdirectory(dumilang)
+add_subdirectory(dcstl)
+add_subdirectory(libmanager)
 add_subdirectory(datamanager)
 add_subdirectory(servicemanager)
 add_subdirectory(apprunner)
@@ -50,5 +63,6 @@ add_subdirectory(Dumimobile/app/src/main/cpp)
 
 #Testing
 enable_testing()
-set(DUMITEST_DIR ${CMAKE_CURRENT_SOURCE_DIR}/dumitest)
+#set(DUMITEST_DIR ${CMAKE_CURRENT_SOURCE_DIR}/dumitest)
 add_subdirectory(test)
+
