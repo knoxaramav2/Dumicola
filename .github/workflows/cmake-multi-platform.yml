@@ -73,6 +73,7 @@ jobs:
         echo "build-output-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
 
     - name: Set up compilers
+      if: runner.os == 'Linux'
       run: |
         sudo apt-get update
         if [ "${{ matrix.c_compiler }}" == "gcc" ]; then
