@@ -48,7 +48,7 @@ public:
 };
 
 extern "C" {
-	__declspec (dllexport) dumisdk::IDCLibrary* LoadLibrary();
+	DUMIEXPORT LoadLibrary();
 }
 
 

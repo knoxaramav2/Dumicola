@@ -59,7 +59,7 @@ dumisdk::IDCLibrary* dumisdk::LibraryManager::_tryLoadLibrary(std::string path)
         FreeLibrary(hmdl); 
     }
 #elif(defined(PLATFORM_GNU))
-    void* hndl = dlopen(libPath.c_str(), RTLD_LAZY);
+    void* hndl = dlopen(path.c_str(), RTLD_LAZY);
     if(!hndl){return nullptr;}
     LLF libload = (LLF)dlsym(hndl, "LoadLibrary");
     if(!libload){

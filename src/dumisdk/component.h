@@ -1,6 +1,7 @@
 #include "dtypes.h"
 #include "defs.h"
 #include "dumiexcept.h"
+#include "environment.h"
 
 #include <memory>
 #include <exception>
@@ -10,6 +11,7 @@
 namespace dumisdk {
 
 	class IDCLibrary;
+	class DCComponentDefinition; class ComponentInfo;
 
 #pragma region Basic
 	class DCDefinition {
@@ -65,9 +67,16 @@ namespace dumisdk {
 	};
 
 	template<typename T>
-	class DCFieldTemplate : extend DCInterface<T>, extend DCComponentDefinition, ComponentInfo {
+	class DCFieldTemplate : extend DCInterface<T>, extend DCFieldDefinition {
+	static_assert(std::is_base_of<DCFieldImplementation, T>::value, "T must extend DCFieldImplementation");
 	protected:
+	using DCInterface<T>::DCInterface;
+	using DCComponentDefinition::DCComponentDefinition;
 	public:
+	DCFieldTemplate(){
+
+	}
+	virtual ~DCFieldTemplate() = default;
 	};
 
 #pragma region ConfigField
@@ -164,5 +173,5 @@ namespace dumisdk {
 
 }
 
-typedef __declspec (dllexport) dumisdk::IDCLibrary* DUMIEXPORT;
-typedef __declspec (dllimport) dumisdk::IDCLibrary* DUMIIMPORT;
+#define DUMIEXPORT EXPORT dumisdk::IDCLibrary* 
+#define DUMIIMPORT IMPORT dumisdk::IDCLibrary*

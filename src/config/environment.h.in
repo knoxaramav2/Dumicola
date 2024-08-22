@@ -39,8 +39,15 @@
 
 #ifdef PLATFORM_WINDOWS
 	#define NL "\r\n"
-#else
+	#define EXPORT __declspec(dllexport)
+	#define IMPORT __declspec(dllimport)
+#elif defined(PLATFORM_GNU)
 	#define NL "\n"
+	#define EXPORT __attribute__((visibility("default")))
+	#define IMPORT
+#elif defined(PLATFORM_ANDROID)
+	#define EXPORT __attribute__((visibility("default")))
+	#define IMPORT
 #endif
 
 #define BUILD_CONFIG @BUILD_CONFIG@
