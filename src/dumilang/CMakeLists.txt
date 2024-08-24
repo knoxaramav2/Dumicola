@@ -17,4 +17,5 @@ target_sources(
     dumilang
 PRIVATE
     token.cpp
+    tokenizer.cpp
 )

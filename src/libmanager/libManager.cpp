@@ -23,7 +23,7 @@ std::vector<std::filesystem::path> dumisdk::LibraryManager::_findSharedLibs()
     for(auto& path: _paths){
         auto pstr = path.string();
         printf("Searching %s....\r\n", pstr.c_str());
-        if(!dirExists(pstr)){
+        if(!dcutil::dirExists(pstr)){
             printf("\tSkipping %s\r\n", pstr.c_str());
             continue;
         }
@@ -91,7 +91,7 @@ void dumisdk::LibraryManager::_filterSharedLibs(std::vector<std::filesystem::pat
 
 dumisdk::LibraryManager::LibraryManager()
 {
-    std::filesystem::path xpath(execPath());
+    std::filesystem::path xpath(dcutil::execPath());
     _paths.push_back(xpath);
     _paths.push_back(xpath/"plugins");
 }

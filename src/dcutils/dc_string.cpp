@@ -4,6 +4,8 @@
 #include <cstdarg>
 #include <algorithm>
 #include <cctype>
+#include <regex>
+#include <sstream>
 
 std::string dcutil::frmstr(const char* f_str, ...){
     va_list args;
@@ -51,4 +53,22 @@ bool dcutil::strEquals(std::string lstr, std::string rstr, bool ignoreCase)
     }
 
     return lstr == rstr;
+}
+
+std::vector<std::string> dcutil::split(std::string text, const char* delim)
+{
+    std::stringstream ss(text);
+    size_t prev = 0, pos;
+    std::vector<std::string> terms;
+    while((pos = text.find_first_of(delim, prev)) != std::string::npos){
+        if(pos > prev){
+            terms.push_back(text.substr(prev, pos-prev));
+            prev = pos + 1;
+        }
+        if(prev < text.length()){
+            terms.push_back(text.substr(prev, std::string::npos));
+        }
+    }
+
+    return terms;
 }

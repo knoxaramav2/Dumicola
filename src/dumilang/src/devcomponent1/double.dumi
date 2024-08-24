@@ -1,10 +1,32 @@
-@name "Double"
-@description "Double all inputs and output their sum"
-@views true
 
-Output("Out1", deci)
+component{
+    name = "DoubleSum"
+    description = "Output double the sum of all inputs"
+    viewsEnabled = true
+    viewsVisible = false
 
-Update(){
-    Out1.value = sum(Inputs)*2
+    Outputs = [output]
+
+    update(){
+        output.value = 0
+        for view in Views{ output.value += view.value }
+        output.value *= 2
+    }
+
+} doubleSum
+
+component{
+    name = "ScriptAdd"
+    description = ""
+    viewsEnabled = false
+
+    Outputs = [output]
+    Inputs = [input1, input2]
+
+    update(){ output.value = input1.value, input2.value }
 }
+
+Output {} output
+
+Input{} input1, input2
 
