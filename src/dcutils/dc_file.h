@@ -17,5 +17,8 @@ namespace dcutil{
     std::string readFileAsString(std::filesystem::path);
     std::vector<std::string> readFileByLines(std::filesystem::path);
 
+    bool writeFile(std::filesystem::path path, std::string& data, bool append = false);
+    bool writeFile(std::filesystem::path path, std::vector<std::string>& data, bool append = false);
+
     std::vector<std::filesystem::path> listFiles(std::filesystem::path path, const char* extFilter, bool recursive); 
 }
