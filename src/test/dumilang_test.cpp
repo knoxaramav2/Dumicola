@@ -1,10 +1,18 @@
+#include <stdio.h>
+
 #include "tests.h"
 #include "environment.h"
-#include <stdio.h>
+#include "dumilang.h"
+
+void init_lang(){
+    
+}
 
 bool test_dumilang(){
 
-    printf("With src: %s%s", DUMILANG_SRC, NL);
+    init_lang();
+    printf("With src: %s%s", DCLANG_DEV_SRC, NL);
 
+    
     return true;
 }

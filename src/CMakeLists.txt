@@ -18,7 +18,10 @@ else()
     set(AUX_BUILD AUX_AS)
 endif()
 
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/cpp.hint COPYONLY)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/cpp.hint ${CMAKE_BINARY_DIR}/cpp.hint COPYONLY)
+
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_BINARY_DIR}/bin)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR}/bin)
 
 # Set the output directories for different types of targets
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
@@ -42,6 +45,7 @@ set(DUMILANG_DIR ${CMAKE_CURRENT_SOURCE_DIR}/dumilang)
 set(DUMISDL_DIR ${CMAKE_CURRENT_SOURCE_DIR}/dcstl)
 set(LIBMAN_DIR ${CMAKE_CURRENT_SOURCE_DIR}/libmanager)
 set(DATAMAN_DIR ${CMAKE_CURRENT_SOURCE_DIR}/datamanager)
+set(DUMIENGINE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/dumiengine)
 set(SERVICEMAN_DIR ${CMAKE_CURRENT_SOURCE_DIR}/servicemanager)
 set(APPRUNNER_DIR ${CMAKE_CURRENT_SOURCE_DIR}/apprunner)
 set(DUMICORE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/dumicore)
@@ -55,6 +59,7 @@ add_subdirectory(dumilang)
 add_subdirectory(dcstl)
 add_subdirectory(libmanager)
 add_subdirectory(datamanager)
+add_subdirectory(dumiengine)
 add_subdirectory(servicemanager)
 add_subdirectory(apprunner)
 add_subdirectory(dumicore)
@@ -63,6 +68,5 @@ add_subdirectory(Dumimobile/app/src/main/cpp)
 
 #Testing
 enable_testing()
-#set(DUMITEST_DIR ${CMAKE_CURRENT_SOURCE_DIR}/dumitest)
 add_subdirectory(test)
 

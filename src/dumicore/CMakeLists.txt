@@ -11,6 +11,7 @@ PUBLIC
     ${APPRUNNER_DIR}
     ${DUMICORE_DIR}
 PRIVATE
+    ${DUMIENGINE_DIR}
     ${DUMILANG_DIR}
     )
     
@@ -18,10 +19,13 @@ target_link_libraries(
     dumicore 
 PRIVATE 
     dcutils 
-    dumisdk 
-    serviceman
     dumilang 
-    apprunner)
+    apprunner
+PUBLIC
+    serviceman
+    dumisdk
+    dumiengine
+    )
 
 target_sources(
     dumicore

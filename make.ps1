@@ -36,7 +36,6 @@ if($b){
     }
 }
 
-
 if ($clean) {
     Write-Host "Cleaning..."
     cmake --build "$local_path/src" --target clean
@@ -46,7 +45,7 @@ if ($clean) {
 
 if ($b) {
     Write-Host "BUILD START"
-    cmake -B "$local_path/build" -S "$local_path/src" $version_opts -DCMAKE_CXX_COMPILER="$cpp_compiler" -DCMAKE_C_COMPILER="$c_compiler" -DCMAKE_BUILD_TYPE="$releaseType" `
+    cmake -B "$local_path/build" -S "$local_path/src" -DCMAKE_CXX_COMPILER="$cpp_compiler" -DCMAKE_C_COMPILER="$c_compiler" -DCMAKE_BUILD_TYPE="$releaseType" `
         -DMAJOR_VRS=10 -DMINOR_VRS=5 -DBUILD_VRS=88
     cmake --build "$local_path/build" --config "$releaseType"
     Write-Host "DONE."

@@ -1,5 +1,5 @@
 #pragma once
 
-#define DUMICOMM_MAJOR 10
-#define DUMICOMM_MINOR 5
-#define DUMICOMM_BUILD 88
+#define DUMICOMM_MAJOR 0
+#define DUMICOMM_MINOR 0
+#define DUMICOMM_BUILD 0

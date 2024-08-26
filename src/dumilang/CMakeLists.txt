@@ -2,11 +2,12 @@ message(">> DUMILANG @ ${CMAKE_CURRENT_SOURCE_DIR}")
 
 add_library(dumilang STATIC)
 
-target_link_libraries(dumilang PUBLIC dcutils dataman)
+target_link_libraries(dumilang PUBLIC dcutils dataman dumiengine)
 target_include_directories(dumilang
 PRIVATE 
     ${DCUTILS_DIR} 
     ${DATAMAN_DIR}
+    ${DUMIENGINE_DIR}
 PUBLIC
     ${CONFIG_DIR}
 )

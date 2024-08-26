@@ -15,6 +15,11 @@ PUBLIC
 target_link_libraries(vulkan PUBLIC dumisdk PRIVATE dcutils)
 target_compile_definitions(vulkan PRIVATE VULKAN_EXPORT)
 
+set_target_properties(vulkan 
+    PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/plugins/stl
+    
+    )
+
 target_sources(vulkan
 PUBLIC
     vulkan.cpp

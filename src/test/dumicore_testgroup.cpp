@@ -14,6 +14,7 @@ int main(){
     test_components();
     test_plugins();
     test_dumilang();
+    test_engine();
 
     applyAsserts();
 

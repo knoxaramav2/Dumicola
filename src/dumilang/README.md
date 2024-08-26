@@ -22,3 +22,4 @@ Map | N*W | Primitive | A map of types [APPSID, (Mixed typing)]
 ```
 
 ```
+
