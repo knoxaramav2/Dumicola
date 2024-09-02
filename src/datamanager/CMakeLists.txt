@@ -12,6 +12,7 @@ ${CONFIG_DIR}
 )
 
 target_link_libraries(dataman PRIVATE dcutils dumisdk)
+set_target_properties(dataman PROPERTIES POSITION_INDEPENDENT_CODE ON)
 
 target_sources(
     dataman

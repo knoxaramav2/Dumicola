@@ -3,37 +3,43 @@
 
 #include "tests.h"
 #include "dlEngine.h"
+#include "dc_file.h"
 
 dumiengine::DumiEngine* engine = nullptr;
 
-static void init_eng(unsigned cores){
+static void init_eng(){
+
     if(engine){
         delete engine;
     }
-    engine = new dumiengine::DumiEngine(cores);
+    engine = new dumiengine::DumiEngine();
+}
+
+static bool loadProg(std::string path){
+    
+    auto fpath = dcutil::rootDir()/"scripts/test"/path;
+    auto data = dcutil::readFileAsString(fpath);
+
+    return engine->loadDCProgram(data) != 0;
+}
+
+static void startEngine(){
+    engine->start();
+}
+
+static void stopEngine(){
+    engine->stop();
 }
 
 static void test_cores(){
 
-    //assertNotThrows([]{
-    //    init_eng(dumiengine::THREAD, 4);
-    //    engine->setState(dumiengine::RUN);
-    //    for(auto i = 0; i < 50; ++i){
-    //        std::this_thread::sleep_for(std::chrono::milliseconds(100));
-    //        engine->update();
-    //    }
-    //});
-
     assertNotThrows([]{
-        init_eng(4);
-        engine->setState(dumiengine::RUN);
-        for(auto i = 0; i < 50; ++i){
-            std::this_thread::sleep_for(std::chrono::milliseconds(100));
-            engine->update();
-        }
+        init_eng();
+        assert(loadProg("program1.dc"));
+        startEngine();
     });
 
-    
+    stopEngine();
     //engine->setState(dumiengine::STOP);
 }
 

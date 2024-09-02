@@ -53,7 +53,7 @@ fs::path dcutil::execPath(){
 fs::path dcutil::rootDir()
 {
     fs::path path(execPath());
-    path = path.parent_path().parent_path();
+    path = path.parent_path();
     return path;
 }
 

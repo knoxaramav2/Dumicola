@@ -1,0 +1,48 @@
+#Program metadata
+::Name "Dev Program 1"
+::Description "Demonstrate basic program"
+::DEPENDS[ #Library dependencies to import
+    #[Library].[Component] (as [ALIAS] optional)
+    Vulkan.And as AND
+    Vulkan.Max as MAX
+    Vulkan.Greater as GTR
+    Hypatia.Sum as SUM
+    Porus.Signed as SIGNED
+    Porus.SignedRandom as RAND
+]
+
+SIGNED SIGNED1      #[Type] [Symbol]
+    VALUE   0       #   [FieldName] [Value]
+RAND RAND1
+    MIN     0
+    MAX     100
+GTR GTR1
+MAX MAX1
+SUM SUM1
+OUT OUT1
+
+LINK GTR1 RAND1
+LINK MAX1 SIGNED1 GTR1
+LINK SUM1 GTR1 MAX1
+LINK OUT1 SUM1
+
+#Graph Order
+#1  SIGNED1
+#2  RAND1
+#3  GTR1
+#4  MAX1
+#5  SUM1
+#6  OUT1
+
+#Bytecode
+#UPDATE SIGNED1
+#UPDATE RAND1
+#UPDATE GTR1
+#UPDATE MAX1
+#UPDATE SUM1
+#UPDATE OUT1
+#WAITSIG
+#GOTO 0
+#
+
+

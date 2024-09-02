@@ -116,5 +116,7 @@
     "terminal.integrated.env.windows": {
         "DEBUG_PATH": "debug",
         "MMI_PATH": "gdb.exe"
-    }
+    },
+    "pieces.cloudCapabilities": "Blended",
+    "pieces.telemetry": true
 }

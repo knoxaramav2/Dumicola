@@ -1,3 +1,5 @@
+#pragma once
+
 #include "dtypes.h"
 #include "defs.h"
 #include "dumiexcept.h"
