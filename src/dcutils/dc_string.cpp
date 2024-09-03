@@ -63,11 +63,12 @@ std::vector<std::string> dcutil::split(std::string text, const char* delim)
     while((pos = text.find_first_of(delim, prev)) != std::string::npos){
         if(pos > prev){
             terms.push_back(text.substr(prev, pos-prev));
-            prev = pos + 1;
         }
-        if(prev < text.length()){
-            terms.push_back(text.substr(prev, std::string::npos));
-        }
+        prev = pos + 1;
+    }
+
+    if(prev < text.length()){
+        terms.push_back(text.substr(prev, std::string::npos));
     }
 
     return terms;

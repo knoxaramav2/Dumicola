@@ -27,4 +27,5 @@ PRIVATE
     dlEngine.cpp
     alu.cpp
     programblock.cpp
+    dccompile.cpp
 )

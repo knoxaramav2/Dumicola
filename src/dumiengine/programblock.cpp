@@ -1,7 +1,11 @@
 #include "programblock.h"
+#include "dc_string.h"
+#include "dccompile.h"
 
 void dumiengine::ProgramBlock::_load(std::string &prgData)
 {
+    _instSpace = compile(prgData);
+    //TODO Error handling
 }
 
 dumiengine::ProgramBlock::ProgramBlock(std::string &prgData, FaultCallback callback):

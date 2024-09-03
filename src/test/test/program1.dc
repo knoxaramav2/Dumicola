@@ -11,15 +11,17 @@
     Porus.SignedRandom as RAND
 ]
 
-SIGNED SIGNED1      #[Type] [Symbol]
-    VALUE   0       #   [FieldName] [Value]
-RAND RAND1
+SIGNED SIGNED1{      #[Type] [Symbol]
+    VALUE   0        #   [FieldName] [Value]
+}
+RAND RAND1{
     MIN     0
     MAX     100
-GTR GTR1
-MAX MAX1
-SUM SUM1
-OUT OUT1
+}
+GTR GTR1{}
+MAX MAX1{}
+SUM SUM1{}
+OUT OUT1{}
 
 LINK GTR1 RAND1
 LINK MAX1 SIGNED1 GTR1

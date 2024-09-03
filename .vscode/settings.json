@@ -117,6 +117,10 @@
         "DEBUG_PATH": "debug",
         "MMI_PATH": "gdb.exe"
     },
+    "workbench.iconTheme": "fira-code-material-minimal",
+    "editor.fontFamily": "fira-code-nerd, FiraCode Nerd Font, Consolas, 'Courier New', monospace",
+    "editor.fontLigatures": true,
     "pieces.cloudCapabilities": "Blended",
     "pieces.telemetry": true
+    
 }

@@ -58,7 +58,14 @@ void KTEST::__assertNotThrows(std::function<void()> func, const char* file, int 
 {
     try{
         func();
-    }catch(...){
+    } catch (const std::exception& ex){
+        printf("%s\r\n", ex.what());
+        __assert(false, file, line);
+    } catch(const std::string& ex){
+        printf("%s\r\n", ex.c_str());
+        __assert(false, file, line);
+    }
+    catch(...){
         __assert(false, file, line);
     }
 }
