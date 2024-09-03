@@ -20,8 +20,43 @@ enum DCLex{
     OP_ANGLE,   //<
     CL_ANGLE,   //>
     PROPERTY,   //::PROPERTY
-    TAB
+    TAB,
+    END
 };
+
+const char* DCLexToString(DCLex lex){
+    const char* ret;
+    switch (RAW)
+    {
+    case RAW: ret = "raw"; break;
+    case STRING: ret = "string"; break;
+    case INTEGER: ret = "integer"; break;
+    case DECIMAL: ret = "decimal"; break;
+    case SYMBOL: ret = "symbol"; break;
+    case DOT: ret = "."; break;
+    case AS: ret = "as"; break;
+    case ALIAS: ret = "alias"; break;
+    case OP_BRCK: ret = "["; break;
+    case CL_BRCK: ret = "]"; break;
+    case OP_BRCE: ret = "{"; break;
+    case CL_BRCE: ret = "}"; break;
+    case OP_PARN: ret = "("; break;
+    case CL_PARN: ret = ")"; break;
+    case OP_ANGLE: ret = "<"; break;
+    case CL_ANGLE: ret = ">"; break;
+    case PROPERTY: ret = "property"; break;
+    case TAB: ret = "\t"; break;
+    case END: ret = "EOF"; break;
+    default:
+        break;
+    }
+
+    return ret;
+}
+
+bool isLiteral(DCLex lex){
+    return lex==STRING||lex==INTEGER||lex==DECIMAL||lex==OP_BRCK;
+}
 
 struct Token{
     std::string text;
@@ -220,12 +255,70 @@ inline std::vector<Token> parseRaw(std::string &raw){
         printf("%s\t\t\t%d\n", item.text.c_str(), item.lex);
     }
 
+    ret.push_back(Token("", END));
     return ret;
+}
+
+void updateRawToken(){
+
+}
+
+void backInterpret(std::vector<Token>& target){
+    int oBrace = 0, oBrack=0, oAngle=0, oParan=0;
+    for(size_t i = 0; i < target.size()-1; ++i){
+        auto lex = target[i].lex;
+        auto& next = target[i+1].lex;
+        switch(lex){
+            case PROPERTY:
+                if(!isLiteral(next)){
+                    throw dumisdk::dumiexception(
+                    dcutil::frmstr("Expected value following %s, received %s.\n", 
+                    target[i].text.c_str(), target[i+1].text.c_str()).c_str());
+                }
+                break;
+            case DOT:
+                if(next != RAW){
+                    throw dumisdk::dumiexception(
+                    dcutil::frmstr("Expected identifier, found %s.\n", 
+                    target[i].text.c_str(), DCLexToString(next)).c_str());
+                }
+                target[i+1].lex = SYMBOL;
+            case AS:
+                if(next != RAW){
+                    throw dumisdk::dumiexception(
+                    dcutil::frmstr("Expected identifier, found %s.\n", 
+                    target[i].text.c_str(), DCLexToString(next)).c_str());
+                }
+                target[i+1].lex = ALIAS;
+                break;
+            case OP_BRCE: ++oBrace; break;
+            case CL_BRCE:
+                if(oBrace==0){throw dumisdk::dumiexception("Extraneous '}' found\n");}
+                --oBrace;
+            break;
+            case OP_BRCK: ++oBrack; break;
+            case CL_BRCK:
+                if(oBrack==0){throw dumisdk::dumiexception("Extraneous ']' found\n");}
+                --oBrack;
+            break;
+            case OP_PARN: ++oParan; break;
+            case CL_PARN:
+                if(oParan==0){throw dumisdk::dumiexception("Extraneous ')' found\n");}
+                --oParan;
+            break;
+            case OP_ANGLE: ++oAngle; break;
+            case CL_ANGLE:
+                if(oAngle==0){throw dumisdk::dumiexception("Extraneous '>' found\n");}
+                --oAngle;
+            break;
+        }
+    }
 }
 
 std::vector<Bytecode> compile(std::string &text)
 {
-    auto rawStack = parseRaw(text); 
+    std::vector<Token> rawStack = parseRaw(text); 
+    backInterpret(rawStack);
 
     return {};
 }
