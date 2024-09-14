@@ -1,57 +1,50 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
-    "configurations": [
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
       {
-        "name": "Test Groups",
-        "type": "cppdbg",
-        "request": "launch",
-        "program": "${workspaceFolder}/build/bin/${env:DEBUG_PATH}/dumi_tests",
-        "args": [],
-        "stopAtEntry": false,
-        "cwd": "${workspaceFolder}",
-        "environment": [],
-        "MIMode": "gdb",
-        "miDebuggerPath": "${env:MMI_PATH}",
-        
-        "setupCommands": [
-            {
-                "description": "Enable pretty-printing for gdb",
-                "text": "-enable-pretty-printing",
-                "ignoreFailures": true
-            }
-        ],
+          "name": "Test Groups",
+          "type": "cppdbg",
+          "request": "launch",
+          "program": "${workspaceFolder}/build/bin/dumi_tests",
+          "args": [],
+          "stopAtEntry": false,
+          "cwd": "${workspaceFolder}",
+          "environment": [],
+          "MIMode": "gdb",
+          "miDebuggerPath": "${env:MMI_PATH}",
+          "externalConsole": false,
+          "setupCommands": [
+              {
+                  "description": "Enable pretty-printing for gdb",
+                  "text": "-enable-pretty-printing",
+                  "ignoreFailures": false
+              }
+          ],
+          "preLaunchTask": "Pre-run build"
       },
       {
-        "name": "Dumidesk",
-        "type": "cppdbg",
-        "request": "launch",
-        "program": "${workspaceFolder}/build/bin/${env:DEBUG_PATH}/dumidesk",
-        "args": [],
-        "stopAtEntry": true,
-        "cwd": "${workspaceFolder}",
-        "environment": [],
-        "externalConsole": false,
-        "MIMode": "gdb",
-        "miDebuggerPath": "${env:MMI_PATH}",
-        "setupCommands": [
-            {
-                "description": "Enable pretty-printing for gdb",
-                "text": "-enable-pretty-printing",
-                "ignoreFailures": true
-            }
-        ],
-      },
-    ],
-    "tasks":{
-      "version": "2.0.0",
-      "tasks":{
-        "label": "Run pre-launch script",
-        "type": "shell",
-        "command": "${workspaceFolder}/make.sh -b",
-        "problemMatcher": []
-    }
-    }
-  }
+          "name": "Dumidesk",
+          "type": "cppdbg",
+          "request": "launch",
+          "program": "${workspaceFolder}/build/bin/dumidesk",
+          "args": [],
+          "stopAtEntry": true,
+          "cwd": "${workspaceFolder}",
+          "environment": [],
+          "externalConsole": false,
+          "MIMode": "gdb",
+          "miDebuggerPath": "${env:MMI_PATH}",
+          "setupCommands": [
+              {
+                  "description": "Enable pretty-printing for gdb",
+                  "text": "-enable-pretty-printing",
+                  "ignoreFailures": true
+              }
+          ],
+          "preLaunchTask": "Pre-run build"
+      }
+  ]
+}

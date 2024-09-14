@@ -37,13 +37,7 @@ std::function<Struct1*(const char*)> fnc = [](const char* name) -> Struct1* {
     return new Struct1(name);
 };
 
-
 struct NoRegister{};
-
-// void initFixtures(){
-
-    
-// }
 
 bool test_services(){
 

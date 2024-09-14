@@ -108,7 +108,7 @@
     },
     "makefile.makefilePath": "./src/cpp",
     "makefile.buildLog": ".",
-    "cmake.sourceDirectory": "/media/knox/ExtDrive/Dev/Dumicola/src",
+    "cmake.sourceDirectory": "E:/Dev/Dumicola/src/dcutils",
     "terminal.integrated.env.linux": {
         "DEBUG_PATH": "",
         "MMI_PATH": "/usr/bin/gdb"
