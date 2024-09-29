@@ -26,9 +26,15 @@
         }, {
             "label": "Pre-run build",
             "type": "shell",
-            "command": "${workspaceFolder}/make.ps1 -b",
-            "problemMatcher": []
-        }
+            "command": "${config:osSpecificCommand}",
+            "problemMatcher": [],
+            "windows":{
+                "command": "${workspaceFolder}/make.ps1 -b"
+            },
+            "linux":{
+                "command": "${workspaceFolder}/make.sh -b"
+            }
+        },
     ],
     "version": "2.0.0"
 }

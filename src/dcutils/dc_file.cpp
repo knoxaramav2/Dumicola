@@ -53,7 +53,9 @@ fs::path dcutil::execPath(){
 fs::path dcutil::rootDir()
 {
     fs::path path(execPath());
+#ifndef  PLATFORM_WINDOWS
     path = path.parent_path();
+#endif // ! PLATFORM_WINDOWS
     return path;
 }
 

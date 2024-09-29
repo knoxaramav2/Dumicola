@@ -14,6 +14,7 @@ enum DCLex{
     DOT,        //a(.)b
     AS,         //A (as) B
     ALIAS,      //A as (B)
+    LINK,       //Link <Node1> <Node2>
     OP_BRCK,    //[
     CL_BRCK,    //]
     OP_BRCE,    //{
@@ -23,6 +24,7 @@ enum DCLex{
     OP_ANGLE,   //<
     CL_ANGLE,   //>
     PROPERTY,   //::PROPERTY
+    COMMENT,    //#Comment
     COMMA,
     TAB,
     NLINE,          
@@ -43,6 +45,7 @@ const char* DCLexToString(DCLex lex){
     case DOT: ret = "dot"; break;
     case AS: ret = "as"; break;
     case ALIAS: ret = "alias"; break;
+    case LINK: ret = "link"; break;
     case OP_BRCK: ret = "["; break;
     case CL_BRCK: ret = "]"; break;
     case OP_BRCE: ret = "{"; break;
@@ -55,6 +58,7 @@ const char* DCLexToString(DCLex lex){
     case TAB: ret = "TAB"; break;
     case END: ret = "EOF"; break;
     case NLINE: ret = "NL"; break;
+    case COMMENT: ret = "CMNT"; break;
     case _PRS_SKIP_: ret = "SKIP"; break;
     default:
         ret = "ERR_UNKNOWN";
@@ -81,15 +85,16 @@ inline bool isNumeric(std::string& text, bool allowDecimal){
             if(c=='.'){
                 if(deci){return false;}
                 deci = true;
-            }
-        } else {return false;}
+            } else {return false;}
+        }
     }
     return true;
 }
 
 inline DCLex detect0(std::string& term){
 
-    if(term=="as"){return AS;}
+    if(term=="AS"){return AS;}
+    if(term=="LINK"){return LINK;}
     if(term.rfind("::", 0)==0){return PROPERTY;}
     if(isNumeric(term, false)){return INTEGER;}
     if(isNumeric(term, true)){return DECIMAL;}
@@ -112,7 +117,7 @@ inline DCLex detect0(std::string& term){
 
 Token detect(std::vector<Token>& tokens, std::string& text){
     const char* nrmStr = text.c_str();
-    dcutil::toUpper(nrmStr);
+    //dcutil::toUpper(nrmStr);
 
     printf("\t| %s ", nrmStr);
     fflush(stdout);
@@ -136,13 +141,14 @@ Token detect(std::vector<Token>& tokens, std::string& text){
         case '\t': lex = TAB; break;
         case '\r': case '\n': lex = NLINE; break;
         case ' ': if(strcmp(nrmStr, "    ")==0){ lex = TAB;} break;
+        case '#': lex = COMMENT; break;
         default:{
             Token* prev = tokens.size() > 0 ? &tokens[tokens.size()-1] : nullptr; 
             std::string trm(nrmStr);
             if(isNumeric(trm, false)){ lex = INTEGER; }
             else if (isNumeric(trm, true)){ lex = DECIMAL; }
-            else if (trm == "AS") { lex = AS; }
-
+            else if (trm == "as") { lex = AS; }
+            else if (trm == "link") { lex = LINK; }
             else{
                 if(prev){
                     switch(prev->lex){
@@ -170,16 +176,23 @@ std::vector<Bytecode> compile(std::string& text)
     std::sregex_iterator end;
     std::vector<std::string> raw;
     std::vector<Token> tokens;
+    DCLex prvLex = DCLex::_PRS_SKIP_;
     for(auto it = start; it != end; ++it){
         auto lstr = it->str();
+        
         Token tk = detect(tokens, lstr);
-        if(tk.lex != _PRS_SKIP_){
+        if(tk.lex != _PRS_SKIP_ && tk.lex != COMMENT &&
+            !(tk.lex == NLINE && prvLex == NLINE)){
             tokens.push_back(tk);
+            prvLex = tk.lex;
         }
     }
 
+    printf(">>>>>>>>>>>>>>>>>>>>>>>\n");
+
     for(auto& t: tokens){
-        printf("[%s]  [%d]\n", t.text.c_str(), t.lex);
+        //if(t.lex == NLINE){ continue; }
+        printf("[%s]  [%s]\n", t.text.c_str(), DCLexToString(t.lex));
     }
 
     return ret;
