@@ -51,3 +51,9 @@
 #endif
 
 #define BUILD_CONFIG Debug
+
+#if Debug == Debug
+	#define DEBUG_MODE
+#endif
+
+//#define BUILD_CONFIG Debug

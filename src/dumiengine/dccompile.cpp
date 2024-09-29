@@ -1,6 +1,7 @@
 #include "dccompile.h"
 #include "dumiexcept.h"
 #include "dc_string.h"
+#include "environment.h"
 
 #include <iterator>
 #include <regex>
@@ -190,9 +191,17 @@ std::vector<Bytecode> compile(std::string& text)
 
     printf(">>>>>>>>>>>>>>>>>>>>>>>\n");
 
+    #ifdef DEBUG_MODE
     for(auto& t: tokens){
-        //if(t.lex == NLINE){ continue; }
         printf("[%s]  [%s]\n", t.text.c_str(), DCLexToString(t.lex));
+    }
+    #endif
+
+    //Temp heap
+    
+
+    for(auto& it : tokens){
+        
     }
 
     return ret;

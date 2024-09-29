@@ -21,6 +21,9 @@ endif()
 
 #add_compile_definitions(BUILD_CONFIG ${CMAKE_BUILD_TYPE})
 set(BUILD_CONFIG ${CMAKE_BUILD_TYPE})
+if(${CMAKE_BUILD_TYPE} STREQUAL "Debug")
+set(DEBUG_MODE "" PARENT_SCOPE)
+endif()
 configure_file(environment.h.in ${CMAKE_CURRENT_SOURCE_DIR}/environment.h)
 
 message("OPT_PERF >> ${OPT_PERF}")
